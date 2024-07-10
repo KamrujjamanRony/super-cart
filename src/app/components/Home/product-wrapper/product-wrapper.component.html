@@ -1,0 +1,30 @@
+<!-- product wrapper -->
+<div class="container pb-16">
+    <h2 class="text-3xl font-medium text-secondary uppercase mb-6">
+      top new arrival
+    </h2>
+    <!-- product grid -->
+    <div class="grid grid-cols-4 gap-6">
+      <!-- single product -->
+      @for(product of products; track product.id){
+        <app-product-card [product]="product"></app-product-card>
+      }
+      <!-- single product end -->
+    </div>
+    <swiper-container
+  slides-per-view="4"
+  mousewheel-force-to-axis="true"
+  loop="true"
+  navigation="true"
+  autoplay-delay="2500"
+  [spaceBetween]="25"
+>
+ <!-- single product -->
+ @for(product of products; track product.id){
+  <swiper-slide><app-product-card [product]="product"></app-product-card></swiper-slide>
+}
+<!-- single product end -->
+</swiper-container>
+    <!-- product grid end -->
+  </div>
+  <!-- product wrapper end -->

@@ -1,0 +1,22 @@
+<body>
+  <app-header />
+  <app-navbar />
+  <app-breadcrumbs [name]="routePath" />
+  <!-- account wrapper -->
+  <div class="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
+    <!-- sidebar -->
+     <div class="col-span-3">
+        <app-user-sidebar />
+     </div>
+    <!-- sidebar end -->
+
+    <!-- outlet -->
+    <div class="col-span-9 span-y-4">
+        <router-outlet></router-outlet>
+    </div>
+    <!-- outlet end -->
+  </div>
+  <!-- account wrapper end -->
+  <app-footer />
+  <app-copyright />
+</body>

@@ -1,0 +1,53 @@
+<section>
+    <!-- breadcrumbs -->
+     <app-breadcrumbs name="Shop" />
+      <!-- breadcrumbs end -->
+  
+      <!-- shop wrapper -->
+      <div class="container grid grid-cols-4 gap-6 pt-4 pb-16 items-start">
+        <!-- sidebar -->
+        <app-shop-sidebar />
+        <!-- sidebar end -->
+  
+        <!-- product -->
+        <div class="col-span-3">
+          <!-- sorting -->
+          <div class="flex items-center mb-4">
+            <select
+              class="w-44 text-sm text-gray-600 px-4 py-3 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary"
+            >
+              <option>Default sorting</option>
+              <option>Price low-high</option>
+              <option>Price high-low</option>
+              <option>Latest product</option>
+            </select>
+  
+            <div class="flex gap-2 ml-auto">
+              <div
+                class="border border-primary w-10 h-9 flex items-center justify-center text-white bg-primary rounded cursor-pointer"
+              >
+                <i class="fas fa-th"></i>
+              </div>
+              <div
+                class="border border-gray-300 w-10 h-9 flex items-center justify-center text-gray-600 rounded cursor-pointer"
+              >
+                <i class="fas fa-list"></i>
+              </div>
+            </div>
+          </div>
+          <!-- sorting end -->
+          <!-- product grid -->
+          <div class="grid grid-cols-3 gap-6">
+            
+            <!-- single product -->
+            @for(product of products; track product.id){
+                <app-product-card [product]="product"></app-product-card>
+              }
+            <!-- single product end -->
+          </div>
+          <!-- product grid end -->
+        </div>
+        <!-- product end -->
+      </div>
+      <!-- shop wrapper end -->
+</section>

@@ -1,0 +1,16 @@
+<!-- recommend -->
+<div class="container pb-16">
+    <h2 class="text-3xl font-medium text-secondary uppercase mb-6">
+      recommended for you
+    </h2>
+    <!-- product grid -->
+    <div class="grid grid-cols-4 gap-6">
+      <!-- single product -->
+      @for(product of products; track product.id){
+        <app-product-card [product]="product"></app-product-card>
+      }
+      <!-- single product end -->
+    </div>
+    <!-- product grid end -->
+  </div>
+  <!-- recommend end -->
