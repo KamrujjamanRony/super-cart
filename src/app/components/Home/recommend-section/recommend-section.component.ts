@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { DataService } from '../../../services/data.service';
 import { ProductCardComponent } from "../../Shared/product-card/product-card.component";
 
@@ -7,7 +7,8 @@ import { ProductCardComponent } from "../../Shared/product-card/product-card.com
   standalone: true,
   imports: [ProductCardComponent],
   templateUrl: './recommend-section.component.html',
-  styleUrl: './recommend-section.component.css'
+  styleUrl: './recommend-section.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class RecommendSectionComponent {
   dataService = inject(DataService);
@@ -18,6 +19,13 @@ export class RecommendSectionComponent {
       this.products = data.products;
       console.log(this.products)
     });
+  }
+
+  breakpoints = {
+    480: { slidesPerView: 1, spaceBetween: 5 },
+    768: { slidesPerView: 2, spaceBetween: 10 },
+    1024: { slidesPerView: 3, spaceBetween: 20 },
+    1440: { slidesPerView: 4, spaceBetween: 25 }
   }
 
 }

@@ -1,4 +1,251 @@
-<!-- navbar -->
+<!-- navbar sm -->
+ <section class="bg-secondary md:hidden">
+  <nav class="container mx-auto">
+    <div class="flex items-center justify-between">
+       <!-- all category -->
+       <div
+       class="px-2 py-3 flex items-center cursor-pointer relative group"
+     >
+       <span class="text-white text-xl">
+         <i class="fas fa-bars"></i>
+       </span>
+   
+       <!-- sub category -->
+       <div
+         class="absolute w-[80vw] left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible z-50"
+       >
+         <!-- single sub category -->
+         <a
+           href="#"
+           class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
+         >
+           <img
+             src="../../../../assets/images/icons/bed.svg"
+             alt="icon"
+             class="w-5 h-5 object-contain"
+           />
+           <span class="ml-6 text-gray-600 text-sm">Bedroom</span>
+         </a>
+         <!-- single sub category end -->
+         <!-- single sub category -->
+         <a
+           href="#"
+           class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
+         >
+           <img
+             src="../../../../assets/images/icons/sofa.svg"
+             alt="icon"
+             class="w-5 h-5 object-contain"
+           />
+           <span class="ml-6 text-gray-600 text-sm">Sofa</span>
+         </a>
+         <!-- single sub category end -->
+         <!-- single sub category -->
+         <a
+           href="#"
+           class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
+         >
+           <img
+             src="../../../../assets/images/icons/office.svg"
+             alt="icon"
+             class="w-5 h-5 object-contain"
+           />
+           <span class="ml-6 text-gray-600 text-sm">Office</span>
+         </a>
+         <!-- single sub category end -->
+         <!-- single sub category -->
+         <a
+           href="#"
+           class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
+         >
+           <img
+             src="../../../../assets/images/icons/terrace.svg"
+             alt="icon"
+             class="w-5 h-5 object-contain"
+           />
+           <span class="ml-6 text-gray-600 text-sm">Outdoor</span>
+         </a>
+         <!-- single sub category end -->
+         <!-- single sub category -->
+         <a
+           href="#"
+           class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
+         >
+           <img
+             src="../../../../assets/images/icons/bed-2.svg"
+             alt="icon"
+             class="w-5 h-5 object-contain"
+           />
+           <span class="ml-6 text-gray-600 text-sm">Mattress</span>
+         </a>
+         <!-- single sub category end -->
+         <!-- single sub category -->
+         <a
+           href="#"
+           class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
+         >
+           <img
+             src="../../../../assets/images/icons/restaurant.svg"
+             alt="icon"
+             class="w-5 h-5 object-contain"
+           />
+           <span class="ml-6 text-gray-600 text-sm">Dining</span>
+         </a>
+         <!-- single sub category end -->
+       </div>
+       <!-- sub category end -->
+     </div>
+     <!-- all category end -->
+      <!-- logo -->
+    <a routerLink="/">
+      <img src="../../../../assets/images/superCartWhite.png" alt="logo" class="w-32" />
+    </a>
+    <!-- logo end -->
+     <!-- icons -->
+    <div class="flex items-center space-x-4">
+      <a
+        routerLink="/user/wishlist"
+        class="text-center text-white hover:text-primary transition relative"
+      >
+        <div class="text-md">
+          <i class="fas fa-heart"></i>
+        </div>
+        <span
+          class="absolute -right-2 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-primary text-white text-[8px]"
+          >8</span
+        >
+      </a>
+      <a
+      routerLink="/user/shopping-cart"
+        class="text-center text-white hover:text-primary transition relative"
+      >
+        <div class="text-md">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <span
+          class="absolute -right-3 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-primary text-white text-[8px]"
+          >8</span
+        >
+      </a>
+      <a
+      routerLink="/user/profile-info"
+        class="text-center text-white hover:text-primary transition relative"
+      >
+        <div class="text-md">
+          <i class="fas fa-user"></i>
+        </div>
+      </a>
+    </div>
+    <!-- icons end -->
+    </div>
+    <!-- searchbar -->
+    <div class="">
+      <div class="w-full max-w-xl relative flex my-1">
+        <input
+          type="text"
+          class="w-full border border-primary border-r-0 px-5 py-3 rounded-md focus:outline-none mx-2"
+          placeholder="search"
+        />
+        <button
+          class="bg-primary text-white px-4 hover:bg-transparent hover:text-primary transition rounded-md absolute h-full right-1 border-none"
+        >
+        <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <!-- searchbar end -->
+      <!-- Menu Bar -->
+      <div class="flex md:hidden items-center justify-between px-2 py-3 z-10">
+        <div class="flex items-center space-x-6 capitalize">
+          <a routerLink="/" class="text-white hover:text-primary transition"
+            >Home</a
+          >
+          <a routerLink="/shop" class="text-white hover:text-primary transition"
+            >Shop</a
+          >
+          <a routerLink="/about-us" class="text-white hover:text-primary transition"
+            >About</a
+          >
+          <a routerLink="/contact-us" class="text-white hover:text-primary transition"
+            >Contact</a
+          >
+        </div>
+    </div>
+    <!-- Menu Bar end -->
+  </nav>
+ </section>
+<!-- navbar sm end -->
+
+
+
+<!-- navbar lg -->
+ <section class="hidden md:block">
+  <!-- header -->
+<header class="py-4 shadow-sm bg-white">
+  <div class="container flex items-center justify-between">
+    <!-- logo -->
+    <a routerLink="/">
+      <img src="../../../../assets/images/superCart.png" alt="logo" class="w-32" />
+    </a>
+    <!-- searchbar -->
+    <div class="w-full max-w-xl relative flex">
+      <span class="absolute left-4 top-3 text-lg text-gray-400">
+        <i class="fas fa-search"></i>
+      </span>
+      <input
+        type="text"
+        class="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none"
+        placeholder="search"
+      />
+      <button
+        class="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition"
+      >
+        Search
+      </button>
+    </div>
+    <!-- icons -->
+    <div class="flex items-center space-x-4">
+      <a
+        routerLink="/user/wishlist"
+        class="text-center text-gray-400 hover:text-primary transition relative"
+      >
+        <div class="text-2xl">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div class="text-xs leading-3">Wish List</div>
+        <span
+          class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
+          >8</span
+        >
+      </a>
+      <a
+      routerLink="/user/shopping-cart"
+        class="text-center text-gray-400 hover:text-primary transition relative"
+      >
+        <div class="text-2xl">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div class="text-xs leading-3">Shopping Cart</div>
+        <span
+          class="absolute right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
+          >8</span
+        >
+      </a>
+      <a
+      routerLink="/user/profile-info"
+        class="text-center text-gray-400 hover:text-primary transition relative"
+      >
+        <div class="text-2xl">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="text-xs leading-3">User</div>
+      </a>
+    </div>
+  </div>
+</header>
+<!-- header end -->
+ 
+<!-- navbar lg -->
 <nav class="bg-secondary">
   <div class="container flex">
     <!-- all category -->
@@ -120,4 +367,6 @@
     <!-- navbar links end -->
   </div>
 </nav>
-<!-- navbar end -->
+<!-- navbar lg end -->
+ </section>
+<!-- navbar lg end -->

@@ -4,13 +4,23 @@
       recommended for you
     </h2>
     <!-- product grid -->
-    <div class="grid grid-cols-4 gap-6">
+      <swiper-container
+      slides-per-view="4"
+      mousewheel-force-to-axis="true"
+      loop="true"
+      navigation="true"
+      autoplay-delay="2500"
+      [spaceBetween]="25"
+      [breakpoints]="breakpoints"
+    >
       <!-- single product -->
       @for(product of products; track product.id){
-        <app-product-card [product]="product"></app-product-card>
+      <swiper-slide
+        ><div class="h-full"><app-product-card [product]="product"></app-product-card
+          ></div></swiper-slide>
       }
       <!-- single product end -->
-    </div>
+    </swiper-container>
     <!-- product grid end -->
   </div>
   <!-- recommend end -->
