@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-view-content',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './view-content.component.css'
 })
 export class ViewContentComponent {
+  @Input() product:any;
 
 }

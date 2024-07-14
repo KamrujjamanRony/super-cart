@@ -810,6 +810,7 @@ h1,h2,h3,h4,h5,h6{
   background-color: rgb(233 30 99 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+  border-color:  rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .color-selector input:checked + label{

@@ -7,13 +7,13 @@
         class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition"
       >
         <a
-          href="#"
+           [routerLink]="getViewLink(product.id)"
           class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-secondary transition"
         >
           <i class="fas fa-search"></i>
         </a>
         <a
-          href="#"
+           routerLink="/user/wishlist"
           class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-secondary transition"
         >
           <i class="far fa-heart"></i>
@@ -24,7 +24,7 @@
 
     <!-- product content -->
     <div class="pt-4 pb-3 px-4">
-      <a href="#">
+      <a  routerLink="/">
         <h4
           class="uppercase font-medium text-xl mb-2 text-secondary hover:text-primary transition"
         >
@@ -50,7 +50,7 @@
       </div>
     </div>
     <a
-      href="#"
+       routerLink="/user/shopping-cart"
       class="block w-full py-1 text-center text-white bg-primary borber border-primary rounded-b hover:bg-transparent hover:text-primary transition capitalize"
       >add to cart</a
     >

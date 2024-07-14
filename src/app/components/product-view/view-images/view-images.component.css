@@ -1,0 +1,21 @@
+.image-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .image-container img {
+    display: block;
+    width: 100%;
+  }
+  
+  .zoom {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    display: none;
+    width: 300px; /* Adjust the zoom box size */
+    height: 300px; /* Adjust the zoom box size */
+  }
+  
