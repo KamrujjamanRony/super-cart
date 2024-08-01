@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-shop-sidebar',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './shop-sidebar.component.css'
 })
 export class ShopSidebarComponent {
+  @Input() products: any;
 
 }

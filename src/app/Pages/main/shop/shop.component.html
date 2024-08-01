@@ -4,13 +4,13 @@
       <!-- breadcrumbs end -->
   
       <!-- shop wrapper -->
-      <div class="container grid grid-cols-4 gap-6 pt-4 pb-16 items-start">
+      <div class="container flex flex-col md:flex-row gap-6 pt-4 pb-16 items-start">
         <!-- sidebar -->
-        <app-shop-sidebar />
+        <app-shop-sidebar [products]="products" />
         <!-- sidebar end -->
   
         <!-- product -->
-        <div class="col-span-3">
+        <div class="">
           <!-- sorting -->
           <div class="flex items-center mb-4">
             <select
@@ -22,14 +22,18 @@
               <option>Latest product</option>
             </select>
   
-            <div class="flex gap-2 ml-auto">
+            <div class="hidden lg:flex gap-2 ml-auto">
               <div
-                class="border border-primary w-10 h-9 flex items-center justify-center text-white bg-primary rounded cursor-pointer"
+                class="border w-10 h-9 flex items-center justify-center rounded cursor-pointer"
+                [ngClass]="{'border-primary bg-primary text-white': viewCart, 'border-gray-300 text-gray-600': !viewCart}"
+                (click)="cardVertically()"
               >
                 <i class="fas fa-th"></i>
               </div>
               <div
-                class="border border-gray-300 w-10 h-9 flex items-center justify-center text-gray-600 rounded cursor-pointer"
+                class="border w-10 h-9 flex items-center justify-center rounded cursor-pointer"
+                [ngClass]="{'border-primary bg-primary text-white': !viewCart, 'border-gray-300 text-gray-600': viewCart}"
+                (click)="cardHorizontally()"
               >
                 <i class="fas fa-list"></i>
               </div>
@@ -37,14 +41,26 @@
           </div>
           <!-- sorting end -->
           <!-- product grid -->
-          <div class="grid grid-cols-3 gap-6">
+           @if (viewCart) {
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             
-            <!-- single product -->
-            @for(product of products; track product.id){
-                <app-product-card [product]="product"></app-product-card>
-              }
-            <!-- single product end -->
-          </div>
+              <!-- single product -->
+              @for(product of products; track product.id){
+                  <app-product-card [product]="product"></app-product-card>
+                }
+              <!-- single product end -->
+            </div>
+           } @else {
+            <div class="grid grid-cols-1 gap-6">
+            
+              <!-- single product -->
+              @for(product of products; track product.id){
+                  <app-product-card-2 [product]="product"></app-product-card-2>
+                }
+              <!-- single product end -->
+            </div>
+           }
+          
           <!-- product grid end -->
         </div>
         <!-- product end -->
