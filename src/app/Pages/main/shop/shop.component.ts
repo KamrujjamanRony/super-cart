@@ -17,13 +17,18 @@ export class ShopComponent {
   dataService = inject(DataService);
   
   products: any;
+  categories: any;
+  brands: any;
   viewCart = true;
 
   constructor() { }
   ngOnInit() {
     this.dataService.getJsonData().subscribe(data => {
       this.products = data.products;
-      console.log(this.products)
+      this.categories = data.products.map((d:any) => {
+        return d.category;
+      });
+      console.log(this.categories)
     });
   }
 
