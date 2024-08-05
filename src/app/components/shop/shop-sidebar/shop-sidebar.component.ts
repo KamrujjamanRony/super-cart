@@ -9,5 +9,8 @@ import { Component, Input } from '@angular/core';
 })
 export class ShopSidebarComponent {
   @Input() products: any;
+  @Input() categories: any;
+  @Input() brands: any;
 
+  constructor() { }
 }

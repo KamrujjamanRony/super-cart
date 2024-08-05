@@ -19,16 +19,25 @@ export class ShopComponent {
   products: any;
   categories: any;
   brands: any;
+  prices: any;
+  sizes: any;
+  colors: any;
   viewCart = true;
 
   constructor() { }
   ngOnInit() {
     this.dataService.getJsonData().subscribe(data => {
       this.products = data.products;
-      this.categories = data.products.map((d:any) => {
-        return d.category;
-      });
-      console.log(this.categories)
+      this.categories = this.groupProductsByProperty(this.products, 'category');
+      this.brands = this.groupProductsByProperty(this.products, 'brand');
+      this.prices = this.groupProductsByProperty(this.products, 'offer_price');
+      this.sizes = this.groupProductsByProperty(this.products, 'size');
+      this.colors = this.groupProductsByProperty(this.products, 'color');
+      console.log(this.categories);
+      console.log(this.brands);
+      console.log(this.prices);
+      console.log(this.sizes);
+      console.log(this.colors);
     });
   }
 
@@ -38,6 +47,22 @@ export class ShopComponent {
   
   cardHorizontally(){
     this.viewCart = false;
+  }
+
+  groupProductsByProperty(products: any[], property: string): any[] {
+    const propertyMap = products.reduce((acc, product) => {
+      const prop = product[property];
+      if (!acc[prop]) {
+        acc[prop] = 0;
+      }
+      acc[prop]++;
+      return acc;
+    }, {});
+
+    return Object.keys(propertyMap).map(prop => ({
+      title: prop,
+      quantity: propertyMap[prop]
+    }));
   }
 
 }

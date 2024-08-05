@@ -7,56 +7,19 @@
         </h3>
         <div class="space-y-2">
           <!-- single category -->
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              id="cat-1"
-              class="text-primary focus:ring-0 cursor-pointer rounded-sm"
-            />
-            <label for="cat-1" class="text-gray-600 ml-3 cursor-pointer"
-              >Bedroom</label
-            >
-            <div class="ml-auto text-gray-600 text-sm">(15)</div>
-          </div>
-          <!-- single category end -->
-          <!-- single category -->
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              id="cat-1"
-              class="text-primary focus:ring-0 cursor-pointer rounded-sm"
-            />
-            <label for="cat-1" class="text-gray-600 ml-3 cursor-pointer"
-              >Sofa</label
-            >
-            <div class="ml-auto text-gray-600 text-sm">(05)</div>
-          </div>
-          <!-- single category end -->
-          <!-- single category -->
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              id="cat-1"
-              class="text-primary focus:ring-0 cursor-pointer rounded-sm"
-            />
-            <label for="cat-1" class="text-gray-600 ml-3 cursor-pointer"
-              >Office</label
-            >
-            <div class="ml-auto text-gray-600 text-sm">(09)</div>
-          </div>
-          <!-- single category end -->
-          <!-- single category -->
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              id="cat-1"
-              class="text-primary focus:ring-0 cursor-pointer rounded-sm"
-            />
-            <label for="cat-1" class="text-gray-600 ml-3 cursor-pointer"
-              >Outdoor</label
-            >
-            <div class="ml-auto text-gray-600 text-sm">(19)</div>
-          </div>
+          @for(data of categories; track data.title){
+            <div class="flex items-center">
+              <input
+                type="checkbox"
+                [id]="data.title"
+                class="text-primary focus:ring-0 cursor-pointer rounded-sm"
+              />
+              <label [for]="data.title" class="text-gray-600 ml-3 cursor-pointer"
+                >{{data?.title}}</label
+              >
+              <div class="ml-auto text-gray-600 text-sm">({{data?.quantity}})</div>
+            </div>
+          }
           <!-- single category end -->
         </div>
       </div>
@@ -67,58 +30,21 @@
           Brands
         </h3>
         <div class="space-y-2">
-          <!-- single category -->
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              id="cat-1"
-              class="text-primary focus:ring-0 cursor-pointer rounded-sm"
-            />
-            <label for="cat-1" class="text-gray-600 ml-3 cursor-pointer"
-              >Bedroom</label
-            >
-            <div class="ml-auto text-gray-600 text-sm">(15)</div>
-          </div>
-          <!-- single category end -->
-          <!-- single category -->
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              id="cat-1"
-              class="text-primary focus:ring-0 cursor-pointer rounded-sm"
-            />
-            <label for="cat-1" class="text-gray-600 ml-3 cursor-pointer"
-              >Sofa</label
-            >
-            <div class="ml-auto text-gray-600 text-sm">(05)</div>
-          </div>
-          <!-- single category end -->
-          <!-- single category -->
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              id="cat-1"
-              class="text-primary focus:ring-0 cursor-pointer rounded-sm"
-            />
-            <label for="cat-1" class="text-gray-600 ml-3 cursor-pointer"
-              >Office</label
-            >
-            <div class="ml-auto text-gray-600 text-sm">(09)</div>
-          </div>
-          <!-- single category end -->
-          <!-- single category -->
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              id="cat-1"
-              class="text-primary focus:ring-0 cursor-pointer rounded-sm"
-            />
-            <label for="cat-1" class="text-gray-600 ml-3 cursor-pointer"
-              >Outdoor</label
-            >
-            <div class="ml-auto text-gray-600 text-sm">(19)</div>
-          </div>
-          <!-- single category end -->
+          <!-- single brand -->
+          @for(data of brands; track data.title){
+            <div class="flex items-center">
+              <input
+                type="checkbox"
+                [id]="data.title"
+                class="text-primary focus:ring-0 cursor-pointer rounded-sm"
+              />
+              <label [for]="data.title" class="text-gray-600 ml-3 cursor-pointer"
+                >{{data?.title}}</label
+              >
+              <div class="ml-auto text-gray-600 text-sm">({{data?.quantity}})</div>
+            </div>
+          }
+          <!-- single brand end -->
         </div>
       </div>
       <!-- brand filter end -->
