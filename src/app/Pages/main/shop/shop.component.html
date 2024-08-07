@@ -6,7 +6,127 @@
       <!-- shop wrapper -->
       <div class="container flex flex-col md:flex-row gap-6 pt-4 pb-16 items-start">
         <!-- sidebar -->
-        <app-shop-sidebar [products]="products" [categories]="categories" [brands]="brands" />
+        <div class="bg-white px-4 pb-6 shadow rounded overflow-hidden min-w-64">
+    <div class="divide-y divide-gray-200 space-y-5">
+      <!-- category filter -->
+      <div>
+        <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">
+          Categories
+        </h3>
+        <div class="space-y-2">
+          <!-- single category -->
+          @for(data of categories; track data.title){
+            <div class="flex items-center">
+              <input
+                type="checkbox"
+                [id]="data.title"
+                class="text-primary focus:ring-0 cursor-pointer rounded-sm"
+                (change)="toggleCategoryName(data.title, $event)"
+              />
+              <label [for]="data.title" class="text-gray-600 ml-3 cursor-pointer"
+                >{{data?.title}}</label
+              >
+              <div class="ml-auto text-gray-600 text-sm">({{data?.quantity}})</div>
+            </div>
+          }
+          <!-- single category end -->
+        </div>
+      </div>
+      <!-- category filter end -->
+      <!-- brand filter -->
+      <div class="pt-4">
+        <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">
+          Brands
+        </h3>
+        <div class="space-y-2">
+          <!-- single brand -->
+          @for(data of brands; track data.title){
+            <div class="flex items-center">
+              <input
+                type="checkbox"
+                [id]="data.title"
+                class="text-primary focus:ring-0 cursor-pointer rounded-sm"
+                (change)="toggleBrandName(data.title, $event)"
+              />
+              <label [for]="data.title" class="text-gray-600 ml-3 cursor-pointer"
+                >{{data?.title}}</label
+              >
+              <div class="ml-auto text-gray-600 text-sm">({{data?.quantity}})</div>
+            </div>
+          }
+          <!-- single brand end -->
+        </div>
+      </div>
+      <!-- brand filter end -->
+      <!-- price filter -->
+      <div class="pt-4">
+        <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">
+          Price
+        </h3>
+        <div class="mt-4 flex items-center">
+          <input
+            type="text"
+            class="w-full min-w-24 border-gray-300 focus:border-primary focus:ring-0 px-3 py-1 text-gray-600 text-sm shadow-sm rounded"
+            placeholder="min"
+          />
+          <span class="px-3 text-gray-500">-</span>
+          <input
+            type="text"
+            class="w-full min-w-24 border-gray-300 focus:border-primary focus:ring-0 px-3 py-1 text-gray-600 text-sm shadow-sm rounded"
+            placeholder="max"
+          />
+        </div>
+      </div>
+      <!-- price filter end -->
+      <!-- size filter -->
+      <div class="pt-4">
+        <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">
+          Size
+        </h3>
+        <div class="flex items-center gap-2">
+          <!-- single size -->
+          @for(data of sizes; track data.title){
+            <div class="size-selector">
+              <input type="radio" class="hidden" name="size" [id]="data.title" />
+              <label
+                [for]="data.title"
+                class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600"
+                >{{data.title}}</label
+              >
+            </div>
+          }
+          <!-- single size end -->
+        </div>
+      </div>
+      <!-- size filter end -->
+      <!-- color filter -->
+      <div class="pt-4">
+        <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">
+          Color
+        </h3>
+        <div class="flex items-center gap-2">
+          <!-- single color -->
+          @for(data of colors; track data.title){
+            <div class="color-selector">
+              <input
+                type="radio"
+                name="color"
+                class="hidden"
+                [id]="data.title"
+              />
+              <label
+                [for]="data.title"
+                class="border border-gray-200 rounded-sm h-5 w-5 cursor-pointer shadow-sm block"
+                [ngStyle]="{'background-color': data.title}"
+              ></label>
+            </div>
+          }
+          <!-- single color end -->
+        </div>
+      </div>
+      <!-- color filter end -->
+    </div>
+  </div>
         <!-- sidebar end -->
   
         <!-- product -->
@@ -45,7 +165,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             
               <!-- single product -->
-              @for(product of products; track product.id){
+              @for(product of byCategory(byBrand(products)); track product.id){
                   <app-product-card [product]="product"></app-product-card>
                 }
               <!-- single product end -->
@@ -55,7 +175,12 @@
             
               <!-- single product -->
               @for(product of products; track product.id){
+                @if (product) {
                   <app-product-card-2 [product]="product"></app-product-card-2>
+                } @else {
+                  <div class="text-center text-gray-500 text-xl">No products found.</div>
+                }
+                  
                 }
               <!-- single product end -->
             </div>
