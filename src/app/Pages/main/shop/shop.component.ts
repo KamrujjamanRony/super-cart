@@ -18,8 +18,10 @@ export class ShopComponent {
   products: any;
   categories: any;
   brands: any;
-  brandNames: string[] = [];
   categoryNames: string[] = [];
+  brandNames: string[] = [];
+  sizeNames: string[] = [];
+  colorNames: string[] = [];
   prices: any;
   sizes: any;
   colors: any;
@@ -108,6 +110,17 @@ export class ShopComponent {
     }
   }
 
+  toggleSizeName(size: string, event: any): void {
+    if (event.target.checked) {
+      this.sizeNames.push(size);
+    } else {
+      const index = this.sizeNames.indexOf(size);
+      if (index > -1) {
+        this.sizeNames.splice(index, 1);
+      }
+    }
+  }
+
   byCategory(data: any): any {
     if (!this.categoryNames || this.categoryNames.length === 0) {
       return data; // If the categoryNames array is empty, return all data
@@ -126,5 +139,18 @@ export class ShopComponent {
     const selectedData = data.filter((product: any) => product && this.brandNames.includes(product.brand.toString()));
     return selectedData;
   }
+  
+  bySize(data: any): any {
+    if (!this.sizeNames || this.sizeNames.length === 0) {
+      return data; // If the sizeNames array is empty, return all data
+    }
+  
+    const selectedData = data.filter((product: any) =>
+      product && product.sizes && product.sizes.some((size: any) => this.sizeNames.includes(size))
+    );
+  
+    return selectedData;
+  }
+  
 
 }

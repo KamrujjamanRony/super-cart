@@ -87,7 +87,8 @@
           <!-- single size -->
           @for(data of sizes; track data.title){
             <div class="size-selector">
-              <input type="radio" class="hidden" name="size" [id]="data.title" />
+              <input type="radio" class="hidden" name="size" [id]="data.title"
+              (change)="toggleSizeName(data.title, $event)" />
               <label
                 [for]="data.title"
                 class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600"
@@ -165,8 +166,10 @@
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             
               <!-- single product -->
-              @for(product of byCategory(byBrand(products)); track product.id){
+              @for(product of byCategory(byBrand(bySize(products))); track product.id){
                   <app-product-card [product]="product"></app-product-card>
+                } @empty {
+                  <div class="text-center text-gray-500 text-xl">No products found.</div>
                 }
               <!-- single product end -->
             </div>
@@ -174,13 +177,10 @@
             <div class="grid grid-cols-1 gap-6">
             
               <!-- single product -->
-              @for(product of products; track product.id){
-                @if (product) {
+              @for(product of byCategory(byBrand(bySize(products))); track product.id){
                   <app-product-card-2 [product]="product"></app-product-card-2>
-                } @else {
+                } @empty {
                   <div class="text-center text-gray-500 text-xl">No products found.</div>
-                }
-                  
                 }
               <!-- single product end -->
             </div>
