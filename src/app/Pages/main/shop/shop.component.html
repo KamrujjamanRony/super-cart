@@ -141,12 +141,13 @@
           <!-- sorting -->
           <div class="flex items-center mb-4">
             <select
+            [(ngModel)]="sortValue"
               class="w-44 text-sm text-gray-600 px-4 py-3 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary"
             >
-              <option>Default sorting</option>
-              <option>Price low-high</option>
-              <option>Price high-low</option>
-              <option>Latest product</option>
+              <option value="">Default sorting</option>
+              <option value="low-high">Price low-high</option>
+              <option value="high-low">Price high-low</option>
+              <option value="latest">Latest product</option>
             </select>
   
             <div class="hidden lg:flex gap-2 ml-auto">
@@ -172,7 +173,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             
               <!-- single product -->
-              @for(product of byCategory(byBrand(bySize(byColor(products)))); track product.id){
+              @for(product of byCategory(byBrand(bySize(byColor(bySorting(products))))); track product.id){
                   <app-product-card [product]="product"></app-product-card>
                 } @empty {
                   <div class="text-center text-gray-500 text-xl">No products found.</div>
@@ -183,7 +184,7 @@
             <div class="grid grid-cols-1 gap-6">
             
               <!-- single product -->
-              @for(product of byCategory(byBrand(bySize(byColor(products)))); track product.id){
+              @for(product of byCategory(byBrand(bySize(byColor(bySorting(products))))); track product.id){
                   <app-product-card-2 [product]="product"></app-product-card-2>
                 } @empty {
                   <div class="text-center text-gray-500 text-xl">No products found.</div>

@@ -4,11 +4,12 @@ import { ProductCardComponent } from '../../../components/Shared/product-card/pr
 import { DataService } from '../../../services/data.service';
 import { CommonModule } from '@angular/common';
 import { ProductCard2Component } from '../../../components/Shared/product-card-2/product-card-2.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shop',
   standalone: true,
-  imports: [BreadcrumbsComponent, ProductCardComponent, CommonModule, ProductCard2Component],
+  imports: [BreadcrumbsComponent, ProductCardComponent, CommonModule, ProductCard2Component, FormsModule],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })
@@ -26,6 +27,7 @@ export class ShopComponent {
   sizes: any;
   colors: any;
   viewCart = true;
+  sortValue: string = "";
 
   constructor() { }
   ngOnInit() {
@@ -158,6 +160,18 @@ export class ShopComponent {
     const selectedData = data.filter((product: any) => product?.colors.includes(this.colorName));
   
     return selectedData;
+  }
+
+  bySorting(data: any): any {
+    if (this.sortValue === "") {
+      return data; // If the sortValue is empty, return all data
+    } else if (this.sortValue === "low-high") {
+      return data.sort((a: any, b: any) => a.offer_price - b.offer_price);
+    } else if (this.sortValue === "high-low") {
+      return data.sort((a: any, b: any) => b.offer_price - a.offer_price);
+    } else if (this.sortValue === "latest") {
+      return data.sort((a: any, b: any) => new Date(b.date_created).getTime() - new Date(a.date_created).getTime());
+    }
   }
 
   onClearFilter() {
