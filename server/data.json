@@ -1,0 +1,233 @@
+{
+  "products": [
+    {
+      "id": 101,
+      "name": "Classic Leather Watch",
+      "purchase_price": 99.99,
+      "regular_price": 149.99,
+      "offer_price": 119.99,
+      "image": "https://i.ibb.co/xGWGmx9/watch-main.jpg",
+      "images": [
+        "https://i.ibb.co/yPShz4p/7.jpg",
+        "https://i.ibb.co/TK3rpjQ/6.jpg",
+        "https://i.ibb.co/LCVvx55/5.jpg",
+        "https://i.ibb.co/tJFNSkW/4.jpg",
+        "https://i.ibb.co/4wySBnK/3.jpg",
+        "https://i.ibb.co/FH3ZgJV/2.jpg",
+        "https://i.ibb.co/DYhzTq2/1.jpg"
+      ],
+      "description": "A timeless classic, this leather watch features a minimalist design with a genuine leather strap and stainless steel case. Perfect for everyday wear.",
+      "product_details": "Sweeping display minimalist wristwatch\n\nModel No.: L6002\nMovement: Miyota 2036 Japan Quartz(Not Digital Watch , no Luminous function)\nCase back: Sealed stainless steel back case\nCase diameter: 40 mm in width (Approx)\nThickness : 9.6 mm (Approx)\nLength: 24 mm (Circlelength)\nStrap material: 316 L Stainless steel mesh band\nStrap Width: 22 mm approx\nGlass: Hardlex mineral, Combines severals layers of anti-reflective coating\nDial: Sweeping northern Lights Display\nWater resist: 3 ATM = 3 Bar (Life waterproof)\n\nWe Ship to Worldwide by Aliexpress Standard Shipping (Mostly Free), exceptAPO/FPO.\n\nItems are shipped from China using Registed Air mail,Can be always tracking online , reach most of the countries within 10 to 20 business days.\n\nDelivery time depends on different Country zone and other factors like Customs checking , Weather, Local Post working efficiency, it may takes up to 20 business days.\n\nCountry\nDelivery Time\n\nWorking Days (not including holiday)\n5-8\n7-12\n12-14\n15-19\n20-22\n>22\nWorking Days + Saturday + Sunday\n7-10\n11-15\n16-20\n21-25\n26-30\n>45\nUnited States\nRate (item arrived)\n5 .1%\n50.1%\n29.6%\n10.5%\n4.7%\nRefund\nUnited Kingdom\nRate (item arrived)\n9.9%\n63.2%\n19.1%\n3.4%\n4.4%\nRefund\nAustralia\nRate (item arrived)\n11.4%\n50.0%\n14.3%\n7.2%\n7.1%\nRefund\nFrance\nRate (item arrived)\n10.5%\n28.6%\n43.8%\n10.1%\n7.0%\nRefund\nGermany\nRate (item arrived)\n5.1%\n22.2%\n30.3%\n25.9%\n15.5%\nRefund\nCanada\nRate (item arrived)\n0.0%\n47.1%\n31.4%\n17.6%\n3.9%\nRefund\nSpain\nRate (item arrived)\n3.5%\n25.0%\n47.9%\n12.9%\n10.7%\nRefund\n other country like brazil ,due to customs problems not always stable . please pay attention to your local customs policy,and notice about the logistics tracking infos.\n\nWe accept alipay here. AliExpress supports Visa, MasterCard, Maestro Debit Card, Western Union, and wire transfer via banks. To learn more about payment methods on AliExpress, please refer to http://help.aliexpress.com/payment_faq.html.\n\nAll major credit cards are accepted through secure payment processor ESCROW.\n\nBuyers are responsible for the return shipping costs under any circumstances. Return items should include the original packaging and accessories 30 days warranty from the dispatched date. Please contact us through email before returning the defective item\n\nWe strive for positive feedback on all transactions and POSITIVE RATING with 5-STAR rating. If for any reason you are not satisfied with your purchase, please contact us before leaving feedback and we will help to resolve any issue for you\n\nFeedback will be left to every buyer who completed the transaction and left positive feedback to us.",
+      "category": "Watches",
+      "sizes": ["xs", "s", "m", "l", "xl"],
+      "colors": ["brown", "red", "green", "blue"],
+      "brand": "Timeless Watches",
+      "is_featured": true,
+      "is_bestseller": true,
+      "is_sale": true,
+      "is_new": false,
+      "tags": ["watch", "classic", "leather"],
+      "related_products": [102, 103, 104],
+      "specifications": [
+        {
+          "item": "Case Material",
+          "value": "Stainless Steel"
+        },
+        {
+          "item": "Strap Material",
+          "value": "Genuine Leather"
+        },
+        {
+          "item": "Water Resistance",
+          "value": "30 meters"
+        },
+        {
+          "item": "Movement",
+          "value": "Quartz"
+        }
+      ],
+      "options": {},
+      "variations": {},
+      "sku": "CLW001BR",
+      "availability": "in stock",
+      "date_created": "2023-03-10",
+      "date_modified": "2023-03-15",
+      "short_description": "A timeless classic with a genuine leather strap and stainless steel case.",
+      "purchased_quantity": 50,
+      "total_sales": 500,
+      "average_rating": 2.8,
+      "rating_count": 150,
+      "facebook-post": "...",
+      "twitter-tweet": "...",
+      "instagram-post": "..."
+    },
+    {
+      "id": 102,
+      "name": "Elegant Silver Bracelet",
+      "purchase_price": 59.99,
+      "regular_price": 89.99,
+      "offer_price": 69.99,
+      "image": "https://i.ibb.co/DYhzTq2/1.jpg",
+      "images": [
+        "https://i.ibb.co/yPShz4p/7.jpg",
+        "https://i.ibb.co/TK3rpjQ/6.jpg",
+        "https://i.ibb.co/LCVvx55/5.jpg",
+        "https://i.ibb.co/tJFNSkW/4.jpg",
+        "https://i.ibb.co/4wySBnK/3.jpg",
+        "https://i.ibb.co/FH3ZgJV/2.jpg",
+        "https://i.ibb.co/xGWGmx9/watch-main.jpg"
+      ],
+      "description": "An elegant silver bracelet crafted from sterling silver, perfect for any occasion.",
+      "product_details": "Material: Sterling Silver\nLength: 18 cm\nClasp Type: Lobster Claw\n\nWe Ship to Worldwide by Aliexpress Standard Shipping (Mostly Free), exceptAPO/FPO.\n\nItems are shipped from China using Registed Air mail,Can be always tracking online , reach most of the countries within 10 to 20 business days.\n\nDelivery time depends on different Country zone and other factors like Customs checking , Weather, Local Post working efficiency, it may takes up to 20 business days.\n\nCountry\nDelivery Time\n\nWorking Days (not including holiday)\n5-8\n7-12\n12-14\n15-19\n20-22\n>22\nWorking Days + Saturday + Sunday\n7-10\n11-15\n16-20\n21-25\n26-30\n>45\nUnited States\nRate (item arrived)\n5 .1%\n50.1%\n29.6%\n10.5%\n4.7%\nRefund\nUnited Kingdom\nRate (item arrived)\n9.9%\n63.2%\n19.1%\n3.4%\n4.4%\nRefund\nAustralia\nRate (item arrived)\n11.4%\n50.0%\n14.3%\n7.2%\n7.1%\nRefund\nFrance\nRate (item arrived)\n10.5%\n28.6%\n43.8%\n10.1%\n7.0%\nRefund\nGermany\nRate (item arrived)\n5.1%\n22.2%\n30.3%\n25.9%\n15.5%\nRefund\nCanada\nRate (item arrived)\n0.0%\n47.1%\n31.4%\n17.6%\n3.9%\nRefund\nSpain\nRate (item arrived)\n3.5%\n25.0%\n47.9%\n12.9%\n10.7%\nRefund\n other country like brazil ,due to customs problems not always stable . please pay attention to your local customs policy,and notice about the logistics tracking infos.\n\nWe accept alipay here. AliExpress supports Visa, MasterCard, Maestro Debit Card, Western Union, and wire transfer via banks. To learn more about payment methods on AliExpress, please refer to http://help.aliexpress.com/payment_faq.html.\n\nAll major credit cards are accepted through secure payment processor ESCROW.\n\nBuyers are responsible for the return shipping costs under any circumstances. Return items should include the original packaging and accessories 30 days warranty from the dispatched date. Please contact us through email before returning the defective item\n\nWe strive for positive feedback on all transactions and POSITIVE RATING with 5-STAR rating. If for any reason you are not satisfied with your purchase, please contact us before leaving feedback and we will help to resolve any issue for you\n\nFeedback will be left to every buyer who completed the transaction and left positive feedback to us.",
+      "category": "Jewelry",
+      "sizes": ["s", "m", "l"],
+      "colors": ["silver"],
+      "brand": "Silver Shine",
+      "is_featured": true,
+      "is_bestseller": true,
+      "is_sale": true,
+      "is_new": true,
+      "tags": ["bracelet", "silver", "elegant"],
+      "related_products": [101, 103, 104],
+      "specifications": [
+        {
+          "item": "Material",
+          "value": "Sterling Silver"
+        },
+        {
+          "item": "Length",
+          "value": "18 cm"
+        },
+        {
+          "item": "Clasp Type",
+          "value": "Lobster Claw"
+        }
+      ],
+      "options": {},
+      "variations": {},
+      "sku": "ESB002",
+      "availability": "in stock",
+      "date_created": "2023-05-20",
+      "date_modified": "2023-06-01",
+      "short_description": "An elegant silver bracelet crafted from sterling silver.",
+      "purchased_quantity": 30,
+      "total_sales": 200,
+      "average_rating": 4.5,
+      "rating_count": 80,
+      "facebook-post": "...",
+      "twitter-tweet": "...",
+      "instagram-post": "..."
+    },
+    {
+      "id": 103,
+      "name": "Modern Digital Watch",
+      "purchase_price": 49.99,
+      "regular_price": 79.99,
+      "offer_price": 59.99,
+      "image": "https://i.ibb.co/FH3ZgJV/2.jpg",
+      "images": [
+        "https://i.ibb.co/yPShz4p/7.jpg",
+        "https://i.ibb.co/TK3rpjQ/6.jpg",
+        "https://i.ibb.co/LCVvx55/5.jpg",
+        "https://i.ibb.co/tJFNSkW/4.jpg",
+        "https://i.ibb.co/4wySBnK/3.jpg",
+        "https://i.ibb.co/xGWGmx9/watch-main.jpg",
+        "https://i.ibb.co/DYhzTq2/1.jpg"
+      ],
+      "description": "A modern digital watch with a sleek design and multiple functionalities.",
+      "product_details": "Display: Digital\nFeatures: Stopwatch, Alarm, Backlight\nWater Resistance: 50 meters\n\nWe Ship to Worldwide by Aliexpress Standard Shipping (Mostly Free), exceptAPO/FPO.\n\nItems are shipped from China using Registed Air mail,Can be always tracking online , reach most of the countries within 10 to 20 business days.\n\nDelivery time depends on different Country zone and other factors like Customs checking , Weather, Local Post working efficiency, it may takes up to 20 business days.\n\nCountry\nDelivery Time\n\nWorking Days (not including holiday)\n5-8\n7-12\n12-14\n15-19\n20-22\n>22\nWorking Days + Saturday + Sunday\n7-10\n11-15\n16-20\n21-25\n26-30\n>45\nUnited States\nRate (item arrived)\n5 .1%\n50.1%\n29.6%\n10.5%\n4.7%\nRefund\nUnited Kingdom\nRate (item arrived)\n9.9%\n63.2%\n19.1%\n3.4%\n4.4%\nRefund\nAustralia\nRate (item arrived)\n11.4%\n50.0%\n14.3%\n7.2%\n7.1%\nRefund\nFrance\nRate (item arrived)\n10.5%\n28.6%\n43.8%\n10.1%\n7.0%\nRefund\nGermany\nRate (item arrived)\n5.1%\n22.2%\n30.3%\n25.9%\n15.5%\nRefund\nCanada\nRate (item arrived)\n0.0%\n47.1%\n31.4%\n17.6%\n3.9%\nRefund\nSpain\nRate (item arrived)\n3.5%\n25.0%\n47.9%\n12.9%\n10.7%\nRefund\n other country like brazil ,due to customs problems not always stable . please pay attention to your local customs policy,and notice about the logistics tracking infos.\n\nWe accept alipay here. AliExpress supports Visa, MasterCard, Maestro Debit Card, Western Union, and wire transfer via banks. To learn more about payment methods on AliExpress, please refer to http://help.aliexpress.com/payment_faq.html.\n\nAll major credit cards are accepted through secure payment processor ESCROW.\n\nBuyers are responsible for the return shipping costs under any circumstances. Return items should include the original packaging and accessories 30 days warranty from the dispatched date. Please contact us through email before returning the defective item\n\nWe strive for positive feedback on all transactions and POSITIVE RATING with 5-STAR rating. If for any reason you are not satisfied with your purchase, please contact us before leaving feedback and we will help to resolve any issue for you\n\nFeedback will be left to every buyer who completed the transaction and left positive feedback to us.",
+      "category": "Watches",
+      "sizes": ["xs", "s", "m", "l", "xl", "xxl"],
+      "colors": ["black"],
+      "brand": "TechTime",
+      "is_featured": true,
+      "is_bestseller": true,
+      "is_sale": true,
+      "is_new": false,
+      "tags": ["watch", "digital", "modern"],
+      "related_products": [101, 102, 104],
+      "specifications": [
+        {
+          "item": "Display",
+          "value": "Digital"
+        },
+        {
+          "item": "Water Resistance",
+          "value": "50 meters"
+        },
+        {
+          "item": "Features",
+          "value": "Stopwatch, Alarm, Backlight"
+        }
+      ],
+      "options": {},
+      "variations": {},
+      "sku": "MDW003",
+      "availability": "in stock",
+      "date_created": "2023-04-15",
+      "date_modified": "2023-04-20",
+      "short_description": "A modern digital watch with multiple functionalities.",
+      "purchased_quantity": 75,
+      "total_sales": 300,
+      "average_rating": 4.2,
+      "rating_count": 120,
+      "facebook-post": "...",
+      "twitter-tweet": "...",
+      "instagram-post": "..."
+    },
+    {
+      "id": 104,
+      "name": "Luxury Gold Necklace",
+      "purchase_price": 129.99,
+      "regular_price": 199.99,
+      "offer_price": 149.99,
+      "image": "https://i.ibb.co/4wySBnK/3.jpg",
+      "images": [
+        "https://i.ibb.co/yPShz4p/7.jpg",
+        "https://i.ibb.co/TK3rpjQ/6.jpg",
+        "https://i.ibb.co/LCVvx55/5.jpg",
+        "https://i.ibb.co/tJFNSkW/4.jpg",
+        "https://i.ibb.co/xGWGmx9/watch-main.jpg",
+        "https://i.ibb.co/FH3ZgJV/2.jpg",
+        "https://i.ibb.co/DYhzTq2/1.jpg"
+      ],
+      "description": "A luxury gold necklace crafted from 18k gold, perfect for special occasions.",
+      "product_details": "Material: 18k Gold\nLength: 20 cm\n\nWe Ship to Worldwide by Aliexpress Standard Shipping (Mostly Free), exceptAPO/FPO.\n\nItems are shipped from China using Registed Air mail,Can be always tracking online , reach most of the countries within 10 to 20 business days.\n\nDelivery time depends on different Country zone and other factors like Customs checking , Weather, Local Post working efficiency, it may takes up to 20 business days.\n\nCountry\nDelivery Time\n\nWorking Days (not including holiday)\n5-8\n7-12\n12-14\n15-19\n20-22\n>22\nWorking Days + Saturday + Sunday\n7-10\n11-15\n16-20\n21-25\n26-30\n>45\nUnited States\nRate (item arrived)\n5 .1%\n50.1%\n29.6%\n10.5%\n4.7%\nRefund\nUnited Kingdom\nRate (item arrived)\n9.9%\n63.2%\n19.1%\n3.4%\n4.4%\nRefund\nAustralia\nRate (item arrived)\n11.4%\n50.0%\n14.3%\n7.2%\n7.1%\nRefund\nFrance\nRate (item arrived)\n10.5%\n28.6%\n43.8%\n10.1%\n7.0%\nRefund\nGermany\nRate (item arrived)\n5.1%\n22.2%\n30.3%\n25.9%\n15.5%\nRefund\nCanada\nRate (item arrived)\n0.0%\n47.1%\n31.4%\n17.6%\n3.9%\nRefund\nSpain\nRate (item arrived)\n3.5%\n25.0%\n47.9%\n12.9%\n10.7%\nRefund\n other country like brazil ,due to customs problems not always stable . please pay attention to your local customs policy,and notice about the logistics tracking infos.\n\nWe accept alipay here. AliExpress supports Visa, MasterCard, Maestro Debit Card, Western Union, and wire transfer via banks. To learn more about payment methods on AliExpress, please refer to http://help.aliexpress.com/payment_faq.html.\n\nAll major credit cards are accepted through secure payment processor ESCROW.\n\nBuyers are responsible for the return shipping costs under any circumstances. Return items should include the original packaging and accessories 30 days warranty from the dispatched date. Please contact us through email before returning the defective item\n\nWe strive for positive feedback on all transactions and POSITIVE RATING with 5-STAR rating. If for any reason you are not satisfied with your purchase, please contact us before leaving feedback and we will help to resolve any issue for you\n\nFeedback will be left to every buyer who completed the transaction and left positive feedback to us.",
+      "category": "Jewelry",
+      "sizes": ["m", "l"],
+      "colors": ["gold"],
+      "brand": "Golden Elegance",
+      "is_featured": true,
+      "is_bestseller": true,
+      "is_sale": true,
+      "is_new": false,
+      "tags": ["necklace", "gold", "luxury"],
+      "related_products": [101, 102, 103],
+      "specifications": [
+        {
+          "item": "Material",
+          "value": "18k Gold"
+        },
+        {
+          "item": "Length",
+          "value": "20 cm"
+        }
+      ],
+      "options": {},
+      "variations": {},
+      "sku": "LGN004",
+      "availability": "in stock",
+      "date_created": "2023-03-10",
+      "date_modified": "2023-03-15",
+      "short_description": "A luxury gold necklace crafted from 18k gold.",
+      "purchased_quantity": 20,
+      "total_sales": 150,
+      "average_rating": 4.7,
+      "rating_count": 60,
+      "facebook-post": "...",
+      "twitter-tweet": "...",
+      "instagram-post": "..."
+    }
+  ],
+  "carts": []
+}
