@@ -21,6 +21,7 @@
                 type="checkbox"
                 [id]="data.title"
                 class="text-primary focus:ring-0 cursor-pointer rounded-sm"
+                [checked]="categoryNames.includes(data.title)"
                 (change)="toggleCategoryName(data.title, $event)"
               />
               <label [for]="data.title" class="text-gray-600 ml-3 cursor-pointer"
@@ -46,6 +47,7 @@
                 type="checkbox"
                 [id]="data.title"
                 class="text-primary focus:ring-0 cursor-pointer rounded-sm"
+                [checked]="brandNames.includes(data.title)"
                 (change)="toggleBrandName(data.title, $event)"
               />
               <label [for]="data.title" class="text-gray-600 ml-3 cursor-pointer"
@@ -88,7 +90,8 @@
           @for(data of sizes; track data.title){
             <div class="size-selector">
               <input type="radio" class="hidden" name="size" [id]="data.title"
-              (change)="toggleSizeName(data.title, $event)" />
+              [checked]="sizeName === data.title"
+              (click)="toggleSizeName(data.title)" />
               <label
                 [for]="data.title"
                 class="text-xs border border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600"
@@ -114,6 +117,8 @@
                 name="color"
                 class="hidden"
                 [id]="data.title"
+                [checked]="colorName === data.title"
+                (click)="toggleColorName(data.title)"
               />
               <label
                 [for]="data.title"
@@ -126,6 +131,7 @@
         </div>
       </div>
       <!-- color filter end -->
+       <button (click)="onClearFilter()" class="bg-primary text-white w-full text-center py-2 hover:bg-rose-500">Clear Filters</button>
     </div>
   </div>
         <!-- sidebar end -->
@@ -166,7 +172,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             
               <!-- single product -->
-              @for(product of byCategory(byBrand(bySize(products))); track product.id){
+              @for(product of byCategory(byBrand(bySize(byColor(products)))); track product.id){
                   <app-product-card [product]="product"></app-product-card>
                 } @empty {
                   <div class="text-center text-gray-500 text-xl">No products found.</div>
@@ -177,7 +183,7 @@
             <div class="grid grid-cols-1 gap-6">
             
               <!-- single product -->
-              @for(product of byCategory(byBrand(bySize(products))); track product.id){
+              @for(product of byCategory(byBrand(bySize(byColor(products)))); track product.id){
                   <app-product-card-2 [product]="product"></app-product-card-2>
                 } @empty {
                   <div class="text-center text-gray-500 text-xl">No products found.</div>

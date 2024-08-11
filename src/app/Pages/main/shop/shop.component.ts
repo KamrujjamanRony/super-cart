@@ -20,8 +20,8 @@ export class ShopComponent {
   brands: any;
   categoryNames: string[] = [];
   brandNames: string[] = [];
-  sizeNames: string[] = [];
-  colorNames: string[] = [];
+  sizeName: string = "";
+  colorName: string = "";
   prices: any;
   sizes: any;
   colors: any;
@@ -36,11 +36,6 @@ export class ShopComponent {
       this.prices = this.groupProductsByProperty(this.products, 'offer_price');
       this.sizes = this.groupProductsByArrayProperty(this.products, 'sizes');
       this.colors = this.groupProductsByArrayProperty(this.products, 'colors');
-      console.log(this.categories);
-      console.log(this.brands);
-      console.log(this.prices);
-      console.log(this.sizes);
-      console.log(this.colors);
     });
   }
 
@@ -110,14 +105,19 @@ export class ShopComponent {
     }
   }
 
-  toggleSizeName(size: string, event: any): void {
-    if (event.target.checked) {
-      this.sizeNames.push(size);
+  toggleSizeName(size: string): void {
+    if (this.sizeName === size) {
+      this.sizeName = ""; // Uncheck if double-clicked
     } else {
-      const index = this.sizeNames.indexOf(size);
-      if (index > -1) {
-        this.sizeNames.splice(index, 1);
-      }
+      this.sizeName = size; // Set the selected size
+    }
+  }
+
+  toggleColorName(color: string): void {
+    if (this.colorName === color) {
+      this.colorName = ""; // Uncheck if double-clicked
+    } else {
+      this.colorName = color; // Set the selected color
     }
   }
 
@@ -141,15 +141,30 @@ export class ShopComponent {
   }
   
   bySize(data: any): any {
-    if (!this.sizeNames || this.sizeNames.length === 0) {
+    if (this.sizeName == "") {
       return data; // If the sizeNames array is empty, return all data
     }
   
-    const selectedData = data.filter((product: any) =>
-      product && product.sizes && product.sizes.some((size: any) => this.sizeNames.includes(size))
-    );
+    const selectedData = data.filter((product: any) => product?.sizes.includes(this.sizeName));
   
     return selectedData;
+  }
+  
+  byColor(data: any): any {
+    if (this.colorName == "") {
+      return data; // If the colorNames array is empty, return all data
+    }
+  
+    const selectedData = data.filter((product: any) => product?.colors.includes(this.colorName));
+  
+    return selectedData;
+  }
+
+  onClearFilter() {
+    this.categoryNames = [];
+    this.brandNames = [];
+    this.sizeName = "";
+    this.colorName = "";
   }
   
 
