@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { BreadcrumbsComponent } from '../../../components/Shared/breadcrumbs/breadcrumbs.component';
 import { ProductCardComponent } from '../../../components/Shared/product-card/product-card.component';
-import { DataService } from '../../../services/data.service';
 import { CommonModule } from '@angular/common';
 import { ProductCard2Component } from '../../../components/Shared/product-card-2/product-card-2.component';
 import { FormsModule } from '@angular/forms';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-shop',
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './shop.component.css'
 })
 export class ShopComponent {
-  dataService = inject(DataService);
+  productService = inject(ProductService);
   
   products: any;
   categories: any;
@@ -31,8 +31,8 @@ export class ShopComponent {
 
   constructor() { }
   ngOnInit() {
-    this.dataService.getJsonData().subscribe(data => {
-      this.products = data.products;
+    this.productService.getAllProducts().subscribe(data => {
+      this.products = data;
       this.categories = this.groupProductsByProperty(this.products, 'category');
       this.brands = this.groupProductsByProperty(this.products, 'brand');
       this.prices = this.groupProductsByProperty(this.products, 'offer_price');

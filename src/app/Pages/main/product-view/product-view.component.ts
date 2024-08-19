@@ -4,7 +4,7 @@ import { ViewContentComponent } from '../../../components/product-view/view-cont
 import { ViewImagesComponent } from '../../../components/product-view/view-images/view-images.component';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../../../services/data.service';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-product-view',
@@ -16,7 +16,7 @@ import { DataService } from '../../../services/data.service';
 export class ProductViewComponent {
   
   route = inject(ActivatedRoute);
-  dataService = inject(DataService);
+  productService = inject(ProductService);
   paramsSubscription?: Subscription;
   product: any;
 
@@ -24,8 +24,8 @@ export class ProductViewComponent {
     this.paramsSubscription = this.route.paramMap.subscribe({
       next: (params: any) => {
         const id = params.get('id');
-        this.dataService.getJsonData().subscribe(data => {
-          this.product = data.products.find((p: any) => p.id == id);
+        this.productService.getProduct(id).subscribe(data => {
+          this.product = data;
         });
       },
     });

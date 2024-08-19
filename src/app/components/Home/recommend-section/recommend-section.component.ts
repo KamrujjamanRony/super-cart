@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
-import { DataService } from '../../../services/data.service';
 import { ProductCardComponent } from "../../Shared/product-card/product-card.component";
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-recommend-section',
@@ -11,12 +11,12 @@ import { ProductCardComponent } from "../../Shared/product-card/product-card.com
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class RecommendSectionComponent {
-  dataService = inject(DataService);
+  productService = inject(ProductService);
   
   products: any;
   ngOnInit() {
-    this.dataService.getJsonData().subscribe(data => {
-      this.products = data.products;
+    this.productService.getAllProducts().subscribe(data => {
+      this.products = data;
       console.log(this.products)
     });
   }
