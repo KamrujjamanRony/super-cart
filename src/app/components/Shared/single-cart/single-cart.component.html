@@ -1,0 +1,53 @@
+<!-- single cart -->
+<div
+  class="flex items-center justify-between gap-6 p-4 border border-gray-200 rounded"
+>
+  <!-- cart image -->
+  <div class="w-28 shrink-0">
+    <img src="../../../../assets/images/products/product9.jpg" alt="w-full" />
+  </div>
+  <!-- cart image end -->
+  <!-- cart content -->
+  <div class="w-1/3">
+    <h2 class="text-gray-800 text-xl font-medium uppercase">
+      Italian L Shape Sofa
+    </h2>
+    <p class="text-gray-500 text-sm">
+      Availability: <span class="text-green-600">In stock</span>
+    </p>
+  </div>
+  <!-- cart content end -->
+  <div class="text-primary text-lg font-semibold">$320.00</div>
+  <!-- quantity -->
+  <div class="">
+    <div
+      class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max"
+    >
+      <button
+        class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none"
+        [disabled]="count === 1"
+        (click)="decrease()"
+      >
+        -
+      </button>
+      <div class="h-8 w-8 text-base flex items-center justify-center">
+        {{count}}
+      </div>
+      <button
+        class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none"
+        (click)="increase()"
+      >
+        +
+      </button>
+    </div>
+  </div>
+  <a
+    href="#"
+    class="cursor-not-allowed px-4 py-2 text-center text-white bg-red-500 border border-red-500 rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
+    >Delete</a
+  >
+  <div class="text-gray-600 cursor-pointer hover:text-primary">
+    <i></i>
+  </div>
+</div>
+<!-- single cart end -->

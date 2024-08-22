@@ -49,11 +49,12 @@
         <div class="text-xs text-tertiary ml-3">({{product?.rating_count}})</div>
       </div>
     </div>
-    <a
-       routerLink="/user/shopping-cart"
+    <button
       class="block w-full py-1 text-center text-white bg-primary borber border-primary rounded-b hover:bg-transparent hover:text-primary transition capitalize"
-      >add to cart</a
+      (click)="addToCart(product)"
     >
+      add to cart
+    </button>
     <!-- product content end -->
   </div>
   <!-- single product end -->
