@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-single-cart',
@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './single-cart.component.css'
 })
 export class SingleCartComponent {
+  @Input() product: any;
   count: any = 1;
 
   increase(){

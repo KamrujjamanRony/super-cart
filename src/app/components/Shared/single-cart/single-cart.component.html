@@ -2,22 +2,26 @@
 <div
   class="flex items-center justify-between gap-6 p-4 border border-gray-200 rounded"
 >
+<input
+                type="checkbox"
+                class="text-primary focus:ring-0 cursor-pointer rounded-sm"
+              />
   <!-- cart image -->
   <div class="w-28 shrink-0">
-    <img src="../../../../assets/images/products/product9.jpg" alt="w-full" />
+    <img [src]="product?.image" alt="w-full" />
   </div>
   <!-- cart image end -->
   <!-- cart content -->
   <div class="w-1/3">
     <h2 class="text-gray-800 text-xl font-medium uppercase">
-      Italian L Shape Sofa
+      {{product?.name}}
     </h2>
     <p class="text-gray-500 text-sm">
-      Availability: <span class="text-green-600">In stock</span>
+      Brand: <span class="text-green-600">{{product?.brand}}</span>
     </p>
   </div>
   <!-- cart content end -->
-  <div class="text-primary text-lg font-semibold">$320.00</div>
+  <div class="text-primary text-lg font-semibold">${{product?.offer_price}}</div>
   <!-- quantity -->
   <div class="">
     <div

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SingleCartComponent } from '../../../components/Shared/single-cart/single-cart.component';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,5 +10,14 @@ import { SingleCartComponent } from '../../../components/Shared/single-cart/sing
   styleUrl: './shopping-cart.component.css'
 })
 export class ShoppingCartComponent {
+  cartService = inject(CartService);
+  
+  carts: any;
+
+  ngOnInit() {
+    this.cartService.getAllCarts().subscribe(data => {
+      this.carts = data;
+    });
+  }
 
 }

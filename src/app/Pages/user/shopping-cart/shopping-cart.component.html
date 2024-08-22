@@ -1,7 +1,11 @@
 <!-- cart -->
 <div>
     <!-- single cart -->
-    <app-single-cart />
+    @for(product of carts; track product.id){
+      <app-single-cart [product]="product"></app-single-cart>
+    } @empty {
+      <div class="text-center text-gray-500 text-xl">No products found.</div>
+    }
     <!-- single cart end -->
   </div>
   <!-- cart end -->
