@@ -24,7 +24,7 @@
 
     <!-- product content -->
     <div class="pt-4 pb-3 px-4">
-      <a  routerLink="/">
+      <a [routerLink]="getViewLink(product.id)">
         <h4
           class="uppercase font-medium text-xl mb-2 text-secondary hover:text-primary transition"
         >
@@ -51,7 +51,7 @@
     </div>
     <button
       class="block w-full py-1 text-center text-white bg-primary borber border-primary rounded-b hover:bg-transparent hover:text-primary transition capitalize"
-      (click)="addToCart(product)"
+      [routerLink]="getViewLink(product.id)"
     >
       add to cart
     </button>

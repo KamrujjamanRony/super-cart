@@ -8,7 +8,6 @@ import { CheckoutComponent } from './Pages/main/checkout/checkout.component';
 import { ContactUsComponent } from './Pages/main/contact-us/contact-us.component';
 import { LoginComponent } from './Pages/main/login/login.component';
 import { ProfileInfoComponent } from './Pages/user/profile-info/profile-info.component';
-import { ViewComponent } from './Pages/main/view/view.component';
 import { WishlistComponent } from './Pages/user/wishlist/wishlist.component';
 import { ShoppingCartComponent } from './Pages/user/shopping-cart/shopping-cart.component';
 import { UserDashboardComponent } from './Layouts/user-dashboard/user-dashboard.component';

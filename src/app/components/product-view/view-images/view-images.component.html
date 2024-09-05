@@ -96,7 +96,7 @@
           </h3>
           <div class="flex items-center gap-2">
             <!-- single color -->
-            @for(color of product?.colors; track color){
+            @for(color of product?.colors; track trackByColor){
               <div 
               (click)="onViewColorClick(color)"
               [ngClass]="{'size-selector': viewColor == color}">
@@ -140,23 +140,24 @@
       <!-- quantity end -->
 
       <!-- cart button -->
-      <div class="flex gap-3 border-b border-gray-200 pb-5 mt-6">
-        <a
-          href="#"
+      <div class="flex gap-3 pb-5 mt-6">
+        <button
+        (click)="addToCart(product)"
           class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition"
         >
           <i class="fas fa-shopping-bag"></i> Add to cart
-        </a>
-        <a
+        </button>
+        <button
           href="#"
           class="border border-gray-300 text-gray-600 px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:text-primary transition"
         >
           <i class="fas fa-heart"></i> Wish list
-        </a>
+        </button>
       </div>
       <!-- cart button end -->
+
       <!-- social share -->
-      <div class="flex gap-3 mt-4">
+      <div class="flex gap-3 pt-4 border-t border-gray-200">
         <a
           href="#"
           class="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center"
@@ -180,3 +181,9 @@
     </div>
     <!-- product content end -->
   </div>
+
+  <!-- error massage -->
+   @if (warningMsg) {
+    <app-modal heading="Warning!" [description]="warningMsg" [isModalOpen]="true" (closeEvent)="resetWarningMsg()"></app-modal>
+   }
+  <!-- error massage end -->
