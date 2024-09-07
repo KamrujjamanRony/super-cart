@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-inputs',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './inputs.component.html',
   styleUrl: './inputs.component.css'
 })
@@ -14,8 +15,10 @@ export class InputsComponent {
   @Input() placeholder: string = ''; // Placeholder for input
   @Input() label: string = ''; // Optional label for the input
   @Input() value: any; // The value passed to the input field
-  @Input() options: Array<{ label: string, value: any }> = [];  // Array of options
+  @Input() options: Array<any> = [];  // Array of options
   @Input() isRequired: boolean = false;
+  @Input() isDisabled: boolean = false;
+  @Input() defaultPlaceholder: string = '';
 
   @Output() valueChange = new EventEmitter<any>(); // Emit changes to the parent component
 

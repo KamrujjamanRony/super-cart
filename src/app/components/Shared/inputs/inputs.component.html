@@ -15,18 +15,23 @@
     </div>
 }
 @else if (type == "select") {
-    <label [for]="inputId" class="block text-sm font-medium text-gray-700">
+    <label [for]="inputId" class="text-gray-600 mb-2 block capitalize">
         {{ label }}
       </label>
       <select
         [id]="inputId"
         [(ngModel)]="value"
+        [ngClass]="{'cursor-not-allowed': isDisabled, 'cursor-pointer': !isDisabled}"
         (ngModelChange)="onValueChange()"
-        class="grow w-full bg-cyan-100 text-black p-2 mt-1 border border-gray-300 rounded"
+        class="input-box"
+        [disabled]="isDisabled"
       >
+        <option selected disabled hidden value="">
+          {{ defaultPlaceholder }}
+        </option>
         @for (option of options; track $index) {
-            <option [value]="option?.value">
-                {{ option?.label }}
+            <option [value]="option?._id">
+                {{ option?.name }}
             </option>
         }
         
