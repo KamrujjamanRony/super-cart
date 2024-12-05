@@ -13,6 +13,8 @@ import { ShoppingCartComponent } from './Pages/user/shopping-cart/shopping-cart.
 import { UserDashboardComponent } from './Layouts/user-dashboard/user-dashboard.component';
 import { ProductViewComponent } from './Pages/main/product-view/product-view.component';
 import { UserCheckoutComponent } from './Pages/main/user-checkout/user-checkout.component';
+import { RegisterComponent } from './Pages/main/register/register.component';
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
     {
@@ -25,7 +27,7 @@ export const routes: Routes = [
           },
           {
             path: 'shop',
-            component: ShopComponent
+            component: ShopComponent, canActivate: [authGuard]
           },
           {
             path: 'about-us',
@@ -33,7 +35,7 @@ export const routes: Routes = [
           },
           {
             path: 'checkout',
-            component: CheckoutComponent
+            component: CheckoutComponent, canActivate: [authGuard]
           },
           {
             path: 'contact-us',
@@ -44,12 +46,16 @@ export const routes: Routes = [
             component: LoginComponent
           },
           {
+            path: 'register',
+            component: RegisterComponent
+          },
+          {
             path: 'view/:id',
-            component: ProductViewComponent
+            component: ProductViewComponent, canActivate: [authGuard]
           },
           {
             path: 'user-checkout',
-            component: UserCheckoutComponent
+            component: UserCheckoutComponent, canActivate: [authGuard]
           },
         ]
       },
@@ -60,19 +66,19 @@ export const routes: Routes = [
           { path: '', redirectTo: 'account', pathMatch: 'full' },
           {
             path: 'account',
-            component: AccountComponent
+            component: AccountComponent, canActivate: [authGuard]
           },
           {
             path: 'profile-info',
-            component: ProfileInfoComponent
+            component: ProfileInfoComponent, canActivate: [authGuard]
           },
           {
             path: 'wishlist',
-            component: WishlistComponent
+            component: WishlistComponent, canActivate: [authGuard]
           },
           {
             path: 'shopping-cart',
-            component: ShoppingCartComponent
+            component: ShoppingCartComponent, canActivate: [authGuard]
           },
         ]
       },
