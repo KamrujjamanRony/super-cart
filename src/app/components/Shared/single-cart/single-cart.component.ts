@@ -4,11 +4,10 @@ import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-single-cart',
-  standalone: true,
-  imports: [RouterLink],
-  templateUrl: './single-cart.component.html',
-  styleUrl: './single-cart.component.css'
+    selector: 'app-single-cart',
+    imports: [RouterLink],
+    templateUrl: './single-cart.component.html',
+    styleUrl: './single-cart.component.css'
 })
 export class SingleCartComponent {
   cartService = inject(CartService);

@@ -7,11 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 
 @Component({
-  selector: 'app-shop',
-  standalone: true,
-  imports: [BreadcrumbsComponent, ProductCardComponent, CommonModule, ProductCard2Component, FormsModule],
-  templateUrl: './shop.component.html',
-  styleUrl: './shop.component.css'
+    selector: 'app-shop',
+    imports: [BreadcrumbsComponent, ProductCardComponent, CommonModule, ProductCard2Component, FormsModule],
+    templateUrl: './shop.component.html',
+    styleUrl: './shop.component.css'
 })
 export class ShopComponent {
   productService = inject(ProductService);

@@ -7,11 +7,10 @@ import { ProductWrapperComponent } from '../../../components/Home/product-wrappe
 import { RecommendSectionComponent } from '../../../components/Home/recommend-section/recommend-section.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [AddSectionComponent, CarouselComponent, CategoriesComponent, FeatureProductComponent, ProductWrapperComponent, RecommendSectionComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    selector: 'app-home',
+    imports: [AddSectionComponent, CarouselComponent, CategoriesComponent, FeatureProductComponent, ProductWrapperComponent, RecommendSectionComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 export class HomeComponent {
 

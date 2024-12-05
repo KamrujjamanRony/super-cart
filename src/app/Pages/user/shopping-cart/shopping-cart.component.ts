@@ -3,11 +3,10 @@ import { SingleCartComponent } from '../../../components/Shared/single-cart/sing
 import { CartService } from '../../../services/cart.service';
 
 @Component({
-  selector: 'app-shopping-cart',
-  standalone: true,
-  imports: [SingleCartComponent],
-  templateUrl: './shopping-cart.component.html',
-  styleUrl: './shopping-cart.component.css'
+    selector: 'app-shopping-cart',
+    imports: [SingleCartComponent],
+    templateUrl: './shopping-cart.component.html',
+    styleUrl: './shopping-cart.component.css'
 })
 export class ShoppingCartComponent {
   cartService = inject(CartService);

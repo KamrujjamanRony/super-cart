@@ -5,11 +5,10 @@ import { Router } from '@angular/router';
 import { ModalComponent } from "../../Shared/modal/modal.component";
 
 @Component({
-  selector: 'app-view-images',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  templateUrl: './view-images.component.html',
-  styleUrl: './view-images.component.css'
+    selector: 'app-view-images',
+    imports: [CommonModule, ModalComponent],
+    templateUrl: './view-images.component.html',
+    styleUrl: './view-images.component.css'
 })
 export class ViewImagesComponent {
   cartService = inject(CartService);

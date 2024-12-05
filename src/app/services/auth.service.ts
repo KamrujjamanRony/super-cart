@@ -1,36 +1,50 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { Auth, createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/users';
+  private auth = inject(Auth);
+  // private firestore = inject(Firestore);
+  public currentUser: any = null;
 
-  constructor(private http: HttpClient) {}
-
-  login(email: any, password: any): Observable<any> {
-    return this.http.get<any[]>(`${this.apiUrl}`).pipe(
-      map(users => {
-        const user = users.find(u => u.email === email && u.password === password);
-        if (user) {
-          // Store user data in local storage
-          localStorage.setItem('user', JSON.stringify(user));
-          return user;
-        } else {
-          throw new Error('Invalid email or password');
-        }
-      }),
-      catchError(err => throwError(err))
-    );
-  }
-
-  logout(): void {
-    localStorage.removeItem('user');
+  getUser(data: any) {
+    this.auth.onAuthStateChanged((user) => {
+      data = user;
+      console.log(user)
+    });
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('user');
+    return !!this.auth.currentUser;
   }
+
+  registerWithEmail(email: any, password: any) {
+    return createUserWithEmailAndPassword(this.auth, email, password);
+  }
+
+  signInWithEmail(email: any, password: any) {
+    return signInWithEmailAndPassword(this.auth, email, password);
+  }
+  
+  signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(this.auth, provider);
+  }
+  
+  signInWithFacebook() {
+    const provider = new FacebookAuthProvider();
+    return signInWithPopup(this.auth, provider);
+  }
+  
+  forgotPassword(email: string) {
+    return sendPasswordResetEmail(this.auth, email);
+  }
+  
+  logout() {
+    return signOut(this.auth);
+  }
+  
 }

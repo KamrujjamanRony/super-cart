@@ -3,12 +3,11 @@ import { ProductCardComponent } from "../../Shared/product-card/product-card.com
 import { ProductService } from '../../../services/product.service';
 
 @Component({
-  selector: 'app-product-wrapper',
-  standalone: true,
-  imports: [ProductCardComponent],
-  templateUrl: './product-wrapper.component.html',
-  styleUrl: './product-wrapper.component.css',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    selector: 'app-product-wrapper',
+    imports: [ProductCardComponent],
+    templateUrl: './product-wrapper.component.html',
+    styleUrl: './product-wrapper.component.css',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ProductWrapperComponent {
   productService = inject(ProductService);

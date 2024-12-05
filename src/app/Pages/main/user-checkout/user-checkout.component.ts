@@ -5,11 +5,10 @@ import { DataService } from '../../../services/data.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-user-checkout',
-  standalone: true,
-  imports: [BreadcrumbsComponent, InputsComponent, FormsModule],
-  templateUrl: './user-checkout.component.html',
-  styleUrl: './user-checkout.component.css'
+    selector: 'app-user-checkout',
+    imports: [BreadcrumbsComponent, InputsComponent, FormsModule],
+    templateUrl: './user-checkout.component.html',
+    styleUrl: './user-checkout.component.css'
 })
 export class UserCheckoutComponent {
   private dataService = inject(DataService);

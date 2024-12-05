@@ -1,28 +1,12 @@
 <!-- Register -->
 <div class="container py-16">
-    <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
+    <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden bg-pink-50">
       <h2 class="text-2xl uppercase font-medium mb-1">Register</h2>
       <p class="text-gray-600 mb-6 text-sm">
-        Register if you are a returning customer
+        Register if you are a new customer
       </p>
       <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
         <div class="space-y-4">
-            <!-- ------------------------- Name ------------------------------ -->
-         <div class="flex gap-1">
-            <div>
-                <label class="text-gray-600 mb-2 block">First Name</label>
-                <input
-                  type="text"
-                  [formControl]="getControl('firstName')"
-                  [class.invalid]="
-                    (getControl('firstName').invalid &&
-                    getControl('firstName').touched) && isSubmitted
-                  "
-                  class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-secondary placeholder-gray-400"
-                  placeholder="First Name"
-                />
-              </div>
-         </div>
             <!-- ------------------------- Email ------------------------------ -->
           <div>
             <label class="text-gray-600 mb-2 block">Email address</label>
@@ -58,19 +42,6 @@
             {{ error }}
           </div>
         }
-        <div class="flex items-center justify-between mt-6">
-          <div class="flex items-center">
-            <input
-              type="checkbox"
-              id="agreement"
-              class="text-primary focus:ring-0 rounded-sm cursor-pointer"
-            />
-            <label for="agreement" class="text-gray-600 ml-3 cursor-pointer"
-              >Remember me</label
-            >
-          </div>
-          <a href="#" class="text-primary">Forgot password</a>
-        </div>
         <div class="mt-4">
           <input
             type="submit"
@@ -82,7 +53,7 @@
   
       <!-- Register with -->
       <div class="mt-6 flex justify-center relative">
-        <div class="text-gray-600 uppercase px-3 bg-white z-10 relative">
+        <div class="text-gray-600 uppercase px-3 bg-pink-50 z-10 relative">
           Or Register in with
         </div>
         <div

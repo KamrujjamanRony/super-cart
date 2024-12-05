@@ -5,11 +5,10 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    imports: [ReactiveFormsModule, CommonModule, RouterLink],
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   // Form Init ------------------------------------------------------
@@ -37,19 +36,41 @@ export class RegisterComponent {
     if (this.form.valid) {
       // console.log(this.form.value);
       const { email, password } = this.form.value;
-      this.authService.login(email, password).subscribe({
-        next: user => {
-          console.log('Login successful', user);
+      this.authService.registerWithEmail(email, password)
+        .then((data) => {
+          console.log(data)
+          console.log('User registered successfully');
           this.router.navigate(['/']);
-        },
-        error: err => {
-          this.error = err.message;
-        }
-      });
+        })
+        .catch((err) => {
+          this.error = err.toString();
+          console.log('Register failed', err.toString());
+        });
     } else {
       alert('Form is invalid! Please Fill Email and Password.');
     }
   }
+
+  loginWithGoogle() {
+    this.authService
+      .signInWithGoogle()
+      .then(() => console.log('Logged in with Google'))
+      .catch((err) => {
+        this.error = err.toString();
+        console.error('Google login failed', err)
+      });
+  }
+
+  loginWithFacebook() {
+    this.authService
+      .signInWithFacebook()
+      .then(() => console.log('Logged in with Facebook'))
+      .catch((err) => {
+        this.error = err.toString();
+        console.error('Facebook login failed', err)
+      });
+  }
+
 
   formReset(e: Event): void {
     e.preventDefault();

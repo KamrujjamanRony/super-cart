@@ -4,14 +4,14 @@
     <div class="px-4 py-3 shadow flex items-center gap-4 bg-white">
       <div class="flex-shrink-0">
         <img
-          src="https://i.ibb.co/dW8bTbT/4n-RGq-XSw3491-1.jpg"
+          [src]="user ? user?.photoURL : 'https://i.ibb.co/dW8bTbT/4n-RGq-XSw3491-1.jpg'"
           class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover"
           alt=""
         />
       </div>
       <div class="flex-grow">
         <p class="text-gray-600">Hello,</p>
-        <h4 class="text-gray-800 font-medium">Kamrujjaman</h4>
+        <h4 class="text-gray-800 font-medium">{{user?.displayName}}</h4>
       </div>
     </div>
     <!-- account wrapper end -->

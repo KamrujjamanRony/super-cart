@@ -7,11 +7,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../services/product.service';
 
 @Component({
-  selector: 'app-product-view',
-  standalone: true,
-  imports: [BreadcrumbsComponent, ViewContentComponent, ViewImagesComponent],
-  templateUrl: './product-view.component.html',
-  styleUrl: './product-view.component.css'
+    selector: 'app-product-view',
+    imports: [BreadcrumbsComponent, ViewContentComponent, ViewImagesComponent],
+    templateUrl: './product-view.component.html',
+    styleUrl: './product-view.component.css'
 })
 export class ProductViewComponent {
   

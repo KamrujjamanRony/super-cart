@@ -3,11 +3,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-inputs',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './inputs.component.html',
-  styleUrl: './inputs.component.css'
+    selector: 'app-inputs',
+    imports: [FormsModule, CommonModule],
+    templateUrl: './inputs.component.html',
+    styleUrl: './inputs.component.css'
 })
 export class InputsComponent {
   @Input() inputId: string = '';  // To set a unique id for each input

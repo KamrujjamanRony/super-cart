@@ -364,9 +364,14 @@
           >Contact us</a
         >
       </div>
-      <a routerLink="/login" class="text-gray-200 hover:text-white transition"
+      @if (user) {
+        <button (click)="logout()" class="text-gray-200 hover:text-white transition">LogOut</button>
+      } @else {
+        <a routerLink="/login" class="text-gray-200 hover:text-white transition"
         >Login/Register</a
       >
+      }
+      
     </div>
     <!-- navbar links end -->
   </div>

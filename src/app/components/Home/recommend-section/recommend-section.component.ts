@@ -3,12 +3,11 @@ import { ProductCardComponent } from "../../Shared/product-card/product-card.com
 import { ProductService } from '../../../services/product.service';
 
 @Component({
-  selector: 'app-recommend-section',
-  standalone: true,
-  imports: [ProductCardComponent],
-  templateUrl: './recommend-section.component.html',
-  styleUrl: './recommend-section.component.css',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    selector: 'app-recommend-section',
+    imports: [ProductCardComponent],
+    templateUrl: './recommend-section.component.html',
+    styleUrl: './recommend-section.component.css',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class RecommendSectionComponent {
   productService = inject(ProductService);
@@ -17,7 +16,6 @@ export class RecommendSectionComponent {
   ngOnInit() {
     this.productService.getAllProducts().subscribe(data => {
       this.products = data;
-      console.log(this.products)
     });
   }
 

@@ -1,20 +1,26 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideRouter, withHashLocation } from '@angular/router';
-
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig } from '@angular/core';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBLJ20acpkZ2NJnnggMac1ksJwnu6U5tkY",
-  authDomain: "bistro-boss-15cc7.firebaseapp.com",
-  projectId: "bistro-boss-15cc7",
-  storageBucket: "bistro-boss-15cc7.firebasestorage.app",
-  messagingSenderId: "320128756396",
-  appId: "1:320128756396:web:8caf8561f015ac26a10d09"
+  apiKey: "AIzaSyAFJCGAbWU3TJmmo1BJBSnnlwUin68wYvo",
+  authDomain: "super-cart-80b68.firebaseapp.com",
+  projectId: "super-cart-80b68",
+  storageBucket: "super-cart-80b68.firebasestorage.app",
+  messagingSenderId: "193969857306",
+  appId: "1:193969857306:web:931f5f4d45f918140002a3"
 };
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes, withHashLocation()), provideHttpClient(withFetch()), provideAnimations(), importProvidersFrom([provideFirebaseApp(() => initializeApp(firebaseConfig)), provideAuth(() => getAuth())])]
+  providers: [
+    provideRouter(routes, withHashLocation()), 
+    provideHttpClient(),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideAuth(() => getAuth())
+  ]
 };
+

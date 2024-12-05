@@ -42,14 +42,6 @@ export const routes: Routes = [
             component: ContactUsComponent
           },
           {
-            path: 'login',
-            component: LoginComponent
-          },
-          {
-            path: 'register',
-            component: RegisterComponent
-          },
-          {
             path: 'view/:id',
             component: ProductViewComponent, canActivate: [authGuard]
           },
@@ -82,4 +74,12 @@ export const routes: Routes = [
           },
         ]
       },
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      }
 ];
