@@ -18,7 +18,7 @@ export class CartService {
   }
 
   getCart(id: string): Observable<any>{
-    return this.http.get<any>(`http://localhost:3000/carts/${id}`);
+    return this.http.get<any>(`http://localhost:3000/carts?userId=${id}`);
   }
 
   updateCart(id: string, updateCartRequest: any | FormData): Observable<any>{

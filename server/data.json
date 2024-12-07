@@ -294,47 +294,6 @@
       "instagram-post": "..."
     }
   ],
-  "carts": [
-    {
-      "id": "104",
-      "name": "Luxury Gold Necklace",
-      "image": "https://i.ibb.co/4wySBnK/3.jpg",
-      "brand": "Golden Elegance",
-      "availability": "in stock",
-      "category": "Jewelry",
-      "price": 149.99,
-      "purchasedQuantity": 20,
-      "selectSize": "l",
-      "selectColor": "gold",
-      "orderQuantity": 5
-    },
-    {
-      "id": "104",
-      "name": "Luxury Gold Necklace",
-      "image": "https://i.ibb.co/4wySBnK/3.jpg",
-      "brand": "Golden Elegance",
-      "availability": "in stock",
-      "category": "Jewelry",
-      "price": 149.99,
-      "purchasedQuantity": 20,
-      "selectSize": "l",
-      "selectColor": "gold",
-      "orderQuantity": 3
-    },
-    {
-      "id": "103",
-      "name": "Modern Digital Watch",
-      "image": "https://i.ibb.co/FH3ZgJV/2.jpg",
-      "brand": "TechTime",
-      "availability": "in stock",
-      "category": "Watches",
-      "price": 59.99,
-      "purchasedQuantity": 75,
-      "selectSize": "xs",
-      "selectColor": "black",
-      "orderQuantity": 2
-    }
-  ],
   "wishlist": [],
   "address": {
     "region": [
@@ -28429,6 +28388,68 @@
         "zipcode": "11111"
       },
       "phone": "1-800-USER"
+    }
+  ],
+  "cartsOld": [
+    {
+      "id": "104",
+      "name": "Luxury Gold Necklace",
+      "image": "https://i.ibb.co/4wySBnK/3.jpg",
+      "brand": "Golden Elegance",
+      "availability": "in stock",
+      "category": "Jewelry",
+      "price": 149.99,
+      "purchasedQuantity": 20,
+      "selectSize": "l",
+      "selectColor": "gold",
+      "orderQuantity": 5
+    },
+    {
+      "id": "104",
+      "name": "Luxury Gold Necklace",
+      "image": "https://i.ibb.co/4wySBnK/3.jpg",
+      "brand": "Golden Elegance",
+      "availability": "in stock",
+      "category": "Jewelry",
+      "price": 149.99,
+      "purchasedQuantity": 20,
+      "selectSize": "l",
+      "selectColor": "gold",
+      "orderQuantity": 3
+    },
+    {
+      "id": "103",
+      "name": "Modern Digital Watch",
+      "image": "https://i.ibb.co/FH3ZgJV/2.jpg",
+      "brand": "TechTime",
+      "availability": "in stock",
+      "category": "Watches",
+      "price": 59.99,
+      "purchasedQuantity": 75,
+      "selectSize": "xs",
+      "selectColor": "black",
+      "orderQuantity": 2
+    }
+  ],
+  "carts": [
+    {
+      "id": 1,
+      "userId": "9DYNtHCx0OVplWXpjY3nndws5Sb2",
+      "date": "2020-10-10",
+      "products": [
+        { "productId": "101", "quantity": 4, "selectColor": "red", "selectSize": "XL" },
+        { "productId": "103", "quantity": 10, "selectColor": "red", "selectSize": "XL" },
+        { "productId": "102", "quantity": 2, "selectColor": "red", "selectSize": "XL" }
+      ]
+    },
+    {
+      "id": 20,
+      "userId": "2AYFtHCx0OVplWXpjY3nndws0Sb6",
+      "date": "2019-10-10",
+      "products": [
+        { "productId": "104", "quantity": 5, "selectColor": "red", "selectSize": "XL" },
+        { "productId": "101", "quantity": 1, "selectColor": "red", "selectSize": "XL" }
+      ]
     }
   ]
 }
