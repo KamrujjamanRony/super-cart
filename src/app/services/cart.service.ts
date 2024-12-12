@@ -1,31 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private cartUpdated = new BehaviorSubject<void>(undefined);
+  cartUpdated$ = this.cartUpdated.asObservable();
 
   http = inject(HttpClient);
 
+  apiUrl = 'http://localhost:3000/carts';
+
   addCart(model: any | FormData): Observable<void>{
-    return this.http.post<void>('http://localhost:3000/carts', model)
+    console.log(model)
+    return this.http.post<void>(this.apiUrl, model).pipe(
+      tap(() => this.cartUpdated.next()) // Notify subscribers of cart update
+    );
   }
 
   getAllCarts(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3000/carts');
+    return this.http.get<any[]>(this.apiUrl);
   }
 
   getCart(id: string): Observable<any>{
-    return this.http.get<any>(`http://localhost:3000/carts?userId=${id}`);
+    return this.http.get<any>(`${this.apiUrl}?userId=${id}`);
   }
 
-  updateCart(id: string, updateCartRequest: any | FormData): Observable<any>{
-    return this.http.put<any>(`http://localhost:3000/carts/${id}`, updateCartRequest);
+  updateCart(cartId: string, updateCartRequest: any | FormData): Observable<any>{
+    return this.http.put<any>(`${this.apiUrl}/${cartId}`, updateCartRequest).pipe(
+      tap(() => this.cartUpdated.next()) // Notify subscribers
+    );
   }
 
   deleteCart(id: string): Observable<any>{
-    return this.http.delete<any>(`http://localhost:3000/carts/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
+      tap(() => this.cartUpdated.next()) // Notify subscribers of cart update
+    );
   }
 }

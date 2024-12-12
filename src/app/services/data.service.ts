@@ -31,7 +31,6 @@ export class DataService {
       map(data => {
         // Access the area array and filter it based on parentId
         const areas = data.area || [];
-        console.log(areas)
         return areas.filter((item: any) => item.parentId == parentId);
       })
     );

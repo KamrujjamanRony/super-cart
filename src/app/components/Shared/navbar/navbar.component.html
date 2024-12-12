@@ -122,10 +122,10 @@
         <div class="text-md">
           <i class="fas fa-shopping-cart"></i>
         </div>
-        @if (carts?.length > 0) {
+        @if (totalCarts() > 0) {
           <span
           class="absolute -right-3 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-primary text-white text-[8px]"
-          >{{carts?.length}}</span
+          >{{totalCarts()}}</span
         >
         }
       </a>
@@ -228,10 +228,10 @@
           <i class="fas fa-shopping-cart"></i>
         </div>
         <div class="text-xs leading-3">Shopping Cart</div>
-        @if (carts?.length > 0) {
+        @if (totalCarts() > 0) {
           <span
           class="absolute right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
-          >{{carts?.length}}</span
+          >{{totalCarts()}}</span
         >
         }
       </a>

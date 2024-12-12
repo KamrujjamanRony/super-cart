@@ -28354,7 +28354,7 @@
   },
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "admin@gmail.com",
       "username": "admin",
       "password": "admin123",
@@ -28372,7 +28372,7 @@
       "phone": "1-800-ADMIN"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "user@gmail.com",
       "username": "user",
       "password": "user123",
@@ -28390,65 +28390,27 @@
       "phone": "1-800-USER"
     }
   ],
-  "cartsOld": [
-    {
-      "id": "104",
-      "name": "Luxury Gold Necklace",
-      "image": "https://i.ibb.co/4wySBnK/3.jpg",
-      "brand": "Golden Elegance",
-      "availability": "in stock",
-      "category": "Jewelry",
-      "price": 149.99,
-      "purchasedQuantity": 20,
-      "selectSize": "l",
-      "selectColor": "gold",
-      "orderQuantity": 5
-    },
-    {
-      "id": "104",
-      "name": "Luxury Gold Necklace",
-      "image": "https://i.ibb.co/4wySBnK/3.jpg",
-      "brand": "Golden Elegance",
-      "availability": "in stock",
-      "category": "Jewelry",
-      "price": 149.99,
-      "purchasedQuantity": 20,
-      "selectSize": "l",
-      "selectColor": "gold",
-      "orderQuantity": 3
-    },
-    {
-      "id": "103",
-      "name": "Modern Digital Watch",
-      "image": "https://i.ibb.co/FH3ZgJV/2.jpg",
-      "brand": "TechTime",
-      "availability": "in stock",
-      "category": "Watches",
-      "price": 59.99,
-      "purchasedQuantity": 75,
-      "selectSize": "xs",
-      "selectColor": "black",
-      "orderQuantity": 2
-    }
-  ],
   "carts": [
     {
-      "id": 1,
+      "id": "1733921726428",
       "userId": "9DYNtHCx0OVplWXpjY3nndws5Sb2",
-      "date": "2020-10-10",
       "products": [
-        { "productId": "101", "quantity": 4, "selectColor": "red", "selectSize": "XL" },
-        { "productId": "103", "quantity": 10, "selectColor": "red", "selectSize": "XL" },
-        { "productId": "102", "quantity": 2, "selectColor": "red", "selectSize": "XL" }
-      ]
-    },
-    {
-      "id": 20,
-      "userId": "2AYFtHCx0OVplWXpjY3nndws0Sb6",
-      "date": "2019-10-10",
-      "products": [
-        { "productId": "104", "quantity": 5, "selectColor": "red", "selectSize": "XL" },
-        { "productId": "101", "quantity": 1, "selectColor": "red", "selectSize": "XL" }
+        {
+          "id": "eea159b8-e9f3-4273-9522-4d1aacdfde21",
+          "productId": "101",
+          "selectSize": "m",
+          "selectColor": "brown",
+          "date": "2024-10-15",
+          "quantity": 1
+        },
+        {
+          "id": "e5efbc6d-ae64-489b-a24b-f1fa3192acd5",
+          "productId": "102",
+          "selectSize": "m",
+          "selectColor": "silver",
+          "date": "2024-10-19",
+          "quantity": 1
+        }
       ]
     }
   ]

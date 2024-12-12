@@ -4,6 +4,7 @@ import { provideRouter, withHashLocation } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,7 +21,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withHashLocation()), 
     provideHttpClient(),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
+    CookieService
   ]
 };
 

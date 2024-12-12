@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { AuthCookieService } from '../../../services/auth-cookie.service';
 
 @Component({
     selector: 'app-register',
@@ -26,6 +27,7 @@ export class RegisterComponent {
 
   // Declare Services ------------------------------------------------------
   authService = inject(AuthService);
+  authCookieService = inject(AuthCookieService);
   router = inject(Router);
 
   error: any;
@@ -38,7 +40,7 @@ export class RegisterComponent {
       const { email, password } = this.form.value;
       this.authService.registerWithEmail(email, password)
         .then((data) => {
-          console.log(data)
+          this.authCookieService.login(data.user);
           console.log('User registered successfully');
           this.router.navigate(['/']);
         })
@@ -54,7 +56,10 @@ export class RegisterComponent {
   loginWithGoogle() {
     this.authService
       .signInWithGoogle()
-      .then(() => console.log('Logged in with Google'))
+      .then((data) => {
+        this.authCookieService.login(data.user);
+        console.log('Logged in with Google')
+      })
       .catch((err) => {
         this.error = err.toString();
         console.error('Google login failed', err)
@@ -64,7 +69,10 @@ export class RegisterComponent {
   loginWithFacebook() {
     this.authService
       .signInWithFacebook()
-      .then(() => console.log('Logged in with Facebook'))
+      .then((data) => {
+        this.authCookieService.login(data.user);
+        console.log('Logged in with Facebook')
+      })
       .catch((err) => {
         this.error = err.toString();
         console.error('Facebook login failed', err)

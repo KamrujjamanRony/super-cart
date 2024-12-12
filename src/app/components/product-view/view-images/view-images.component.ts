@@ -3,6 +3,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Input, Renderer2 } from '@an
 import { CartService } from '../../../services/cart.service';
 import { Router } from '@angular/router';
 import { ModalComponent } from "../../Shared/modal/modal.component";
+import { AuthCookieService } from '../../../services/auth-cookie.service';
 
 @Component({
     selector: 'app-view-images',
@@ -12,6 +13,7 @@ import { ModalComponent } from "../../Shared/modal/modal.component";
 })
 export class ViewImagesComponent {
   cartService = inject(CartService);
+  authCookieService = inject(AuthCookieService);
   renderer = inject(Renderer2);
   router = inject(Router);
   @Input() product: any;
@@ -97,27 +99,84 @@ export class ViewImagesComponent {
   }
 
   addToCart(product: any) {
-    // Add product to the cart here
-    if ((!product?.sizes && !product?.colors) || (product?.sizes && this.viewSize && !product?.colors) || (product?.colors && this.viewColor && !product?.sizes) || (product?.sizes && this.viewSize && product?.colors && this.viewColor)) {
-      const cartProduct = { id: product.id, name: product?.name, image: product?.image, brand: product?.brand, availability: product?.availability, category: product?.category, price: product?.offer_price, purchasedQuantity: product?.purchased_quantity, selectSize: this.viewSize, selectColor: this.viewColor, orderQuantity: this.count };
-      this.cartService.addCart(cartProduct).subscribe({
-        next: (response) => {
-          this.router.navigateByUrl('user/shopping-cart');
+    const user = this.authCookieService.getUserData();
+  
+    if (!user) {
+      console.error('User not logged in');
+      return;
+    }
+  
+    if ((!product?.sizes && !product?.colors) || 
+        (product?.sizes && this.viewSize && !product?.colors) || 
+        (product?.colors && this.viewColor && !product?.sizes) || 
+        (product?.sizes && this.viewSize && product?.colors && this.viewColor)) {
+      
+      const cartProduct = { 
+        id: crypto.randomUUID().toString(), 
+        productId: product.id, 
+        selectSize: this.viewSize, 
+        selectColor: this.viewColor, 
+        quantity: this.count 
+      };
+  
+      this.cartService.getCart(user.uid).subscribe({
+        next: (cart) => {
+          console.log(cart)
+          if (cart.length > 0) {
+            const restCart = cart[0];
+            // If the cart exists, check if the product is already in the cart
+            const existingProduct = restCart.products.find((p: any) => p.productId === cartProduct.productId && p.selectSize === cartProduct.selectSize && p.selectColor === cartProduct.selectColor);
+  
+            if (existingProduct) {
+              // Update the quantity if the product already exists
+              existingProduct.quantity += cartProduct.quantity;
+            } else {
+              // Add the new product to the cart
+              restCart.products.push(cartProduct);
+            }
+  
+            // Update the cart
+            this.cartService.updateCart( restCart.id, restCart).subscribe({
+              next: () => {
+                console.log('Cart updated successfully');
+                // this.router.navigateByUrl('user/shopping-cart');
+              },
+              error: (error) => {
+                console.error('Error updating cart:', error);
+              }
+            });
+          } else {
+            // If no cart exists, create a new cart for the user
+            const newCart = {
+              id: Date.now().toString(), // Generate a unique ID for the new cart
+              userId: user.uid,
+              products: [cartProduct]
+            };
+  
+            this.cartService.addCart(newCart).subscribe({
+              next: () => {
+                console.log('New cart created successfully');
+                // this.router.navigateByUrl('user/shopping-cart');
+              },
+              error: (error) => {
+                console.error('Error creating cart:', error);
+              }
+            });
+          }
         },
         error: (error) => {
-          console.error('Error adding product to cart:', error);
+          console.error('Error fetching user cart:', error);
         }
       });
+  
     } else {
       this.warningMsg = (product?.sizes && product?.colors)
-        ?
-        ((this.viewSize && !this.viewColor) ? "Please select color" : (!this.viewSize && this.viewColor) ? "Please select size" : "Please select size and color")
-        :
-        ((!product?.sizes && product?.colors) ? "Please select color" : "Please select size");
+        ? ((this.viewSize && !this.viewColor) ? "Please select color" : (!this.viewSize && this.viewColor) ? "Please select size" : "Please select size and color")
+        : ((!product?.sizes && product?.colors) ? "Please select color" : "Please select size");
       console.log(this.warningMsg);
     }
-
   }
+  
 
   scrollToTop() {
     // Scroll to the top of the page

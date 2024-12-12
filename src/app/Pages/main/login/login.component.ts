@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { AuthCookieService } from '../../../services/auth-cookie.service';
 
 @Component({
     selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent {
 
   // Declare Services ------------------------------------------------------
   authService = inject(AuthService);
+  authCookieService = inject(AuthCookieService);
   router = inject(Router);
 
   error: any;
@@ -39,7 +41,7 @@ export class LoginComponent {
       this.authService
         .signInWithEmail(email, password)
         .then((data) => {
-          console.log(data)
+          this.authCookieService.login(data.user);
           console.log('Logged in successfully');
           this.router.navigate(['/']);
         })
@@ -55,8 +57,9 @@ export class LoginComponent {
   loginWithGoogle() {
     this.authService
       .signInWithGoogle()
-      .then(() => {
-        console.log('Logged in with Google')
+      .then((data) => {
+        this.authCookieService.login(data.user);
+        console.log('Logged in with Google');
         this.router.navigate(['/']);
       })
       .catch((err) => {
@@ -68,7 +71,8 @@ export class LoginComponent {
   loginWithFacebook() {
     this.authService
       .signInWithFacebook()
-      .then(() => {
+      .then((data) => {
+        this.authCookieService.login(data.user);
         console.log('Logged in with Facebook');
         this.router.navigate(['/']);
       })

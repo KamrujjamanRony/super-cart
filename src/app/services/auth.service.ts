@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
+import { AuthCookieService } from './auth-cookie.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -7,18 +9,20 @@ import { Auth, createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthP
 })
 export class AuthService {
   private auth = inject(Auth);
-  // private firestore = inject(Firestore);
+  authCookieService = inject(AuthCookieService);
+  router = inject(Router);
   public currentUser: any = null;
 
   getUser(data: any) {
     this.auth.onAuthStateChanged((user) => {
       data = user;
-      console.log(user)
     });
   }
 
   isLoggedIn(): boolean {
-    return !!this.auth.currentUser;
+    const user = this.authCookieService.getUserData();
+    return !!user;
+    // return !!this.auth.currentUser;
   }
 
   registerWithEmail(email: any, password: any) {
@@ -44,6 +48,8 @@ export class AuthService {
   }
   
   logout() {
+    this.authCookieService.logout();
+    this.router.navigate(['/']);
     return signOut(this.auth);
   }
   

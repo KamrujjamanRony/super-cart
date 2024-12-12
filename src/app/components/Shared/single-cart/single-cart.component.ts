@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthCookieService } from '../../../services/auth-cookie.service';
 
 @Component({
     selector: 'app-single-cart',
@@ -11,8 +12,9 @@ import { Subscription } from 'rxjs';
 })
 export class SingleCartComponent {
   cartService = inject(CartService);
+  authCookieService = inject(AuthCookieService);
   @Input() product: any;
-  @Input() carts: any;
+  @Input() userCarts: any;
   @Output() cartUpdated = new EventEmitter<any>(); // Emit event to parent component
   count: any = 1;
   deleteCartSubscription?: Subscription;
@@ -20,21 +22,26 @@ export class SingleCartComponent {
   constructor() { }
 
   ngOnInit() {
-    this.count = this.product.orderQuantity;
+    this.count = this.product.quantity;
   }
 
   // Update the product quantity and also update it in the carts array
   increase() {
-    const updatedProduct = { ...this.product, orderQuantity: ++this.count };
+    const updatedCart = {
+      ...this.userCarts,
+      products: this.userCarts.products.map((p: any) =>
+        p.productId === this.product.productId ? { ...p, quantity: ++this.count } : p
+      ),
+    };
 
-    this.cartService.updateCart(this.product.id, updatedProduct).subscribe({
+    this.cartService.updateCart(this.userCarts.id, updatedCart).subscribe({
       next: (response) => {
         // Find the updated product in the carts array and update it
-        const index = this.carts.findIndex((p: any) => p.id === this.product.id);
+        const index = this.userCarts.products.findIndex((p: any) => p.id === this.product.id);
         if (index !== -1) {
-          this.carts[index].orderQuantity = this.count;
+          this.userCarts.products[index].quantity = this.count;
         }
-        this.cartUpdated.emit(this.carts);  // Emit the updated carts back to parent
+        this.cartUpdated.emit(this.userCarts.products);  // Emit the updated carts back to parent
       },
       error: (error) => {
         console.error('Error increasing cart quantity:', error);
@@ -43,16 +50,21 @@ export class SingleCartComponent {
   }
 
   decrease() {
-    const updatedProduct = { ...this.product, orderQuantity: --this.count };
+    const updatedCart = {
+      ...this.userCarts,
+      products: this.userCarts.products.map((p: any) =>
+        p.productId === this.product.productId ? { ...p, quantity: --this.count } : p
+      ),
+    };
 
-    this.cartService.updateCart(this.product.id, updatedProduct).subscribe({
+    this.cartService.updateCart(this.userCarts.id, updatedCart).subscribe({
       next: (response) => {
         // Find the updated product in the carts array and update it
-        const index = this.carts.findIndex((p: any) => p.id === this.product.id);
+        const index = this.userCarts.products.findIndex((p: any) => p.id === this.product.id);
         if (index !== -1) {
-          this.carts[index].orderQuantity = this.count;
+          this.userCarts.products[index].quantity = this.count;
         }
-        this.cartUpdated.emit(this.carts);  // Emit the updated carts back to parent
+        this.cartUpdated.emit(this.userCarts.products);  // Emit the updated carts back to parent
       },
       error: (error) => {
         console.error('Error decreasing cart quantity:', error);
@@ -64,17 +76,46 @@ export class SingleCartComponent {
     return `/view/${id}`;
   }
 
-  deleteCart() {
-    this.deleteCartSubscription = this.cartService.deleteCart(this.product.id).subscribe({
-      next: (response) => {
-        console.log(response);
+  deleteCart(selected: any) {
+    const user = this.authCookieService.getUserData();
+  
+    if (!user) {
+      console.error('User not logged in');
+      return;
+    }
+  
+    this.cartService.getCart(user.uid).subscribe({
+      next: (cartArray) => {
+        const cart = cartArray[0];
+  
+        if (cart) {
+          const updatedCart = {
+            ...this.userCarts,
+            products: this.userCarts.products.filter((p: any) => p.id !== selected.id),
+          };
+  
+          this.cartService.updateCart(cart.id, updatedCart).subscribe({
+            next: (response) => {
+              console.log('Cart deleted successfully');
+              this.cartUpdated.emit(updatedCart.products); // Emit updated products array
+            },
+            error: (error) => {
+              console.error('Error deleting cart:', error);
+            },
+            complete: () => {
+              console.log('Delete cart operation completed');
+            }
+          });
+        } else {
+          console.log('No cart found to delete');
+        }
       },
       error: (error) => {
-        console.error('Error to delete cart:', error);
+        console.error('Error fetching user cart:', error);
       }
     });
-    this.deleteCartSubscription.unsubscribe();
-    window.location.reload(); // Reload the page to reflect the updated cart after deletion
   }
+  
+  
 
 }

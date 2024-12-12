@@ -3,6 +3,7 @@ import { SingleCartComponent } from '../../../components/Shared/single-cart/sing
 import { CartService } from '../../../services/cart.service';
 import { Auth } from '@angular/fire/auth';
 import { ProductService } from '../../../services/product.service';
+import { AuthCookieService } from '../../../services/auth-cookie.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -14,15 +15,28 @@ import { ProductService } from '../../../services/product.service';
 export class ShoppingCartComponent {
   cartService = inject(CartService);
   productService = inject(ProductService);
+  authCookieService = inject(AuthCookieService);
   private auth = inject(Auth);
 
   carts: any[] = [];
+  userCarts: any[] = [];
   products: any[] = [];
   user: any;
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
   ngOnInit() {
+    this.loadCart();
+
+    // Subscribe to cart updates
+    this.cartService.cartUpdated$.subscribe(() => {
+      this.loadCart(); // Refresh cart whenever it updates
+    });
+  }
+
+
+
+  loadCart() {
     this.auth.onAuthStateChanged((user) => {
       this.user = user;
 
@@ -30,8 +44,11 @@ export class ShoppingCartComponent {
         this.products = productData;
 
         this.cartService.getCart(this.user?.uid).subscribe((cartData) => {
+          if (!cartData) {
+            return;
+          }
+          this.userCarts = cartData[0];
           this.carts = this.mergeCartAndProducts(cartData[0]?.products || []);
-          console.log(this.carts);
           this.calculateTotals();
         });
       });
@@ -44,11 +61,12 @@ export class ShoppingCartComponent {
       const product = this.products.find((p) => p.id == cartItem.productId);
 
       return {
-        id: cartItem.productId,
+        id: cartItem.id,
         productId: cartItem.productId,
         quantity: cartItem.quantity,
         selectColor: cartItem.selectColor,
         selectSize: cartItem.selectSize,
+        date: cartItem.date,
         productName: product?.name || 'Unknown',
         price: product?.offer_price || product?.regular_price || 0,
         image: product?.image || '',
