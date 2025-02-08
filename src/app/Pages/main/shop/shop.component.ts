@@ -7,14 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 
 @Component({
-    selector: 'app-shop',
-    imports: [BreadcrumbsComponent, ProductCardComponent, CommonModule, ProductCard2Component, FormsModule],
-    templateUrl: './shop.component.html',
-    styleUrl: './shop.component.css'
+  selector: 'app-shop',
+  imports: [BreadcrumbsComponent, ProductCardComponent, CommonModule, ProductCard2Component, FormsModule],
+  templateUrl: './shop.component.html',
+  styleUrl: './shop.component.css'
 })
 export class ShopComponent {
   productService = inject(ProductService);
-  
+
   products: any;
   categories: any;
   brands: any;
@@ -34,17 +34,17 @@ export class ShopComponent {
       this.products = data;
       this.categories = this.groupProductsByProperty(this.products, 'category');
       this.brands = this.groupProductsByProperty(this.products, 'brand');
-      this.prices = this.groupProductsByProperty(this.products, 'offer_price');
+      this.prices = this.groupProductsByProperty(this.products, 'OfferPrice');
       this.sizes = this.groupProductsByArrayProperty(this.products, 'sizes');
       this.colors = this.groupProductsByArrayProperty(this.products, 'colors');
     });
   }
 
-  cardVertically(){
+  cardVertically() {
     this.viewCart = true;
   }
-  
-  cardHorizontally(){
+
+  cardHorizontally() {
     this.viewCart = false;
   }
 
@@ -126,7 +126,7 @@ export class ShopComponent {
     if (!this.categoryNames || this.categoryNames.length === 0) {
       return data; // If the categoryNames array is empty, return all data
     }
-  
+
     const selectedData = data.filter((product: any) => product && this.categoryNames.includes(product.category.toString()));
     return selectedData;
   }
@@ -136,28 +136,28 @@ export class ShopComponent {
     if (!this.brandNames || this.brandNames.length === 0) {
       return data; // If the brandNames array is empty, return all data
     }
-  
+
     const selectedData = data.filter((product: any) => product && this.brandNames.includes(product.brand.toString()));
     return selectedData;
   }
-  
+
   bySize(data: any): any {
     if (this.sizeName == "") {
       return data; // If the sizeNames array is empty, return all data
     }
-  
+
     const selectedData = data.filter((product: any) => product?.sizes.includes(this.sizeName));
-  
+
     return selectedData;
   }
-  
+
   byColor(data: any): any {
     if (this.colorName == "") {
       return data; // If the colorNames array is empty, return all data
     }
-  
+
     const selectedData = data.filter((product: any) => product?.colors.includes(this.colorName));
-  
+
     return selectedData;
   }
 
@@ -165,11 +165,11 @@ export class ShopComponent {
     if (this.sortValue === "") {
       return data; // If the sortValue is empty, return all data
     } else if (this.sortValue === "low-high") {
-      return data.sort((a: any, b: any) => a.offer_price - b.offer_price);
+      return data.sort((a: any, b: any) => a.OfferPrice - b.OfferPrice);
     } else if (this.sortValue === "high-low") {
-      return data.sort((a: any, b: any) => b.offer_price - a.offer_price);
+      return data.sort((a: any, b: any) => b.OfferPrice - a.OfferPrice);
     } else if (this.sortValue === "latest") {
-      return data.sort((a: any, b: any) => new Date(b.date_created).getTime() - new Date(a.date_created).getTime());
+      return data.sort((a: any, b: any) => new Date(b.DateCreated).getTime() - new Date(a.DateCreated).getTime());
     }
   }
 
@@ -179,6 +179,6 @@ export class ShopComponent {
     this.sizeName = "";
     this.colorName = "";
   }
-  
+
 
 }

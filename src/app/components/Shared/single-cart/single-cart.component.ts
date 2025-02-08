@@ -1,7 +1,6 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
 import { RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuthCookieService } from '../../../services/auth-cookie.service';
 
 @Component({
@@ -17,7 +16,6 @@ export class SingleCartComponent {
   @Input() userCarts: any;
   @Output() cartUpdated = new EventEmitter<any>(); // Emit event to parent component
   count: any = 1;
-  deleteCartSubscription?: Subscription;
 
   constructor() { }
 
@@ -77,43 +75,33 @@ export class SingleCartComponent {
   }
 
   deleteCart(selected: any) {
-    const user = this.authCookieService.getUserData();
   
-    if (!user) {
+    if (!this.userCarts) {
       console.error('User not logged in');
       return;
     }
-  
-    this.cartService.getCart(user.uid).subscribe({
-      next: (cartArray) => {
-        const cart = cartArray[0];
-  
-        if (cart) {
-          const updatedCart = {
-            ...this.userCarts,
-            products: this.userCarts.products.filter((p: any) => p.id !== selected.id),
-          };
-  
-          this.cartService.updateCart(cart.id, updatedCart).subscribe({
-            next: (response) => {
-              console.log('Cart deleted successfully');
-              this.cartUpdated.emit(updatedCart.products); // Emit updated products array
-            },
-            error: (error) => {
-              console.error('Error deleting cart:', error);
-            },
-            complete: () => {
-              console.log('Delete cart operation completed');
-            }
-          });
-        } else {
-          console.log('No cart found to delete');
+    
+    if (this.userCarts) {
+      const updatedCart = {
+        ...this.userCarts,
+        products: this.userCarts.products.filter((p: any) => p.id !== selected.id),
+      };
+
+      this.cartService.updateCart(this.userCarts.id, updatedCart).subscribe({
+        next: (response) => {
+          console.log('Cart deleted successfully');
+          this.cartUpdated.emit(updatedCart.products); // Emit updated products array
+        },
+        error: (error) => {
+          console.error('Error deleting cart:', error);
+        },
+        complete: () => {
+          console.log('Delete cart operation completed');
         }
-      },
-      error: (error) => {
-        console.error('Error fetching user cart:', error);
-      }
-    });
+      });
+    } else {
+      console.log('No cart found to delete');
+    }
   }
   
   

@@ -68,7 +68,7 @@ export class ShoppingCartComponent {
         selectSize: cartItem.selectSize,
         date: cartItem.date,
         productName: product?.name || 'Unknown',
-        price: product?.offer_price || product?.regular_price || 0,
+        price: product?.OfferPrice || product?.RegularPrice || 0,
         image: product?.image || '',
         category: product?.category || 'Unknown',
         brand: product?.brand || 'Unknown',
