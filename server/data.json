@@ -51,8 +51,23 @@
         {
           "id": 1,
           "userId": "2",
-          "ratingValue": 4.5,
+          "ratingValue": 5,
+          "date": "2024-11-23",
+          "review": "Best product!"
+        },
+        {
+          "id": 2,
+          "userId": "1",
+          "ratingValue": 5,
+          "date": "2025-01-13",
           "review": "Great product!"
+        },
+        {
+          "id": 3,
+          "userId": "3",
+          "ratingValue": 3,
+          "date": "2025-02-27",
+          "review": "Nice product!"
         }
       ],
       "options": {},
@@ -28363,16 +28378,15 @@
       "username": "admin",
       "password": "admin123",
       "role": "admin",
-      "name": {
-        "firstname": "Admin",
-        "lastname": "User"
-      },
+      "fullname": "Admin User",
       "address": {
         "city": "AdminCity",
         "street": "123 Admin St",
-        "number": 1,
-        "zipcode": "00000"
+        "isDefault": true,
+        "type": "Home"
       },
+      "gender": "male",
+      "dob": "08-12-1997",
       "phone": "1-800-ADMIN"
     },
     {
@@ -28381,17 +28395,33 @@
       "username": "user",
       "password": "user123",
       "role": "user",
-      "name": {
-        "firstname": "Regular",
-        "lastname": "User"
-      },
+      "fullname": "Regular User",
       "address": {
         "city": "UserCity",
         "street": "456 User Blvd",
-        "number": 2,
-        "zipcode": "11111"
+        "isDefault": true,
+        "type": "Office"
       },
+      "gender": "male",
+      "dob": "16-06-1996",
       "phone": "1-800-USER"
+    },
+    {
+      "id": "3",
+      "email": "user2@gmail.com",
+      "username": "user2",
+      "password": "user123",
+      "role": "user",
+      "fullname": "Regular User 2",
+      "address": {
+        "city": "UserCity",
+        "street": "456 User Blvd",
+        "isDefault": true,
+        "type": "Office"
+      },
+      "gender": "male",
+      "dob": "16-06-1996",
+      "phone": "1-800-USER2"
     }
   ]
 }
