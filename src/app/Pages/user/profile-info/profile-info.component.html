@@ -2,51 +2,77 @@
 <div class="col-span-9 shadow rounded px-6 pt-5 pb-7">
   <h4 class="text-lg font-medium capitalize mb-4">Profile Information</h4>
   <div class="space-y-4">
-    <form action="" class="w-full">
-      <!-- Full Name -->
+    <form #form="ngForm" (ngSubmit)="onFormSubmit()" class="w-full">
+      <!-- fullname -->
       <div class="grid grid-cols-1 gap-4">
         <div>
           <label for="" class="text-gray-600 mb-2 block">Full name</label>
-          <input type="text" class="input-box" placeholder="Enter Full Name" />
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            [(ngModel)]="model.fullname"
+            class="input-box"
+            placeholder="Enter Full Name"
+          />
         </div>
       </div>
-      <!-- Full Name end -->
+      <!-- fullname end -->
       <!-- form row -->
       <div class="grid grid-cols-2 gap-4">
-        <!-- Birthday -->
+        <!-- dob -->
         <div>
           <label for="" class="text-gray-600 mb-2 block">Birthday</label>
-          <input type="date" class="input-box" placeholder="Birthday" />
+          <input
+            type="date"
+            id="dob"
+            name="dob"
+            [(ngModel)]="model.dob"
+            class="input-box"
+            placeholder="Birthday"
+          />
         </div>
-        <!-- Birthday end -->
-        <!-- Gender -->
+        <!-- dob end -->
+        <!-- gender -->
         <div>
           <label for="" class="text-gray-600 mb-2 block">Gender</label>
-          <select class="input-box">
+          <select
+            id="gender"
+            name="gender"
+            [(ngModel)]="model.gender"
+            class="input-box"
+          >
             <option>Male</option>
             <option>Female</option>
           </select>
         </div>
-        <!-- Gender end -->
+        <!-- gender end -->
       </div>
       <!-- form row end -->
       <!-- form row -->
       <div class="grid grid-cols-2 gap-4">
-        <!-- Email -->
+        <!-- email -->
         <div>
           <label for="" class="text-gray-600 mb-2 block">Email address</label>
           <input
             type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="model.email"
             class="input-box"
             placeholder="Enter email address"
+            disabled
           />
         </div>
         <!-- Email end -->
-        <!-- Phone -->
+        <!-- phoneNumber -->
         <div>
           <label for="" class="text-gray-600 mb-2 block">Phone number</label>
           <input
             type="text"
+            id="phoneNumber"
+            name="phoneNumber"
+            [(ngModel)]="model.phoneNumber"
             class="input-box"
             placeholder="Enter phone number"
           />

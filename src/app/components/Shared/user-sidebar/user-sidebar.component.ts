@@ -15,7 +15,7 @@ export class UserSidebarComponent {
   ngOnInit() {
     this.auth.onAuthStateChanged((user) => {
       this.user = user;
-      console.log(user)
+      // console.log(user)
     });
   }
 

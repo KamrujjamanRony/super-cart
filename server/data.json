@@ -28374,6 +28374,7 @@
   "users": [
     {
       "id": "1",
+      "userId": "222",
       "email": "admin@gmail.com",
       "username": "admin",
       "password": "admin123",
@@ -28390,38 +28391,17 @@
       "phone": "1-800-ADMIN"
     },
     {
-      "id": "2",
-      "email": "user@gmail.com",
-      "username": "user",
-      "password": "user123",
+      "id": "3c16",
+      "userId": "Z2pofnwEmGQYOd48nkjVjSoKCby2",
+      "email": "kamrujjaman0228@gmail.com",
+      "username": "kamrujjaman0228@gmail.com",
       "role": "user",
-      "fullname": "Regular User",
-      "address": {
-        "city": "UserCity",
-        "street": "456 User Blvd",
-        "isDefault": true,
-        "type": "Office"
-      },
-      "gender": "male",
-      "dob": "16-06-1996",
-      "phone": "1-800-USER"
-    },
-    {
-      "id": "3",
-      "email": "user2@gmail.com",
-      "username": "user2",
-      "password": "user123",
-      "role": "user",
-      "fullname": "Regular User 2",
-      "address": {
-        "city": "UserCity",
-        "street": "456 User Blvd",
-        "isDefault": true,
-        "type": "Office"
-      },
-      "gender": "male",
-      "dob": "16-06-1996",
-      "phone": "1-800-USER2"
+      "fullname": "Md. Kamrujjaman",
+      "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocJGHsayXArH6lIMtqTqyaz_iOlOEd3QuZbP7sIjhSM6lHpnMQsl=s96-c",
+      "address": [],
+      "gender": "",
+      "dob": "",
+      "phoneNumber": null
     }
   ]
 }
