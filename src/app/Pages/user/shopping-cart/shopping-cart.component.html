@@ -3,22 +3,36 @@
   <div class="gap-2 grid grid-cols-1">
     <!-- single cart -->
     @for(product of carts; track product.id){
-    <app-single-cart [product]="product" [userCarts]="userCarts" (cartUpdated)="updateCartAfterChange($event)"></app-single-cart>
+    <app-single-cart
+      [product]="product"
+      [userCarts]="userCarts"
+      (cartUpdated)="updateCartAfterChange($event)"
+    ></app-single-cart>
     } @empty {
-    <div class="text-center text-gray-500 text-xl">No products found.</div>
+    <div class="text-center text-gray-800 text-xl">No products found.</div>
     }
     <div class="w-full h-1 bg-white rounded"></div>
     <div class="flex justify-end">
-      <h3 class="text-xl">Subtotal ({{totalQuantity}} items): <span class="font-bold">${{totalPrice}}</span></h3>
+      <h3 class="text-xl">
+        Subtotal ({{ totalQuantity }} items):
+        <span class="font-bold">${{ totalPrice }}</span>
+      </h3>
     </div>
     <!-- single cart end -->
   </div>
   @if (carts.length > 0) {
-    <div class="border rounded bg-white w-full md:w-96 p-5 h-fit">
-      <h3 class="text-xl">Subtotal ({{totalQuantity}} items): <span class="font-bold">${{totalPrice}}</span></h3>
-      <button class="cursor-pointer px-4 py-2 text-center text-white bg-rose-500 border border-rose-500 rounded-full hover:bg-transparent hover:text-primary transition capitalize font-roboto font-medium w-full">Proceed to checkout</button>
-      <p></p>
-    </div>
+  <div class="border rounded bg-white w-full md:w-96 p-5 h-fit">
+    <h3 class="text-xl">
+      Subtotal ({{ totalQuantity }} items):
+      <span class="font-bold">${{ totalPrice }}</span>
+    </h3>
+    <button
+      class="cursor-pointer px-4 py-2 text-center text-gray-50 bg-rose-500 border border-rose-500 rounded-full hover:bg-transparent hover:text-primary transition capitalize font-roboto font-medium w-full"
+    >
+      Proceed to checkout
+    </button>
+    <p></p>
+  </div>
   }
 </section>
 <!-- cart end -->

@@ -14,7 +14,7 @@
       class="p-3 flex items-center justify-between border-b border-b-gray-300"
     >
       <!--Modal Header -->
-      <h3 class="font-semibold text-xl">{{heading}}</h3>
+      <h3 class="font-semibold text-xl">{{ heading }}</h3>
       <span class="modal-close cursor-pointer" (click)="closeModal($event)"
         >X</span
       >
@@ -23,17 +23,17 @@
     <div class="p-3 border-b border-b-gray-300">
       <!--Modal Body -->
       <p>
-        {{description}}
+        {{ description }}
       </p>
     </div>
     <div class="p-3 flex items-center justify-start">
       <!--Modal Footer -->
       <div>
-        <!-- <button class="text-sm text-white bg-blue-500 rounded-md px-4 py-2">
+        <!-- <button class="text-sm text-gray-50 bg-blue-500 rounded-md px-4 py-2">
           Accept
         </button> -->
         <button
-          class="modal-close text-sm text-gray-400 border rounded-md px-4 py-2"
+          class="modal-close text-sm text-gray-800 border rounded-md px-4 py-2"
           (click)="closeModal($event)"
         >
           Close

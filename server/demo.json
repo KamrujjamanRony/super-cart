@@ -1,0 +1,27 @@
+{
+  "uid": "Z2pofnwEmGQYOd48nkjVjSoKCby2",
+  "email": "kamrujjaman0228@gmail.com",
+  "emailVerified": true,
+  "displayName": "Md. Kamrujjaman",
+  "isAnonymous": false,
+  "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocJGHsayXArH6lIMtqTqyaz_iOlOEd3QuZbP7sIjhSM6lHpnMQsl=s96-c",
+  "providerData": [
+    {
+      "providerId": "google.com",
+      "uid": "110389565757965176670",
+      "displayName": "Md. Kamrujjaman",
+      "email": "kamrujjaman0228@gmail.com",
+      "phoneNumber": null,
+      "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocJGHsayXArH6lIMtqTqyaz_iOlOEd3QuZbP7sIjhSM6lHpnMQsl=s96-c"
+    }
+  ],
+  "stsTokenManager": {
+    "refreshToken": "AMf-vBxJhsHRVTTHAshwkWn2voh304_aDOVGmgcRTYerCD3Wbvp1Bjlh41B8W7aeDz6QG1p7SgKK1kGVTtUnPIolh0gLbgOxJp6QWtiKnXPjRWjofoBLWLe-QTSLRB-bjdXYViS1_vLWqDq7_KMI0Cf1UIeN19tu2Pec1Xip_9H1-cVRU9H6pbixzgqVyMdMO8CPTCBranm2sRty-0uBDIdAT4RQPr8QZqRPjgAbeEELe2EtHATuAUevCvR2T0yNLr43gS18Q466901AfMEuXXyp9f-rFuJNb1iRVqIsOE1oEKGXo4CR9SDxAwT6QLB8oh-vynfahl81a78PWuDYCD-m0S3-hvrBPoKOT0F_NU1sIVqRyST-AuF7niO2jf0v2cIWFjneRRzK2XBptDp1g-q7ZfgOrWcPOX2ppeiHreVGCv8aB4yII-wfB7m6c9RKsPWj_cZ4WyOM",
+    "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNmOWEwNTBkYzRhZTgyOGMyODcxYzMyNTYzYzk5ZDUwMjc3ODRiZTUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTWQuIEthbXJ1amphbWFuIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0pHSHNheVhBckg2bElNdHFUcXlhel9pT2xPRWQzUXVaYlA3c0lqaFNNNmxIcG5NUXNsPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3N1cGVyLWNhcnQtODBiNjgiLCJhdWQiOiJzdXBlci1jYXJ0LTgwYjY4IiwiYXV0aF90aW1lIjoxNzQ2NTkyMDE1LCJ1c2VyX2lkIjoiWjJwb2Zud0VtR1FZT2Q0OG5ralZqU29LQ2J5MiIsInN1YiI6IloycG9mbndFbUdRWU9kNDhua2pWalNvS0NieTIiLCJpYXQiOjE3NDY1OTIwMTUsImV4cCI6MTc0NjU5NTYxNSwiZW1haWwiOiJrYW1ydWpqYW1hbjAyMjhAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTAzODk1NjU3NTc5NjUxNzY2NzAiXSwiZW1haWwiOlsia2FtcnVqamFtYW4wMjI4QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.YXqx40fu2-c_8yznJqCwLV_J5Uwex2us-zAuySj4TaWENkgP15wWXJ_fKqFZHWCv3_r1GaEEH5oU86b266ixQXO141mgQNfFtbnKpFTQzRZvUAb5LDirqDtEMgu6fFKDXGynTqS3FGo9Z3BWrFnN-O15iahBZPM6bUd69nfadqnZV-4mdSnysSM_GqiJwC_Hu3SZj_u53Qi8QF21Tl3Whvw5LSKI9zlfArvrKw-kDUJ5bbze104VyrNfObtvaVUGSMt08MCQk6QT-IXmItkq4b33-EEGfS6Mk27x41zpuV41dElRvfi6XYjVLyas8wmumQ0uvXe_NkuNZek7EFw6Ig",
+    "expirationTime": 1746595616072
+  },
+  "createdAt": "1741239898774",
+  "lastLoginAt": "1746592015197",
+  "apiKey": "AIzaSyAFJCGAbWU3TJmmo1BJBSnnlwUin68wYvo",
+  "appName": "[DEFAULT]"
+}

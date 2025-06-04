@@ -6,6 +6,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
+import { MessageService } from 'primeng/api';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,12 +22,18 @@ const firebaseConfig = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withHashLocation()), 
+    provideRouter(routes, withHashLocation()),
     provideHttpClient(),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth()),
     CookieService,
-    provideAnimations()
+    provideAnimations(),
+    MessageService,
+    providePrimeNG({
+      theme: {
+        preset: Aura
+      }
+    })
   ]
 };
 

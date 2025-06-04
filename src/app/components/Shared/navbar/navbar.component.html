@@ -4,7 +4,7 @@
     <div class="flex items-center justify-between">
       <!-- all category -->
       <div class="px-2 py-3 flex items-center cursor-pointer relative group">
-        <span class="text-white text-xl">
+        <span class="text-gray-50 text-xl">
           <i class="fas fa-bars"></i>
         </span>
 
@@ -22,7 +22,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Bedroom</span>
+            <span class="ml-6 text-gray-800 text-sm">Bedroom</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -35,7 +35,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Sofa</span>
+            <span class="ml-6 text-gray-800 text-sm">Sofa</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -48,7 +48,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Office</span>
+            <span class="ml-6 text-gray-800 text-sm">Office</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -61,7 +61,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Outdoor</span>
+            <span class="ml-6 text-gray-800 text-sm">Outdoor</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -74,7 +74,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Mattress</span>
+            <span class="ml-6 text-gray-800 text-sm">Mattress</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -87,7 +87,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Dining</span>
+            <span class="ml-6 text-gray-800 text-sm">Dining</span>
           </a>
           <!-- single sub category end -->
         </div>
@@ -107,35 +107,35 @@
       <div class="flex items-center space-x-4">
         <a
           routerLink="/user/wishlist"
-          class="text-center text-white hover:text-primary transition relative"
+          class="text-center text-gray-50 hover:text-primary transition relative"
         >
           <div class="text-md">
             <i class="fas fa-heart"></i>
           </div>
           @if (totalWishlists() > 0) {
           <span
-            class="absolute right-0 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-primary text-white text-[8px]"
+            class="absolute right-0 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-primary text-gray-50 text-[8px]"
             >{{ totalWishlists() }}</span
           >
           }
         </a>
         <a
           routerLink="/user/shopping-cart"
-          class="text-center text-white hover:text-primary transition relative"
+          class="text-center text-gray-50 hover:text-primary transition relative"
         >
           <div class="text-md">
             <i class="fas fa-shopping-cart"></i>
           </div>
           @if (totalCarts() > 0) {
           <span
-            class="absolute right-0 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-primary text-white text-[8px]"
+            class="absolute right-0 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-primary text-gray-50 text-[8px]"
             >{{ totalCarts() }}</span
           >
           }
         </a>
         <a
           routerLink="/user/profile-info"
-          class="text-center text-white hover:text-primary transition relative"
+          class="text-center text-gray-50 hover:text-primary transition relative"
         >
           <div class="text-md">
             <i class="fas fa-user"></i>
@@ -153,7 +153,7 @@
           placeholder="search"
         />
         <button
-          class="bg-primary text-white px-4 hover:bg-transparent hover:text-primary transition rounded-md absolute h-full right-1 border-none"
+          class="bg-primary text-gray-50 px-4 hover:bg-transparent hover:text-primary transition rounded-md absolute h-full right-1 border-none"
         >
           <i class="fas fa-search"></i>
         </button>
@@ -163,20 +163,20 @@
     <!-- Menu Bar -->
     <div class="flex md:hidden items-center justify-between px-2 py-3 z-10">
       <div class="flex items-center space-x-6 capitalize">
-        <a routerLink="/" class="text-white hover:text-primary transition"
+        <a routerLink="/" class="text-gray-50 hover:text-primary transition"
           >Home</a
         >
-        <a routerLink="/shop" class="text-white hover:text-primary transition"
+        <a routerLink="/shop" class="text-gray-50 hover:text-primary transition"
           >Shop</a
         >
         <a
           routerLink="/about-us"
-          class="text-white hover:text-primary transition"
+          class="text-gray-50 hover:text-primary transition"
           >About</a
         >
         <a
           routerLink="/contact-us"
-          class="text-white hover:text-primary transition"
+          class="text-gray-50 hover:text-primary transition"
           >Contact</a
         >
       </div>
@@ -201,7 +201,7 @@
       </a>
       <!-- searchbar -->
       <div class="w-full max-w-xl relative flex">
-        <span class="absolute left-4 top-3 text-lg text-gray-400">
+        <span class="absolute left-4 top-3 text-lg text-gray-800">
           <i class="fas fa-search"></i>
         </span>
         <input
@@ -210,7 +210,7 @@
           placeholder="search"
         />
         <button
-          class="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition"
+          class="bg-primary border border-primary text-gray-50 px-8 rounded-r-md hover:bg-transparent hover:text-primary transition"
         >
           Search
         </button>
@@ -219,7 +219,7 @@
       <div class="flex items-center space-x-4">
         <a
           routerLink="/user/wishlist"
-          class="text-center text-gray-400 hover:text-primary transition relative"
+          class="text-center text-gray-800 hover:text-primary transition relative"
         >
           <div class="text-2xl">
             <i class="fas fa-heart"></i>
@@ -227,14 +227,14 @@
           <div class="text-xs leading-3">Wish List</div>
           @if (totalWishlists() > 0) {
           <span
-            class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
+            class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-gray-50 text-xs"
             >{{ totalWishlists() }}</span
           >
           }
         </a>
         <a
           routerLink="/user/shopping-cart"
-          class="text-center text-gray-400 hover:text-primary transition relative"
+          class="text-center text-gray-800 hover:text-primary transition relative"
         >
           <div class="text-2xl">
             <i class="fas fa-shopping-cart"></i>
@@ -242,14 +242,14 @@
           <div class="text-xs leading-3">Shopping Cart</div>
           @if (totalCarts() > 0) {
           <span
-            class="absolute right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
+            class="absolute right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-gray-50 text-xs"
             >{{ totalCarts() }}</span
           >
           }
         </a>
         <a
           routerLink="/user/profile-info"
-          class="text-center text-gray-400 hover:text-primary transition relative"
+          class="text-center text-gray-800 hover:text-primary transition relative"
         >
           <div class="text-2xl">
             <i class="fas fa-user"></i>
@@ -268,10 +268,10 @@
       <div
         class="px-8 py-4 bg-primary flex items-center cursor-pointer relative group"
       >
-        <span class="text-white">
+        <span class="text-gray-50">
           <i class="fas fa-bars"></i>
         </span>
-        <span class="capitalize ml-2 text-white">All categories</span>
+        <span class="capitalize ml-2 text-gray-50">All categories</span>
 
         <!-- sub category -->
         <div
@@ -287,7 +287,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Bedroom</span>
+            <span class="ml-6 text-gray-800 text-sm">Bedroom</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -300,7 +300,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Sofa</span>
+            <span class="ml-6 text-gray-800 text-sm">Sofa</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -313,7 +313,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Office</span>
+            <span class="ml-6 text-gray-800 text-sm">Office</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -326,7 +326,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Outdoor</span>
+            <span class="ml-6 text-gray-800 text-sm">Outdoor</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -339,7 +339,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Mattress</span>
+            <span class="ml-6 text-gray-800 text-sm">Mattress</span>
           </a>
           <!-- single sub category end -->
           <!-- single sub category -->
@@ -352,7 +352,7 @@
               alt="icon"
               class="w-5 h-5 object-contain"
             />
-            <span class="ml-6 text-gray-600 text-sm">Dining</span>
+            <span class="ml-6 text-gray-800 text-sm">Dining</span>
           </a>
           <!-- single sub category end -->
         </div>
@@ -363,34 +363,36 @@
       <!-- navbar links -->
       <div class="flex items-center justify-between flex-grow pl-12">
         <div class="flex items-center space-x-6 capitalize">
-          <a routerLink="/" class="text-gray-200 hover:text-white transition"
+          <a routerLink="/" class="text-gray-200 hover:text-gray-50 transition"
             >Home</a
           >
           <a
             routerLink="/shop"
-            class="text-gray-200 hover:text-white transition"
+            class="text-gray-200 hover:text-gray-50 transition"
             >Shop</a
           >
           <a
             routerLink="/about-us"
-            class="text-gray-200 hover:text-white transition"
+            class="text-gray-200 hover:text-gray-50 transition"
             >About us</a
           >
           <a
             routerLink="/contact-us"
-            class="text-gray-200 hover:text-white transition"
+            class="text-gray-200 hover:text-gray-50 transition"
             >Contact us</a
           >
         </div>
         @if (user) {
         <button
           (click)="logout()"
-          class="text-gray-200 hover:text-white transition"
+          class="text-gray-200 hover:text-gray-50 transition"
         >
           LogOut
         </button>
         } @else {
-        <a routerLink="/login" class="text-gray-200 hover:text-white transition"
+        <a
+          routerLink="/login"
+          class="text-gray-200 hover:text-gray-50 transition"
           >Login/Register</a
         >
         }

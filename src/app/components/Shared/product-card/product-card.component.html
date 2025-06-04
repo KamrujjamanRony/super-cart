@@ -8,13 +8,13 @@
     >
       <a
         [routerLink]="getViewLink(product.id)"
-        class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-secondary transition"
+        class="text-gray-50 text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-secondary transition"
       >
         <i class="fas fa-search"></i>
       </a>
       <button
         (click)="addToWishlist(product)"
-        class="text-white text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-secondary transition"
+        class="text-gray-50 text-lg w-9 h-9 rounded-full bg-primary flex items-center justify-center hover:bg-secondary transition"
       >
         <i class="far fa-heart"></i>
       </button>
@@ -54,7 +54,7 @@
     </div>
   </div>
   <button
-    class="block w-full py-1 text-center text-white bg-primary borber border-primary rounded-b hover:bg-transparent hover:text-primary transition capitalize"
+    class="block w-full py-1 text-center text-gray-50 bg-primary borber border-primary rounded-b hover:bg-transparent hover:text-primary transition capitalize"
     [routerLink]="getViewLink(product.id)"
   >
     add to cart

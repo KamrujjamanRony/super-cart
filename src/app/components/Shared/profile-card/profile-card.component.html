@@ -1,13 +1,19 @@
 <!-- single card -->
 <div class="shadow rounded bg-white px-4 pt-6 pb-8">
-    <div class="flex justify-between items-center mb-4">
-      <h3 class="font-medium text-gray-800 text-lg">Personal profile</h3>
-      <a href="#" class="text-primary">Edit</a>
-    </div>
-    <div class="space-y-1">
-      <h4 class="text-gray-700">Russell Ahmed</h4>
-      <p class="text-gray-800">Example&#64;gmail.com</p>
-      <p class="text-gray-800">123 456-789</p>
-    </div>
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="font-medium text-gray-800 text-lg">{{ data?.type }}</h3>
+    @if (data?.isDefault) {
+    <span
+      class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300"
+      >Default</span
+    >
+    }
+    <a href="#" class="text-primary">Edit</a>
   </div>
-  <!-- single card end -->
+  <div class="space-y-1">
+    <h4 class="text-gray-800">{{ data?.city }}</h4>
+    <p class="text-gray-800">{{ data?.street }}</p>
+    <p class="text-gray-800">{{ data?.contact }}</p>
+  </div>
+</div>
+<!-- single card end -->

@@ -4,7 +4,7 @@ import { AuthCookieService } from '../../../services/auth-cookie.service';
 import { Auth } from '@angular/fire/auth';
 import { WishListService } from '../../../services/wish-list.service';
 import { SingleWishlistComponent } from "../../../components/Shared/single-wishlist/single-wishlist.component";
-import { ToastComponent } from "../../../components/Shared/toast/toast.component";
+import { ToastComponent } from "../../../components/primeng/toast/toast.component";
 
 @Component({
   selector: 'app-wishlist',

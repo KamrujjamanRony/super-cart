@@ -20,7 +20,7 @@
           <i class="fas fa-star"></i>
         </span>
         }
-        <span class="text-md text-gray-500 ml-4 font-bold">{{
+        <span class="text-md text-gray-800 ml-4 font-bold">{{
           fiveStar().length
         }}</span>
       </div>
@@ -30,7 +30,7 @@
           <i class="fas fa-star"></i>
         </span>
         }
-        <span class="text-md text-gray-500 ml-4 font-bold">{{
+        <span class="text-md text-gray-800 ml-4 font-bold">{{
           fourStar().length
         }}</span>
       </div>
@@ -40,7 +40,7 @@
           <i class="fas fa-star"></i>
         </span>
         }
-        <span class="text-md text-gray-500 ml-4 font-bold">{{
+        <span class="text-md text-gray-800 ml-4 font-bold">{{
           threeStar().length
         }}</span>
       </div>
@@ -50,7 +50,7 @@
           <i class="fas fa-star"></i>
         </span>
         }
-        <span class="text-md text-gray-500 ml-4 font-bold">{{
+        <span class="text-md text-gray-800 ml-4 font-bold">{{
           twoStar().length
         }}</span>
       </div>
@@ -60,7 +60,7 @@
           <i class="fas fa-star"></i>
         </span>
         }
-        <span class="text-md text-gray-500 ml-4 font-bold">{{
+        <span class="text-md text-gray-800 ml-4 font-bold">{{
           oneStar().length
         }}</span>
       </div>
@@ -105,7 +105,7 @@
       </div>
       <button
         (click)="onFilterClear()"
-        class="btn bg-primary text-white px-5 py-2"
+        class="btn bg-primary text-gray-50 px-5 py-2"
       >
         Clear Filter
       </button>
@@ -123,11 +123,11 @@
             </span>
             }
           </div>
-          <div class="text-sm text-gray-600">
+          <div class="text-sm text-gray-800">
             {{ showUserName(item?.userId) }}
           </div>
         </div>
-        <div class="text-sm text-gray-600">
+        <div class="text-sm text-gray-800">
           {{ timeAgo(item?.date) }}
         </div>
       </div>

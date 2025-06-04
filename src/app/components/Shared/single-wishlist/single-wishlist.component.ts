@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { WishListService } from '../../../services/wish-list.service';
 import { RouterLink } from '@angular/router';
-import { ToastService } from '../toast/toast.service';
+import { ToastService } from '../../primeng/toast/toast.service';
 
 @Component({
   selector: 'app-single-wishlist',
@@ -24,7 +24,7 @@ export class SingleWishlistComponent {
 
     if (!this.userWishlist) {
       console.error('User not logged in');
-      this.toastService.createToast('User not logged in', 'warning');
+      this.toastService.showMessage('warn', 'Warning', 'User not logged in!');
       return;
     }
 
@@ -37,20 +37,20 @@ export class SingleWishlistComponent {
       this.wishListService.updateWishlist(this.userWishlist.id, updatedCart).subscribe({
         next: (response) => {
           console.log('Cart deleted successfully');
-          this.toastService.createToast('Cart deleted successfully', 'success');
+          this.toastService.showMessage('success', 'Success', 'Cart deleted successfully');
           this.cartUpdated.emit(updatedCart.products); // Emit updated products array
         },
         error: (error) => {
           console.error('Error deleting cart:', error);
-          this.toastService.createToast('Error deleting cart.', 'error');
+          this.toastService.showMessage('error', 'Error', error.error.message);
         },
         complete: () => {
           console.log('Delete cart operation completed');
-          this.toastService.createToast('Delete cart operation completed.', 'success');
+          this.toastService.showMessage('success', 'Success', 'Delete cart operation completed.');
         }
       });
     } else {
-      this.toastService.createToast('No cart found to delete', 'warning');
+      this.toastService.showMessage('warn', 'Warning', 'No cart found to delete');
       console.log('No cart found to delete');
     }
   }
