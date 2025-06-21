@@ -64,7 +64,7 @@ export class WishlistComponent {
         id: item.id,
         productId: item.productId,
         productName: product?.name || 'Unknown',
-        price: product?.OfferPrice || product?.RegularPrice || 0,
+        price: product?.offerPrice || product?.regularPrice || 0,
         image: product?.image || '',
         availability: product?.availability || 'Unknown'
       };

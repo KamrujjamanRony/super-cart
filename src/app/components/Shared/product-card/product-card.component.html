@@ -1,5 +1,7 @@
 <!-- single product -->
-<div class="bg-white shadow rounded overflow-hidden group">
+<div
+  class="bg-white shadow rounded overflow-hidden group h-72 lg:h-96 w-full flex flex-col justify-between items-start"
+>
   <!-- product img -->
   <div class="relative">
     <img [src]="product?.image" class="w-full" alt="" />
@@ -23,23 +25,23 @@
   <!-- product img end -->
 
   <!-- product content -->
-  <div class="pt-4 pb-3 px-4">
+  <div class="py-2 px-4 h-full">
     <a [routerLink]="getViewLink(product.id)">
       <h4
-        class="uppercase font-medium text-xl mb-2 text-secondary hover:text-primary transition"
+        class="uppercase font-medium text-md lg:text-xl text-secondary hover:text-primary transition"
       >
         {{ product?.name }}
       </h4>
     </a>
     <div class="flex items-baseline mb-1 space-x-2 font-roboto">
-      <p class="text-xl text-primary font-semibold">
-        ${{ product?.OfferPrice }}
+      <p class="text-md lg:text-xl text-primary font-semibold">
+        {{ product?.offerPrice | currency : "BDT" : "৳" }}
       </p>
-      <p class="text-sm text-secondary line-through">
-        ${{ product?.RegularPrice }}
+      <p class="text-xs lg:text-sm text-secondary line-through">
+        {{ product?.regularPrice | currency : "BDT" : "৳" }}
       </p>
     </div>
-    <div class="flex items-center">
+    <!-- <div class="flex items-center">
       <div class="flex gap-1 text-sm">
         @for(star of getStarsArray(product?.AverageRating); track $index) {
         <span [ngClass]="{ 'text-primary': star, 'text-senary': !star }">
@@ -47,11 +49,8 @@
         </span>
         }
       </div>
-      <!-- <ng-container *ngFor="let star of getStarsArray(product?.AverageRating)">
-          <span><i class="fas fa-star"></i></span>
-        </ng-container> -->
       <div class="text-xs text-tertiary ml-3">({{ product?.RatingCount }})</div>
-    </div>
+    </div> -->
   </div>
   <button
     class="block w-full py-1 text-center text-gray-50 bg-primary borber border-primary rounded-b hover:bg-transparent hover:text-primary transition capitalize"
