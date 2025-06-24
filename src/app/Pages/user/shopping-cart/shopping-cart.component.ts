@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { SingleCartComponent } from '../../../components/Shared/single-cart/single-cart.component';
-import { CartService } from '../../../services/cart.service';
+import { CartService } from '../../../services/user/cart.service';
 import { Auth } from '@angular/fire/auth';
 import { ProductService } from '../../../services/product.service';
-import { AuthCookieService } from '../../../services/auth-cookie.service';
+import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 
 @Component({
   selector: 'app-shopping-cart',

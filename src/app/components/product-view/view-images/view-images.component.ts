@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Input, Renderer2 } from '@angular/core';
-import { CartService } from '../../../services/cart.service';
+import { CartService } from '../../../services/user/cart.service';
 import { Router } from '@angular/router';
 import { ModalComponent } from "../../Shared/modal/modal.component";
-import { AuthCookieService } from '../../../services/auth-cookie.service';
+import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 
 @Component({
-    selector: 'app-view-images',
-    imports: [CommonModule, ModalComponent],
-    templateUrl: './view-images.component.html',
-    styleUrl: './view-images.component.css'
+  selector: 'app-view-images',
+  imports: [CommonModule, ModalComponent],
+  templateUrl: './view-images.component.html',
+  styleUrl: './view-images.component.css'
 })
 export class ViewImagesComponent {
   cartService = inject(CartService);
@@ -100,25 +100,25 @@ export class ViewImagesComponent {
 
   addToCart(product: any) {
     const user = this.authCookieService.getUserData();
-  
+
     if (!user) {
       console.error('User not logged in');
       return;
     }
-  
-    if ((!product?.sizes && !product?.colors) || 
-        (product?.sizes && this.viewSize && !product?.colors) || 
-        (product?.colors && this.viewColor && !product?.sizes) || 
-        (product?.sizes && this.viewSize && product?.colors && this.viewColor)) {
-      
-      const cartProduct = { 
-        id: crypto.randomUUID().toString(), 
-        productId: product.id, 
-        selectSize: this.viewSize, 
-        selectColor: this.viewColor, 
-        quantity: this.count 
+
+    if ((!product?.sizes && !product?.colors) ||
+      (product?.sizes && this.viewSize && !product?.colors) ||
+      (product?.colors && this.viewColor && !product?.sizes) ||
+      (product?.sizes && this.viewSize && product?.colors && this.viewColor)) {
+
+      const cartProduct = {
+        id: crypto.randomUUID().toString(),
+        productId: product.id,
+        selectSize: this.viewSize,
+        selectColor: this.viewColor,
+        quantity: this.count
       };
-  
+
       this.cartService.getCart(user.uid).subscribe({
         next: (cart) => {
           console.log(cart)
@@ -126,7 +126,7 @@ export class ViewImagesComponent {
             const restCart = cart[0];
             // If the cart exists, check if the product is already in the cart
             const existingProduct = restCart.products.find((p: any) => p.productId === cartProduct.productId && p.selectSize === cartProduct.selectSize && p.selectColor === cartProduct.selectColor);
-  
+
             if (existingProduct) {
               // Update the quantity if the product already exists
               existingProduct.quantity += cartProduct.quantity;
@@ -134,9 +134,9 @@ export class ViewImagesComponent {
               // Add the new product to the cart
               restCart.products.push(cartProduct);
             }
-  
+
             // Update the cart
-            this.cartService.updateCart( restCart.id, restCart).subscribe({
+            this.cartService.updateCart(restCart.id, restCart).subscribe({
               next: () => {
                 console.log('Cart updated successfully');
                 // this.router.navigateByUrl('user/shopping-cart');
@@ -152,7 +152,7 @@ export class ViewImagesComponent {
               userId: user.uid,
               products: [cartProduct]
             };
-  
+
             this.cartService.addCart(newCart).subscribe({
               next: () => {
                 console.log('New cart created successfully');
@@ -168,7 +168,7 @@ export class ViewImagesComponent {
           console.error('Error fetching user cart:', error);
         }
       });
-  
+
     } else {
       this.warningMsg = (product?.sizes && product?.colors)
         ? ((this.viewSize && !this.viewColor) ? "Please select color" : (!this.viewSize && this.viewColor) ? "Please select size" : "Please select size and color")
@@ -176,7 +176,7 @@ export class ViewImagesComponent {
       console.log(this.warningMsg);
     }
   }
-  
+
 
   scrollToTop() {
     // Scroll to the top of the page

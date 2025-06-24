@@ -1,0 +1,97 @@
+<section>
+  <div class="w-full max-w-7xl mx-auto">
+    <div class="text-center mb-5">
+      <h2 class="text-4xl capitalize font-bold">
+        {{ id ? "update gallery" : "add gallery" }}
+      </h2>
+    </div>
+    @if (model) {
+    <form
+      #form="ngForm"
+      (ngSubmit)="onFormSubmit()"
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    >
+      <div class="mb-4">
+        <label class="block text-black text-sm font-bold mb-2" for="title">
+          Title
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+          id="title"
+          name="title"
+          type="text"
+          placeholder="Enter Title here"
+          [(ngModel)]="model.title"
+          required
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="link" class="block text-black text-sm font-bold mb-2"
+          >Image</label
+        >
+        @if(model?.link){
+        <img
+          [src]="model?.link"
+          [alt]="model?.title"
+          class="h-16 md:h-24 rounded"
+        />
+        }
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+          id="link"
+          name="link"
+          type="text"
+          placeholder="Type here"
+          [(ngModel)]="model.link"
+          required
+        />
+      </div>
+
+      <div class="mb-4">
+        <label
+          class="block text-black text-sm font-bold mb-2"
+          for="description"
+        >
+          Description
+        </label>
+        <textarea
+          name="description"
+          id="description"
+          class="shadow appearance-none border border-base-300 rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+          cols="30"
+          rows="10"
+          placeholder="Enter Gallery description here"
+          [(ngModel)]="model.description"
+        ></textarea>
+      </div>
+
+      @if (loading()) {
+      <button [disabled]="loading()" class="btn btn-error text-white">
+        Processing...
+      </button>
+      } @else {
+      <input
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        [value]="id ? 'Update' : 'Add'"
+      />
+      }
+    </form>
+    }
+  </div>
+
+  @if (error()) {
+  <div class="toast toast-top toast-end">
+    <div class="alert alert-error">
+      <span class="text-white">{{ error() }}</span>
+    </div>
+  </div>
+  } @if (success()) {
+  <div class="toast toast-top toast-end">
+    <div class="alert alert-success">
+      <span class="text-white">{{ success() }}</span>
+    </div>
+  </div>
+  }
+</section>

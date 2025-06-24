@@ -1,9 +1,9 @@
 import { Auth } from '@angular/fire/auth';
 import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CartService } from '../../../services/cart.service';
-import { AuthService } from '../../../services/auth.service';
+import { CartService } from '../../../services/user/cart.service';
 import { WishListService } from '../../../services/wish-list.service';
+import { AuthService } from '../../../services/user/auth.service';
 
 @Component({
   selector: 'app-navbar',

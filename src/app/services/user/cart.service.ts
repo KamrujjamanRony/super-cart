@@ -14,7 +14,6 @@ export class CartService {
   apiUrl = 'http://localhost:3000/carts';
 
   addCart(model: any | FormData): Observable<void>{
-    console.log(model)
     return this.http.post<void>(this.apiUrl, model).pipe(
       tap(() => this.cartUpdated.next()) // Notify subscribers of cart update
     );

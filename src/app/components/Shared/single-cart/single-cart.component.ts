@@ -1,13 +1,13 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { CartService } from '../../../services/cart.service';
+import { CartService } from '../../../services/user/cart.service';
 import { RouterLink } from '@angular/router';
-import { AuthCookieService } from '../../../services/auth-cookie.service';
+import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 
 @Component({
-    selector: 'app-single-cart',
-    imports: [RouterLink],
-    templateUrl: './single-cart.component.html',
-    styleUrl: './single-cart.component.css'
+  selector: 'app-single-cart',
+  imports: [RouterLink],
+  templateUrl: './single-cart.component.html',
+  styleUrl: './single-cart.component.css'
 })
 export class SingleCartComponent {
   cartService = inject(CartService);
@@ -75,12 +75,12 @@ export class SingleCartComponent {
   }
 
   deleteCart(selected: any) {
-  
+
     if (!this.userCarts) {
       console.error('User not logged in');
       return;
     }
-    
+
     if (this.userCarts) {
       const updatedCart = {
         ...this.userCarts,
@@ -103,7 +103,7 @@ export class SingleCartComponent {
       console.log('No cart found to delete');
     }
   }
-  
-  
+
+
 
 }

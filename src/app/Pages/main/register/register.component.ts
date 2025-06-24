@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
-import { AuthCookieService } from '../../../services/auth-cookie.service';
+import { AuthCookieService } from '../../../services/user/auth-cookie.service';
+import { AuthService } from '../../../services/user/auth.service';
 
 @Component({
-    selector: 'app-register',
-    imports: [ReactiveFormsModule, CommonModule, RouterLink],
-    templateUrl: './register.component.html',
-    styleUrl: './register.component.css'
+  selector: 'app-register',
+  imports: [ReactiveFormsModule, RouterLink],
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   // Form Init ------------------------------------------------------
@@ -19,7 +19,7 @@ export class RegisterComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]]
   });
-  
+
   getControl(controlName: string): FormControl {
     return this.form.get(controlName) as FormControl;
   }
@@ -31,7 +31,7 @@ export class RegisterComponent {
   router = inject(Router);
 
   error: any;
-  
+
 
   onSubmit(e: Event) {
     this.isSubmitted = true;

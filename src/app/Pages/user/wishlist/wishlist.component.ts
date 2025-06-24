@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
-import { AuthCookieService } from '../../../services/auth-cookie.service';
+import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 import { Auth } from '@angular/fire/auth';
 import { WishListService } from '../../../services/wish-list.service';
 import { SingleWishlistComponent } from "../../../components/Shared/single-wishlist/single-wishlist.component";

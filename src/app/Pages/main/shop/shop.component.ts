@@ -34,7 +34,7 @@ export class ShopComponent {
       this.products = data;
       this.categories = this.groupProductsByProperty(this.products, 'category');
       this.brands = this.groupProductsByProperty(this.products, 'brand');
-      this.prices = this.groupProductsByProperty(this.products, 'OfferPrice');
+      this.prices = this.groupProductsByProperty(this.products, 'offerPrice');
       this.sizes = this.groupProductsByArrayProperty(this.products, 'sizes');
       this.colors = this.groupProductsByArrayProperty(this.products, 'colors');
     });
@@ -165,11 +165,11 @@ export class ShopComponent {
     if (this.sortValue === "") {
       return data; // If the sortValue is empty, return all data
     } else if (this.sortValue === "low-high") {
-      return data.sort((a: any, b: any) => a.OfferPrice - b.OfferPrice);
+      return data.sort((a: any, b: any) => a.offerPrice - b.offerPrice);
     } else if (this.sortValue === "high-low") {
-      return data.sort((a: any, b: any) => b.OfferPrice - a.OfferPrice);
+      return data.sort((a: any, b: any) => b.offerPrice - a.offerPrice);
     } else if (this.sortValue === "latest") {
-      return data.sort((a: any, b: any) => new Date(b.DateCreated).getTime() - new Date(a.DateCreated).getTime());
+      return data.sort((a: any, b: any) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime());
     }
   }
 

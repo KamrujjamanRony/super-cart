@@ -111,7 +111,7 @@
       <h3 class="text-sm text-gray-800 uppercase font-medium mb-1">Color</h3>
       <div class="flex items-center gap-2">
         <!-- single color -->
-        @for(color of product?.colors; track trackByColor){
+        @for(color of product?.colors; track trackByColor($index, color)){
         <div
           (click)="onViewColorClick(color)"
           [ngClass]="{ 'size-selector': viewColor == color }"
