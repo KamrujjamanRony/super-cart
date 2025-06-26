@@ -26,6 +26,11 @@ export class SidebarComponent {
       link: '/admin/product-list'
     },
     {
+      title: 'Menu',
+      icon: faFolder,
+      link: '/admin/menu-list'
+    },
+    {
       title: 'Categories',
       icon: faFolder,
       link: '/admin/categories'

@@ -21,6 +21,8 @@ import { authGuard } from './services/admin/auth.guard';
 import { ProductListComponent } from './Pages/admin/product-list/product-list.component';
 import { AdminFormComponent } from './Pages/admin/admin-form/admin-form.component';
 import { ProductFormComponent } from './Pages/admin/product-form/product-form.component';
+import { AdminLoginComponent } from './Pages/admin/admin-login/admin-login.component';
+import { MenuListComponent } from './Pages/admin/menu-list/menu-list.component';
 
 export const routes: Routes = [
   {
@@ -60,12 +62,12 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'admin-list', pathMatch: 'full' },
       {
         path: 'admin-list',
-        component: AdminListComponent, canActivate: [authGuard]
+        component: AdminListComponent
       },
       {
         path: 'admin-form/add',
@@ -86,6 +88,10 @@ export const routes: Routes = [
       {
         path: 'product-form/edit/:id',
         component: ProductFormComponent, canActivate: [authGuard]
+      },
+      {
+        path: 'menu-list',
+        component: MenuListComponent, canActivate: [authGuard]
       },
     ]
   },
@@ -115,6 +121,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'admin-login',
+    component: AdminLoginComponent
   },
   {
     path: 'register',

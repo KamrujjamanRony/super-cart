@@ -57,10 +57,10 @@ export class AdminListComponent {
 
     this.onLoadUsers();
 
-    this.isView.set(this.checkPermission("User", "View"));
-    this.isInsert.set(this.checkPermission("User", "Insert"));
-    this.isEdit.set(this.checkPermission("User", "Edit"));
-    this.isDelete.set(this.checkPermission("User", "Delete"));
+    this.isView.set(this.checkPermission("Admin List", "View"));
+    this.isInsert.set(this.checkPermission("Admin List", "Insert"));
+    this.isEdit.set(this.checkPermission("Admin List", "Edit"));
+    this.isDelete.set(this.checkPermission("Admin List", "Delete"));
 
     // Focus on the search input when the component is initialized
     setTimeout(() => {
