@@ -12,8 +12,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
         [(ngModel)]="selectedOptions" 
         optionLabel="name" 
         placeholder="Select Options" 
-        [maxSelectedLabels]="3" 
-        styleClass="block !py-2.5 !px-0 !w-full !text-sm !text-gray-950 !bg-transparent !border-0 !border-b-2 !border-gray-300 !appearance-none !focus:outline-none !focus:ring-0 !focus:border-teal-600 !peer !rounded-none">
+        [maxSelectedLabels]="4" >
       </p-multiselect>
   `,
 })

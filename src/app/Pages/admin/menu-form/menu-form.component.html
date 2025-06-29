@@ -7,35 +7,82 @@
   (ngSubmit)="onSubmit($event)"
   class="min-w-[400px] mx-auto px-2"
 >
-  <!-- userName -->
-  <Field label="userName">
+  <!-- menuName -->
+  <Field label="menu Name">
     <input
       #inputRef
       type="text"
-      [formControl]="getControl('userName')"
+      [formControl]="getControl('menuName')"
       class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
       [class.invalid]="
-        (getControl('userName').invalid && getControl('userName').touched) ||
+        (getControl('menuName').invalid && getControl('menuName').touched) ||
         isSubmitted
       "
       placeholder=""
       required
     />
   </Field>
-
-  <!-- password -->
-  <Field label="password">
+  <!-- moduleName -->
+  <Field label="module Name">
     <input
       #inputRef
       type="text"
-      [formControl]="getControl('password')"
+      [formControl]="getControl('moduleName')"
       class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-      [class.invalid]="
-        (getControl('password').invalid && getControl('password').touched) ||
-        isSubmitted
-      "
       placeholder=""
-      required
+    />
+  </Field>
+  <!-- parentMenuId -->
+  <Field label="parent Menu">
+    <select
+      #inputRef
+      name="parentMenuId"
+      [formControl]="getControl('parentMenuId')"
+      placeholder=""
+      class="block py-2.5 px-2 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer capitalize"
+    >
+      <option value="" class="capitalize">Select Option</option>
+      @for(option of menuOptions; track $index){
+      <option [value]="option?.key" class="capitalize">
+        {{ option?.value }}
+      </option>
+      }
+    </select>
+  </Field>
+  <!-- permissionsKey -->
+  <div class="mb-5 relative">
+    <label class="block text-xs font-medium text-gray-950 absolute"
+      >Permissions</label
+    >
+    <p-multiselect
+      #inputRef
+      [options]="options"
+      [formControl]="getControl('permissionsKey')"
+      optionLabel=""
+      placeholder="Select Options"
+      [maxSelectedLabels]="3"
+      styleClass="block !py-2.5 !px-0 !w-full !text-sm !text-gray-950 !bg-transparent !border-0 !border-b-2 !border-gray-300 !appearance-none !focus:outline-none !focus:ring-0 !focus:border-teal-600 !peer !rounded-none"
+    >
+    </p-multiselect>
+  </div>
+  <!-- url -->
+  <Field label="url">
+    <input
+      #inputRef
+      type="text"
+      [formControl]="getControl('url')"
+      class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+      placeholder=""
+    />
+  </Field>
+  <!-- icon -->
+  <Field label="icon">
+    <input
+      #inputRef
+      type="text"
+      [formControl]="getControl('icon')"
+      class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+      placeholder=""
     />
   </Field>
 
@@ -84,7 +131,7 @@
       type="submit"
       class="text-gray-50 bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-1 focus:outline-none focus:ring-teal-300 shadow-lg shadow-teal-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 h-10"
     >
-      {{ selectedUser ? "Update" : "Save" }}
+      {{ selectedMenu ? "Update" : "Save" }}
     </button>
   </div>
 </form>

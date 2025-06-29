@@ -40,7 +40,7 @@ export class WishlistComponent {
     this.auth.onAuthStateChanged((user) => {
       this.user = user;
 
-      this.productService.getAllProducts().subscribe((productData) => {
+      this.productService.getProducts().subscribe((productData) => {
         this.products = productData;
 
         this.wishListService.getWishlist(this.user?.uid).subscribe((cartData) => {

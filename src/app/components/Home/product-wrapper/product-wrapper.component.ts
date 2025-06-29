@@ -14,7 +14,7 @@ export class ProductWrapperComponent {
 
   products: any;
   ngOnInit() {
-    this.productService.getAllProducts().subscribe(data => {
+    this.productService.getProducts().subscribe(data => {
       this.products = data;
     });
   }

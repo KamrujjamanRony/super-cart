@@ -40,7 +40,7 @@ export class ShoppingCartComponent {
     this.auth.onAuthStateChanged((user) => {
       this.user = user;
 
-      this.productService.getAllProducts().subscribe((productData) => {
+      this.productService.getProducts().subscribe((productData) => {
         this.products = productData;
 
         this.cartService.getCart(this.user?.uid).subscribe((cartData) => {

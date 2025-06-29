@@ -28,9 +28,8 @@ export class ShopComponent {
   viewCart = true;
   sortValue: string = "";
 
-  constructor() { }
   ngOnInit() {
-    this.productService.getAllProducts().subscribe(data => {
+    this.productService.getProducts().subscribe(data => {
       this.products = data;
       this.categories = this.groupProductsByProperty(this.products, 'category');
       this.brands = this.groupProductsByProperty(this.products, 'brand');
@@ -165,11 +164,11 @@ export class ShopComponent {
     if (this.sortValue === "") {
       return data; // If the sortValue is empty, return all data
     } else if (this.sortValue === "low-high") {
-      return data.sort((a: any, b: any) => a.offerPrice - b.offerPrice);
+      return data?.sort((a: any, b: any) => a.offerPrice - b.offerPrice);
     } else if (this.sortValue === "high-low") {
-      return data.sort((a: any, b: any) => b.offerPrice - a.offerPrice);
+      return data?.sort((a: any, b: any) => b.offerPrice - a.offerPrice);
     } else if (this.sortValue === "latest") {
-      return data.sort((a: any, b: any) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime());
+      return data?.sort((a: any, b: any) => new Date(a.createdDate).getTime() - new Date(b.createdDate).getTime());
     }
   }
 

@@ -1,9 +1,8 @@
 import { Component, ElementRef, inject, signal, viewChild, viewChildren } from '@angular/core';
 import { ToastService } from '../../../components/primeng/toast/toast.service';
 import { UserService } from '../../../services/admin/user.service';
-import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { UserAccessTreeComponent } from '../../../components/admin/user-access-tree/user-access-tree.component';
-import { FieldComponent } from '../../../components/admin/field/field.component';
 import { CommonModule } from '@angular/common';
 import { DataFetchService } from '../../../services/admin/useDataFetch';
 import { MenuService } from '../../../services/admin/menu.service';
@@ -11,10 +10,11 @@ import { AuthService } from '../../../services/admin/auth.service';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSearch, faPencil, faRemove } from '@fortawesome/free-solid-svg-icons';
+import { AdminFormComponent } from '../admin-form/admin-form.component';
 
 @Component({
   selector: 'app-admin-list',
-  imports: [ReactiveFormsModule, UserAccessTreeComponent, FieldComponent, CommonModule, FontAwesomeModule],
+  imports: [UserAccessTreeComponent, CommonModule, FontAwesomeModule, AdminFormComponent],
   templateUrl: './admin-list.component.html',
   styleUrl: './admin-list.component.css'
 })
@@ -35,13 +35,14 @@ export class AdminListComponent {
   filteredUserList = signal<any[]>([]);
   highlightedTr: number = -1;
   selectedUser: any;
+  showModal = false;
+  modalTitle = 'Add New Admin';
 
   private searchQuery$ = new BehaviorSubject<string>('');
   userAccessTree = signal<any[]>([]);
+  showAccessTree = signal<boolean>(false);
   isLoading$: Observable<any> | undefined;
   hasError$: Observable<any> | undefined;
-  readonly inputRefs = viewChildren<ElementRef>('inputRef');
-  readonly searchInput = viewChild.required<ElementRef<HTMLInputElement>>('searchInput');
   isSubmitted = false;
 
   form = this.fb.group({
@@ -61,12 +62,6 @@ export class AdminListComponent {
     this.isInsert.set(this.checkPermission("Admin List", "Insert"));
     this.isEdit.set(this.checkPermission("Admin List", "Edit"));
     this.isDelete.set(this.checkPermission("Admin List", "Delete"));
-
-    // Focus on the search input when the component is initialized
-    setTimeout(() => {
-      const inputs = this.inputRefs();
-      inputs[0]?.nativeElement.focus();
-    }, 10);
   }
 
 
@@ -84,10 +79,74 @@ export class AdminListComponent {
     }
   }
 
+  openAddModal() {
+    this.modalTitle = 'Add New User';
+    this.selectedUser = null;
+    this.onLoadTreeData("");
+    this.showModal = true;
+    this.showAccessTree.set(true);
+  }
+
+  openEditModal(user: any) {
+    this.modalTitle = 'Edit User';
+    this.selectedUser = user;
+    this.onLoadTreeData(user.id);
+    this.showModal = true;
+    this.showAccessTree.set(true);
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.selectedUser = null;
+    this.showAccessTree.set(false);
+  }
+
   onLoadTreeData(userId: any) {
     this.menuService.generateTreeData(userId).subscribe((data) => {
       this.userAccessTree.set(data);
+      this.showAccessTree.set(data.length > 0);
     });
+  }
+
+  handleFormSubmit(formData: any): any {
+    // Save permissions before submitting
+    this.savePermissions();
+
+    if (this.selectedUser) {
+      this.userService.updateUser(this.selectedUser.id, {
+        ...formData,
+        menuPermissions: this.userAccessTree()
+      }).subscribe({
+        next: (response) => {
+          if (response) {
+            this.toastService.showMessage('success', 'Successful', 'User successfully updated!');
+            this.onLoadUsers();
+            this.closeModal();
+          }
+        },
+        error: (error) => {
+          console.error('Error updating user:', error);
+          this.toastService.showMessage('error', 'Error', `${error.error.status} : ${error.error.message || error.error.title}`);
+        }
+      });
+    } else {
+      this.userService.addUser({
+        ...formData,
+        menuPermissions: this.userAccessTree()
+      }).subscribe({
+        next: (response: any) => {
+          if (response) {
+            this.toastService.showMessage('success', 'Successful', 'User successfully added!');
+            this.onLoadUsers();
+            this.closeModal();
+          }
+        },
+        error: (error) => {
+          console.error('Error adding user:', error);
+          this.toastService.showMessage('error', 'Error', `${error.error.status} : ${error.error.message || error.error.title}`);
+        }
+      });
+    }
   }
 
   onLoadUsers() {
@@ -106,7 +165,9 @@ export class AdminListComponent {
         )
       )
     ).subscribe(filteredData => {
-      filteredData.shift();                   // todo: remove first element of user list
+      if (!this.searchQuery$.getValue() || this.searchQuery$.getValue()?.toLowerCase() === 's' || this.searchQuery$.getValue()?.toLowerCase() === 'su' || this.searchQuery$.getValue()?.toLowerCase() === 'sup' || this.searchQuery$.getValue()?.toLowerCase() === 'supe' || this.searchQuery$.getValue()?.toLowerCase() === 'super' || this.searchQuery$.getValue()?.toLowerCase() === 'supers' || this.searchQuery$.getValue()?.toLowerCase() === 'superso' || this.searchQuery$.getValue()?.toLowerCase() === 'supersof' || this.searchQuery$.getValue()?.toLowerCase() === 'supersoft') {
+        filteredData.shift();
+      }
       this.filteredUserList.set(filteredData)
     });
   }
@@ -115,120 +176,6 @@ export class AdminListComponent {
   onSearchUser(event: Event) {
     const query = (event.target as HTMLInputElement).value.toLowerCase();
     this.searchQuery$.next(query);
-  }
-
-  // Simplified method to get form controls
-  getControl(controlName: string): FormControl {
-    return this.form.get(controlName) as FormControl;
-  }
-
-
-  handleEnterKey(event: Event, currentIndex: number) {
-    const keyboardEvent = event as KeyboardEvent;
-    event.preventDefault();
-    const allInputs = this.inputRefs();
-    const inputs = allInputs.filter((i: any) => !i.nativeElement.disabled);
-
-    if (currentIndex + 1 < inputs.length) {
-      inputs[currentIndex + 1].nativeElement.focus();
-    } else {
-      this.onSubmit(keyboardEvent);
-    }
-  }
-
-  handleSearchKeyDown(event: KeyboardEvent) {
-    if (this.filteredUserList().length === 0) {
-      return; // Exit if there are no items to navigate
-    }
-
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      const inputs = this.inputRefs();
-      inputs[0].nativeElement.focus();
-    } else if (event.key === 'ArrowDown') {
-      event.preventDefault(); // Prevent default scrolling behavior
-      this.highlightedTr = (this.highlightedTr + 1) % this.filteredUserList().length;
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault(); // Prevent default scrolling behavior
-      this.highlightedTr =
-        (this.highlightedTr - 1 + this.filteredUserList().length) % this.filteredUserList().length;
-    } else if (event.key === 'Enter') {
-      event.preventDefault(); // Prevent form submission
-
-      // Call onUpdate for the currently highlighted item
-      if (this.highlightedTr !== -1) {
-        const selectedItem = this.filteredUserList()[this.highlightedTr];
-        this.onUpdate(selectedItem);
-        this.highlightedTr = -1;
-      }
-    }
-  }
-
-  onSubmit(e: Event) {
-    this.isSubmitted = true;
-    if (this.form.valid) {
-      this.savePermissions();
-      if (this.selectedUser) {
-        this.userService.updateUser(this.selectedUser.id, this.form.value)
-          .subscribe({
-            next: (response) => {
-              if (response !== null && response !== undefined) {
-                this.toastService.showMessage('success', 'Successful', 'User successfully updated!');
-                this.onLoadUsers();
-                this.isSubmitted = false;
-                this.selectedUser = null;
-                this.formReset(e);
-              }
-
-            },
-            error: (error) => {
-              console.error('Error register:', error);
-              if (error.error.message || error.error.title) {
-                this.toastService.showMessage('error', 'Error', `${error.error.status} : ${error.error.message || error.error.title}`);
-              }
-            }
-          });
-      } else {
-        this.userService.addUser(this.form.value)
-          .subscribe({
-            next: (response) => {
-              if (response !== null && response !== undefined) {
-                this.toastService.showMessage('success', 'Successful', 'User successfully added!');
-                this.onLoadUsers();
-                this.isSubmitted = false;
-                this.formReset(e);
-              }
-
-            },
-            error: (error) => {
-              console.error('Error add user:', error);
-              if (error.error.message || error.error.title) {
-                this.toastService.showMessage('error', 'Error', `${error.error.status} : ${error.error.message || error.error.title}`);
-              }
-            }
-          });
-      }
-    } else {
-      this.toastService.showMessage('warn', 'Warning', 'Form is invalid! Please Fill All Recommended Field!');
-    }
-  }
-
-  onUpdate(data: any) {
-    this.onLoadTreeData(data.id);
-    this.selectedUser = data;
-    this.form.patchValue({
-      userName: data?.userName,
-      password: data?.password,
-      eId: data?.eId,
-      isActive: data?.isActive,
-      menuPermissions: data?.menuPermissions,
-    });
-
-    // Focus the 'userName' input field after patching the value
-    setTimeout(() => {
-      const inputs = this.inputRefs();
-      inputs[0].nativeElement.focus();
-    }, 0); // Delay to ensure the DOM is updated
   }
 
   onDelete(id: any) {
@@ -243,20 +190,6 @@ export class AdminListComponent {
         }
       });
     }
-  }
-
-  formReset(e: Event): void {
-    e.preventDefault();
-    this.form.reset({
-      userName: '',
-      password: '',
-      eId: null,
-      isActive: true,
-      menuPermissions: [''],
-    });
-    this.onLoadTreeData("");
-    this.isSubmitted = false;
-    this.selectedUser = null;
   }
 
   // User Accessibility Code Start----------------------------------------------------------------
@@ -313,6 +246,4 @@ export class AdminListComponent {
   }
 
   // User Accessibility Code End----------------------------------------------------------------
-
-
 }

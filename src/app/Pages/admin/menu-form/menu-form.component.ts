@@ -2,16 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FieldComponent } from '../../../components/admin/field/field.component';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
-  selector: 'app-admin-form',
-  imports: [CommonModule, FieldComponent, ReactiveFormsModule],
-  templateUrl: './admin-form.component.html',
-  styleUrl: './admin-form.component.css'
+  selector: 'app-menu-form',
+  imports: [CommonModule, FieldComponent, ReactiveFormsModule, MultiSelectModule],
+  templateUrl: './menu-form.component.html',
+  styleUrl: './menu-form.component.css'
 })
-export class AdminFormComponent {
-  @Input() selectedUser: any = null;
-  @Input() modalTitle: string = 'User Form';
+export class MenuFormComponent {
+  @Input() menuOptions: any[] = [];
+  @Input() selectedMenu: any = null;
+  @Input() modalTitle: string = 'Menu Form';
+  @Input() options: string[] = ['View', 'Insert', 'Edit', 'Delete'];
 
   @Output() submitForm = new EventEmitter<any>();
   @Output() cancel = new EventEmitter<void>();
@@ -21,21 +24,25 @@ export class AdminFormComponent {
   isSubmitted = false;
 
   form = this.fb.group({
-    userName: ['', [Validators.required]],
-    password: [''],
-    eId: [null],
+    menuName: ['', [Validators.required]],
+    moduleName: [''],
+    parentMenuId: [null],
+    url: [''],
     isActive: [true],
-    menuPermissions: [['']],
+    icon: [''],
+    permissionsKey: [''],
   });
 
   ngOnChanges() {
-    if (this.selectedUser) {
+    if (this.selectedMenu) {
       this.form.patchValue({
-        userName: this.selectedUser?.userName,
-        password: this.selectedUser?.password,
-        eId: this.selectedUser?.eId,
-        isActive: this.selectedUser?.isActive,
-        menuPermissions: this.selectedUser?.menuPermissions,
+        menuName: this.selectedMenu?.menuName,
+        moduleName: this.selectedMenu?.moduleName,
+        parentMenuId: this.selectedMenu?.parentMenuId,
+        url: this.selectedMenu?.url,
+        isActive: this.selectedMenu?.isActive,
+        icon: this.selectedMenu?.icon,
+        permissionsKey: this.selectedMenu?.permissionsKey,
       });
     }
   }
@@ -58,11 +65,13 @@ export class AdminFormComponent {
   onFormReset(event: Event) {
     event.preventDefault();
     this.form.reset({
-      userName: '',
-      password: '',
-      eId: null,
+      menuName: '',
+      moduleName: '',
+      parentMenuId: null,
+      url: '',
       isActive: true,
-      menuPermissions: [''],
+      icon: '',
+      permissionsKey: '',
     });
     this.isSubmitted = false;
     this.formReset.emit();
