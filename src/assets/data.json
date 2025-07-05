@@ -28053,5 +28053,146 @@
       "scope": "L4",
       "isLeafNode": true
     }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Laptops",
+      "image": "https://i.ibb.co/ZRXJqVrZ/Laptops.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Desktop Computers",
+      "image": "https://i.ibb.co/5xLNgNXX/Desktop-Computers.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Laptop & Computer Accessories",
+      "image": "https://i.ibb.co/nskfbGz6/Laptop-Computer-Accessories.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Home Appliances",
+      "image": "https://i.ibb.co/HDxQs07b/Home-Appliances.jpg"
+    },
+    {
+      "id": 5,
+      "name": "TVs",
+      "image": "https://i.ibb.co/QFRzqm64/TVs.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Audio & Video",
+      "image": "https://i.ibb.co/ZRh2L6tg/Audio-Video.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Cameras & Camcorders",
+      "image": "https://i.ibb.co/7MKhvHN/Cameras-Camcorders.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Mobile Phones",
+      "image": "https://i.ibb.co/77F0ZVk/Mobile-Phones.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Tablets",
+      "image": "https://i.ibb.co/tw7fpdR2/Tablets.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Smart Watches & Wearables",
+      "image": "https://i.ibb.co/Xr93zXb1/Smart-Watches-Wearables.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Headphones & Earphones",
+      "image": "https://i.ibb.co/35tSx1rC/Headphones-Earphones.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Speakers",
+      "image": "https://i.ibb.co/351Y10Ct/Speakers.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Gaming Consoles & Accessories",
+      "image": "https://i.ibb.co/MD6yWj4C/Gaming-Consoles-Accessories.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Printers & Scanners",
+      "image": "https://i.ibb.co/Mxmttqt7/Printers-Scanners.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Networking Devices",
+      "image": "https://i.ibb.co/tThgH9xh/Networking-Devices.jpg"
+    }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "name": "Apple"
+    },
+    {
+      "id": 2,
+      "name": "Samsung"
+    },
+    {
+      "id": 3,
+      "name": "Dell"
+    },
+    {
+      "id": 4,
+      "name": "HP"
+    },
+    {
+      "id": 5,
+      "name": "Lenovo"
+    },
+    {
+      "id": 6,
+      "name": "Sony"
+    },
+    {
+      "id": 7,
+      "name": "LG"
+    },
+    {
+      "id": 8,
+      "name": "Asus"
+    },
+    {
+      "id": 9,
+      "name": "Microsoft"
+    }
+  ],
+  "publishSections": [
+    {
+      "id": 1,
+      "name": "Banner"
+    },
+    {
+      "id": 2,
+      "name": "Categories"
+    },
+    {
+      "id": 3,
+      "name": "Products"
+    },
+    {
+      "id": 4,
+      "name": "Add Section"
+    },
+    {
+      "id": 5,
+      "name": "Recommend Section"
+    },
+    {
+      "id": 6,
+      "name": "Limited Time Offers"
+    }
   ]
 }

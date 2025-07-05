@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthCookieService } from '../../../services/user/auth-cookie.service';
-import { WishListService } from '../../../services/wish-list.service';
+import { WishListService } from '../../../services/user/wish-list.service';
 
 @Component({
   selector: 'app-product-card',

@@ -2,7 +2,7 @@ import { Auth } from '@angular/fire/auth';
 import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../services/user/cart.service';
-import { WishListService } from '../../../services/wish-list.service';
+import { WishListService } from '../../../services/user/wish-list.service';
 import { AuthService } from '../../../services/user/auth.service';
 
 @Component({
@@ -17,10 +17,21 @@ export class NavbarComponent {
   wishListService = inject(WishListService);
   private auth = inject(Auth);
   private cdr = inject(ChangeDetectorRef);
+  menuList = [
+    { name: 'Home', path: '/' },
+    { name: 'Shop', path: '/shop' },
+    { name: 'About Us', path: '/about-us' },
+    { name: 'Contact Us', path: '/contact-us' },
+    { name: 'Login', path: '/login' },
+    { name: 'Register', path: '/register' },
+    { name: 'Cart', path: '/cart' },
+    { name: 'Wishlist', path: '/wish-list' }
+  ]
 
   totalCarts = signal<number>(0);
   totalWishlists = signal<number>(0);
   user: any;
+  category: string = 'all';
 
   ngOnInit() {
     this.auth.onAuthStateChanged((user) => {

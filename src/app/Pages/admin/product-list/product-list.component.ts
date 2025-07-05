@@ -8,6 +8,7 @@ import { DataFetchService } from '../../../services/admin/useDataFetch';
 import { ToastService } from '../../../components/primeng/toast/toast.service';
 import { AuthService } from '../../../services/admin/auth.service';
 import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map, Observable, switchMap } from 'rxjs';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-product-list',
@@ -23,6 +24,7 @@ export class ProductListComponent {
   private dataFetchService = inject(DataFetchService);
   private toastService = inject(ToastService);
   private authService = inject(AuthService);
+  private DataService = inject(DataService);
 
   isView = signal<boolean>(false);
   isInsert = signal<boolean>(false);
@@ -68,29 +70,13 @@ export class ProductListComponent {
   }
 
   loadCategoriesAndBrands() {
-    this.categories.set([
-      'Electronics',
-      'Clothing',
-      'Home Appliances',
-      'Books',
-      'Sports',
-      'Beauty & Health',
-      'Toys & Games',
-      'Automotive',
-      'Grocery'
-    ]);
-    this.brands.set([
-      'Samsung',
-      'Apple',
-      'Sony',
-      'Nike',
-      'Adidas',
-      'LG',
-      'Dell',
-      'HP',
-      'Canon',
-      'Philips'
-    ]);
+    // For demonstration purposes, using hardcoded categories and brands
+    this.DataService.getCategories().subscribe(data => {
+      this.categories.set(Array.isArray(data) ? data.map((cat: any) => cat.name) : []);
+    });
+    this.DataService.getBrands().subscribe(data => {
+      this.brands.set(Array.isArray(data) ? data.map((brand: any) => brand.name) : []);
+    });
     // this.productService.getCategories().subscribe(categories => {
     //   this.categories.set(categories);
     // });

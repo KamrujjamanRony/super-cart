@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { WishListService } from '../../../services/wish-list.service';
+import { WishListService } from '../../../services/user/wish-list.service';
 import { RouterLink } from '@angular/router';
 import { ToastService } from '../../primeng/toast/toast.service';
 

@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { ProductCard2Component } from '../../../components/Shared/product-card-2/product-card-2.component';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -14,10 +16,12 @@ import { ProductService } from '../../../services/product.service';
 })
 export class ShopComponent {
   productService = inject(ProductService);
+  route = inject(ActivatedRoute);
 
   products: any;
   categories: any;
   brands: any;
+  paramName: any = "";
   categoryNames: string[] = [];
   brandNames: string[] = [];
   sizeName: string = "";
@@ -27,16 +31,31 @@ export class ShopComponent {
   colors: any;
   viewCart = true;
   sortValue: string = "";
+  paramsSubscription?: Subscription;
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(data => {
-      this.products = data;
-      this.categories = this.groupProductsByProperty(this.products, 'category');
-      this.brands = this.groupProductsByProperty(this.products, 'brand');
-      this.prices = this.groupProductsByProperty(this.products, 'offerPrice');
-      this.sizes = this.groupProductsByArrayProperty(this.products, 'sizes');
-      this.colors = this.groupProductsByArrayProperty(this.products, 'colors');
+    // Fetch products from the ProductService
+    this.paramsSubscription = this.route.paramMap.subscribe({
+      next: (params) => {
+        this.paramName = params.get('category');
+        this.productService.getProducts('', this.paramName ? this.paramName : '').subscribe(data => {
+          this.products = data;
+          this.categories = this.groupProductsByProperty(this.products, 'category');
+          this.brands = this.groupProductsByProperty(this.products, 'brand');
+          this.prices = this.groupProductsByProperty(this.products, 'offerPrice');
+          this.sizes = this.groupProductsByArrayProperty(this.products, 'sizes');
+          this.colors = this.groupProductsByArrayProperty(this.products, 'colors');
+        });
+      }
     });
+    // this.productService.getProducts().subscribe(data => {
+    //   this.products = data;
+    //   this.categories = this.groupProductsByProperty(this.products, 'category');
+    //   this.brands = this.groupProductsByProperty(this.products, 'brand');
+    //   this.prices = this.groupProductsByProperty(this.products, 'offerPrice');
+    //   this.sizes = this.groupProductsByArrayProperty(this.products, 'sizes');
+    //   this.colors = this.groupProductsByArrayProperty(this.products, 'colors');
+    // });
   }
 
   cardVertically() {

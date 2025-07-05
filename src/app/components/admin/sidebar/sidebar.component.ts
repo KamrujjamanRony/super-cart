@@ -33,7 +33,12 @@ export class SidebarComponent {
     {
       title: 'Categories',
       icon: faFolder,
-      link: '/admin/categories'
+      link: '/admin/category-list'
+    },
+    {
+      title: 'Brands',
+      icon: faFolder,
+      link: '/admin/brand-list'
     },
     {
       title: 'Orders',
