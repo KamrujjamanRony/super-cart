@@ -5,14 +5,14 @@
     <form #form="ngForm" (ngSubmit)="onFormSubmit()" class="w-full">
       <!-- fullname -->
       <div class="grid grid-cols-1 gap-4">
-        <div>
+        <div class="w-full">
           <label for="" class="text-gray-800 mb-2 block">Full name</label>
           <input
             type="text"
             id="fullname"
             name="fullname"
             [(ngModel)]="model.fullname"
-            class="input-box"
+            class="w-full"
             placeholder="Enter Full Name"
           />
         </div>
@@ -20,19 +20,21 @@
       <!-- fullname end -->
       <!-- form row -->
       <div class="grid grid-cols-2 gap-4">
-        <!-- dob -->
-        <div>
-          <label for="" class="text-gray-800 mb-2 block">Birthday</label>
-          <input
-            type="date"
-            id="dob"
-            name="dob"
-            [(ngModel)]="model.dob"
-            class="input-box"
-            placeholder="Birthday"
-          />
+        <!-- username -->
+        <div class="grid grid-cols-1 gap-4">
+          <div class="w-full">
+            <label for="" class="text-gray-800 mb-2 block">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              [(ngModel)]="model.username"
+              class="w-full"
+              placeholder="Enter Full Name"
+            />
+          </div>
         </div>
-        <!-- dob end -->
+        <!-- username end -->
         <!-- gender -->
         <div>
           <label for="" class="text-gray-800 mb-2 block">Gender</label>
@@ -40,7 +42,7 @@
             id="gender"
             name="gender"
             [(ngModel)]="model.gender"
-            class="input-box"
+            class="w-full"
           >
             <option value="">Select Gender</option>
             <option value="Male">Male</option>
@@ -60,7 +62,7 @@
             id="email"
             name="email"
             [(ngModel)]="model.email"
-            class="input-box"
+            class="w-full"
             placeholder="Enter email address"
             disabled
           />
@@ -74,7 +76,7 @@
             id="phoneNumber"
             name="phoneNumber"
             [(ngModel)]="model.phoneNumber"
-            class="input-box"
+            class="w-full"
             placeholder="Enter phone number"
           />
         </div>

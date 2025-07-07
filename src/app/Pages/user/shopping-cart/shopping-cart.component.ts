@@ -4,11 +4,12 @@ import { CartService } from '../../../services/user/cart.service';
 import { Auth } from '@angular/fire/auth';
 import { ProductService } from '../../../services/product.service';
 import { AuthCookieService } from '../../../services/user/auth-cookie.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [SingleCartComponent],
+  imports: [SingleCartComponent, CommonModule],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.css'
 })
@@ -34,6 +35,10 @@ export class ShoppingCartComponent {
     });
   }
 
+  sortedCarts(carts: any[]): any[] {
+    // Replace this with your actual sorting logic
+    return carts?.slice().sort((a, b) => a.productId - b.productId) || [];
+  }
 
 
   loadCart() {

@@ -3,7 +3,6 @@ import { MainComponent } from './Layouts/main/main.component';
 import { HomeComponent } from './Pages/main/home/home.component';
 import { ShopComponent } from './Pages/main/shop/shop.component';
 import { AboutUsComponent } from './Pages/main/about-us/about-us.component';
-import { AccountComponent } from './Pages/user/account/account.component';
 import { CheckoutComponent } from './Pages/main/checkout/checkout.component';
 import { ContactUsComponent } from './Pages/main/contact-us/contact-us.component';
 import { LoginComponent } from './Pages/main/login/login.component';
@@ -24,6 +23,7 @@ import { userGuard } from './services/user/user.guard';
 import { CategoryListComponent } from './Pages/admin/category-list/category-list.component';
 import { WishListComponent } from './Pages/admin/wish-list/wish-list.component';
 import { BrandListComponent } from './Pages/admin/brand-list/brand-list.component';
+import { UserAddressComponent } from './Pages/user/user-address/user-address.component';
 
 export const routes: Routes = [
   {
@@ -100,10 +100,10 @@ export const routes: Routes = [
     path: 'user',
     component: UserDashboardComponent,
     children: [
-      { path: '', redirectTo: 'account', pathMatch: 'full' },
+      { path: '', redirectTo: 'profile-info', pathMatch: 'full' },
       {
-        path: 'account',
-        component: AccountComponent, canActivate: [userGuard]
+        path: 'user-address',
+        component: UserAddressComponent, canActivate: [userGuard]
       },
       {
         path: 'profile-info',

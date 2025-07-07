@@ -2,7 +2,7 @@
 <section class="flex flex-col xl:flex-row gap-2">
   <div class="gap-2 grid grid-cols-1">
     <!-- single cart -->
-    @for(product of carts; track product.id){
+    @for(product of sortedCarts(carts); track product.id){
     <app-single-cart
       [product]="product"
       [userCarts]="userCarts"

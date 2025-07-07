@@ -43,10 +43,6 @@ export class SingleWishlistComponent {
         error: (error) => {
           console.error('Error deleting cart:', error);
           this.toastService.showMessage('error', 'Error', error.error.message);
-        },
-        complete: () => {
-          console.log('Delete cart operation completed');
-          this.toastService.showMessage('success', 'Success', 'Delete cart operation completed.');
         }
       });
     } else {

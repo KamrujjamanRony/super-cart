@@ -54,7 +54,7 @@
   </div>
   <button
     class="block w-full py-1 text-center text-gray-50 bg-primary borber border-primary rounded-b hover:bg-transparent hover:text-primary transition capitalize"
-    [routerLink]="getViewLink(product.id)"
+    (click)="addToCart(product)"
   >
     add to cart
   </button>

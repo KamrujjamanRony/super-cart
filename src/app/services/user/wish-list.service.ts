@@ -11,30 +11,27 @@ export class WishListService {
 
   http = inject(HttpClient);
 
-  apiUrl = 'http://localhost:3000/wishlist';
+  apiUrl = 'http://supersoft:81/api/Wishlist';
 
-  addWishlist(model: any | FormData): Observable<void>{
+  addWishlist(model: any | FormData): Observable<void> {
     console.log(model)
     return this.http.post<void>(this.apiUrl, model).pipe(
       tap(() => this.wishlistUpdated.next()) // Notify subscribers of Wishlist update
     );
   }
 
-  getAllWishlists(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getWishlist(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  getWishlist(id: string): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}?userId=${id}`);
+  updateWishlist(id: string, updateWishlistRequest: any | FormData): Observable<string> {
+    return this.http.put(`${this.apiUrl}/${id}`, updateWishlistRequest,
+      { responseType: 'text' }).pipe(
+        tap(() => this.wishlistUpdated.next()) // Notify subscribers
+      );
   }
 
-  updateWishlist(id: string, updateWishlistRequest: any | FormData): Observable<any>{
-    return this.http.put<any>(`${this.apiUrl}/${id}`, updateWishlistRequest).pipe(
-      tap(() => this.wishlistUpdated.next()) // Notify subscribers
-    );
-  }
-
-  deleteWishlist(id: string): Observable<any>{
+  deleteWishlist(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
       tap(() => this.wishlistUpdated.next()) // Notify subscribers of Wishlist update
     );

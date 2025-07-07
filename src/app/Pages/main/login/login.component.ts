@@ -3,8 +3,9 @@ import { Component, inject } from '@angular/core';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthCookieService } from '../../../services/user/auth-cookie.service';
-import { UsersService } from '../../../services/users.service';
+import { UsersService } from '../../../services/user/users.service';
 import { AuthService } from '../../../services/user/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,7 @@ export class LoginComponent {
   // Declare Services ------------------------------------------------------
   usersService = inject(UsersService);
   authService = inject(AuthService);
+  private location = inject(Location);
   authCookieService = inject(AuthCookieService);
   router = inject(Router);
 
@@ -46,7 +48,7 @@ export class LoginComponent {
           this.authCookieService.login(data.user);
           this.entryUser(data.user);
           console.log('Logged in successfully');
-          this.router.navigate(['/']);
+          this.location.back();
         })
         .catch((err) => {
           this.error = err.toString();
@@ -64,7 +66,7 @@ export class LoginComponent {
         this.authCookieService.login(data.user);
         this.entryUser(data.user);
         console.log('Logged in with Google');
-        this.router.navigate(['/']);
+        this.location.back();
       })
       .catch((err) => {
         this.error = err.toString();
@@ -79,7 +81,7 @@ export class LoginComponent {
         this.authCookieService.login(data.user);
         this.entryUser(data.user);
         console.log('Logged in with Facebook');
-        this.router.navigate(['/']);
+        this.location.back();
       })
       .catch((err) => {
         this.error = err.toString();
@@ -103,6 +105,7 @@ export class LoginComponent {
   }
 
   entryUser(data: any) {
+    console.log(data)
     const userInfo = {
       userId: data?.uid,
       email: data?.providerData[0]?.email,
@@ -112,7 +115,7 @@ export class LoginComponent {
       photoURL: data?.providerData[0]?.photoURL,
       address: [],
       gender: "",
-      dob: "",
+      dob: "1997-12-08",
       phoneNumber: data?.providerData[0]?.phoneNumber
     }
     console.log(data.providerData[0])

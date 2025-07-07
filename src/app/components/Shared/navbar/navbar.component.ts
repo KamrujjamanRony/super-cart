@@ -36,8 +36,10 @@ export class NavbarComponent {
   ngOnInit() {
     this.auth.onAuthStateChanged((user) => {
       this.user = user;
-      this.fetchUserCart();
-      this.fetchWishList();
+      if (this.user?.uid) {
+        this.fetchUserCart();
+        this.fetchWishList();
+      }
     });
 
     // Listen for cart updates
@@ -52,17 +54,23 @@ export class NavbarComponent {
   }
 
   fetchUserCart() {
-    this.cartService.getAllCarts().subscribe(data => {
-      const userCart = data.find(c => c.userId === this.user?.uid);
-      this.totalCarts.set(userCart ? userCart.products.reduce((sum: number, p: { quantity: any; }) => sum + p.quantity, 0) : 0);
+    if (!this.user?.uid) {
+      this.totalCarts.set(0);
+      return;
+    }
+    this.cartService.getCart(this.user?.uid).subscribe(data => {
+      this.totalCarts.set(data?.length > 0 ? data[0].products.reduce((sum: number, p: { quantity: any; }) => sum + p.quantity, 0) : 0);
       this.cdr.detectChanges();
     });
   }
 
   fetchWishList() {
-    this.wishListService.getAllWishlists().subscribe(data => {
-      const userWishlist = data.find(c => c.userId === this.user?.uid);
-      this.totalWishlists.set(userWishlist ? userWishlist.products.length : 0);
+    if (!this.user?.uid) {
+      this.totalWishlists.set(0);
+      return;
+    }
+    this.wishListService.getWishlist(this.user?.uid).subscribe(data => {
+      this.totalWishlists.set(data?.length > 0 ? data[0].products.length : 0);
       this.cdr.detectChanges();
     });
   }

@@ -14,8 +14,8 @@ export class SingleCartComponent {
   authCookieService = inject(AuthCookieService);
   @Input() product: any;
   @Input() userCarts: any;
-  @Output() cartUpdated = new EventEmitter<any>(); // Emit event to parent component
-  count: any = 1;
+  @Output() cartUpdated = new EventEmitter<any>();
+  count: number = 1;
 
   constructor() { }
 
@@ -23,51 +23,39 @@ export class SingleCartComponent {
     this.count = this.product.quantity;
   }
 
-  // Update the product quantity and also update it in the carts array
-  increase() {
+  // Common update function for both increase and decrease
+  private updateQuantity(newQuantity: number) {
+    // Ensure quantity doesn't go below 1
+    newQuantity = Math.max(1, newQuantity);
+
     const updatedCart = {
       ...this.userCarts,
       products: this.userCarts.products.map((p: any) =>
-        p.productId === this.product.productId ? { ...p, quantity: ++this.count } : p
+        p.productId === this.product.productId ? { ...p, quantity: newQuantity } : p
       ),
     };
 
     this.cartService.updateCart(this.userCarts.id, updatedCart).subscribe({
       next: (response) => {
-        // Find the updated product in the carts array and update it
-        const index = this.userCarts.products.findIndex((p: any) => p.id === this.product.id);
-        if (index !== -1) {
-          this.userCarts.products[index].quantity = this.count;
-        }
-        this.cartUpdated.emit(this.userCarts.products);  // Emit the updated carts back to parent
+        // Update local state consistently
+        this.count = newQuantity;
+        this.product.quantity = newQuantity;
+        this.cartUpdated.emit(updatedCart.products);
       },
       error: (error) => {
-        console.error('Error increasing cart quantity:', error);
+        console.error('Error updating cart quantity:', error);
+        // Revert the count if there's an error
+        this.count = this.product.quantity;
       }
     });
   }
 
-  decrease() {
-    const updatedCart = {
-      ...this.userCarts,
-      products: this.userCarts.products.map((p: any) =>
-        p.productId === this.product.productId ? { ...p, quantity: --this.count } : p
-      ),
-    };
+  increase() {
+    this.updateQuantity(this.count + 1);
+  }
 
-    this.cartService.updateCart(this.userCarts.id, updatedCart).subscribe({
-      next: (response) => {
-        // Find the updated product in the carts array and update it
-        const index = this.userCarts.products.findIndex((p: any) => p.id === this.product.id);
-        if (index !== -1) {
-          this.userCarts.products[index].quantity = this.count;
-        }
-        this.cartUpdated.emit(this.userCarts.products);  // Emit the updated carts back to parent
-      },
-      error: (error) => {
-        console.error('Error decreasing cart quantity:', error);
-      }
-    });
+  decrease() {
+    this.updateQuantity(this.count - 1);
   }
 
   getViewLink(id: any) {
@@ -75,32 +63,22 @@ export class SingleCartComponent {
   }
 
   deleteCart(selected: any) {
-
-    if (!this.userCarts) {
-      console.error('User not logged in');
-      return;
-    }
-
     if (this.userCarts) {
       const updatedCart = {
         ...this.userCarts,
-        products: this.userCarts.products.filter((p: any) => p.id !== selected.id),
+        products: this.userCarts.products.filter((p: any) =>
+          p.productId !== selected.productId // Use productId consistently
+        ),
       };
 
       this.cartService.updateCart(this.userCarts.id, updatedCart).subscribe({
         next: (response) => {
-          console.log('Cart deleted successfully');
-          this.cartUpdated.emit(updatedCart.products); // Emit updated products array
+          this.cartUpdated.emit(updatedCart.products);
         },
         error: (error) => {
           console.error('Error deleting cart:', error);
-        },
-        complete: () => {
-          console.log('Delete cart operation completed');
         }
       });
-    } else {
-      console.log('No cart found to delete');
     }
   }
 

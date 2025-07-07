@@ -1,0 +1,86 @@
+<p-dialog
+  [visible]="showModal"
+  [modal]="true"
+  [style]="{ width: '90vw' }"
+  [draggable]="true"
+  (onHide)="onClose()"
+  [header]="isEditMode ? 'Edit Address' : 'Add New Address'"
+>
+  <div class="grid grid-cols-1 gap-2">
+    <div class="field">
+      <label for="type">Address Type</label>
+      <p-dropdown
+        [(ngModel)]="formData.type"
+        [options]="addressTypes"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select address type"
+      ></p-dropdown>
+    </div>
+
+    <div class="field">
+      <label for="city">City*</label>
+      <input
+        id="city"
+        type="text"
+        pInputText
+        [(ngModel)]="formData.city"
+        placeholder="Enter city"
+        required
+      />
+    </div>
+
+    <div class="field">
+      <label for="street">Street Address*</label>
+      <input
+        id="street"
+        type="text"
+        pInputText
+        [(ngModel)]="formData.street"
+        placeholder="Enter street address"
+        required
+      />
+    </div>
+
+    <div class="field">
+      <label for="contact">Contact Number*</label>
+      <input
+        id="contact"
+        type="tel"
+        pInputText
+        [(ngModel)]="formData.contact"
+        placeholder="Enter contact number"
+        required
+      />
+    </div>
+
+    <div class="field-checkbox">
+      <p-checkbox
+        [(ngModel)]="formData.isDefault"
+        [binary]="true"
+        inputId="default"
+      ></p-checkbox>
+      <label for="default" class="ml-2">Set as default address</label>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="onClose()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      type="button"
+      [label]="isEditMode ? 'Update' : 'Add'"
+      icon="pi pi-check"
+      (click)="onSubmit()"
+    ></button>
+  </ng-template>
+</p-dialog>

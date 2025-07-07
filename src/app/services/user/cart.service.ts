@@ -11,29 +11,26 @@ export class CartService {
 
   http = inject(HttpClient);
 
-  apiUrl = 'http://localhost:3000/carts';
+  apiUrl = 'http://supersoft:81/api/Cart';
 
-  addCart(model: any | FormData): Observable<void>{
+  addCart(model: any | FormData): Observable<void> {
     return this.http.post<void>(this.apiUrl, model).pipe(
       tap(() => this.cartUpdated.next()) // Notify subscribers of cart update
     );
   }
 
-  getAllCarts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getCart(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  getCart(id: string): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}?userId=${id}`);
+  updateCart(cartId: string, updateCartRequest: any | FormData): Observable<string> {
+    return this.http.put(`${this.apiUrl}/${cartId}`, updateCartRequest,
+      { responseType: 'text' }).pipe(
+        tap(() => this.cartUpdated.next()) // Notify subscribers
+      );
   }
 
-  updateCart(cartId: string, updateCartRequest: any | FormData): Observable<any>{
-    return this.http.put<any>(`${this.apiUrl}/${cartId}`, updateCartRequest).pipe(
-      tap(() => this.cartUpdated.next()) // Notify subscribers
-    );
-  }
-
-  deleteCart(id: string): Observable<any>{
+  deleteCart(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
       tap(() => this.cartUpdated.next()) // Notify subscribers of cart update
     );

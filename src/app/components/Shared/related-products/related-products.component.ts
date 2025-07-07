@@ -13,7 +13,7 @@ export class RelatedProductsComponent {
   @Input() allProducts: any[] = [];
 
   get relatedProducts() {
-    if (!this.currentProduct?.relatedProducts || !this.allProducts.length) {
+    if (!this.currentProduct?.relatedProducts || !this.allProducts?.length) {
       return [];
     }
     return this.allProducts.filter(product =>
