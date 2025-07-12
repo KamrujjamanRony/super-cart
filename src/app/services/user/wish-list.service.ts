@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,7 @@ export class WishListService {
   wishlistUpdated$ = this.wishlistUpdated.asObservable();
 
   http = inject(HttpClient);
-
-  apiUrl = 'http://supersoft:81/api/Wishlist';
+  private apiUrl = `${environment.apiUrl}/Wishlist`;
 
   addWishlist(model: any | FormData): Observable<void> {
     console.log(model)

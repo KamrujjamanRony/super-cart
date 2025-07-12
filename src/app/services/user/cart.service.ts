@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,7 @@ export class CartService {
   cartUpdated$ = this.cartUpdated.asObservable();
 
   http = inject(HttpClient);
-
-  apiUrl = 'http://supersoft:81/api/Cart';
+  private apiUrl = `${environment.apiUrl}/Cart`;
 
   addCart(model: any | FormData): Observable<void> {
     return this.http.post<void>(this.apiUrl, model).pipe(
@@ -33,6 +33,13 @@ export class CartService {
   deleteCart(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
       tap(() => this.cartUpdated.next()) // Notify subscribers of cart update
+    );
+  }
+
+  // Add this method to your CartService
+  clearCart(userId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/user/${userId}`).pipe(
+      tap(() => this.cartUpdated.next())
     );
   }
 }

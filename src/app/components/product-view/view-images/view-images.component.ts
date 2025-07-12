@@ -4,6 +4,8 @@ import { CartService } from '../../../services/user/cart.service';
 import { Router } from '@angular/router';
 import { ModalComponent } from "../../Shared/modal/modal.component";
 import { AuthCookieService } from '../../../services/user/auth-cookie.service';
+import { WishListService } from '../../../services/user/wish-list.service';
+import { ToastService } from '../../primeng/toast/toast.service';
 
 @Component({
   selector: 'app-view-images',
@@ -13,7 +15,9 @@ import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 })
 export class ViewImagesComponent {
   cartService = inject(CartService);
+  wishListService = inject(WishListService);
   authCookieService = inject(AuthCookieService);
+  private toastService = inject(ToastService);
   renderer = inject(Renderer2);
   router = inject(Router);
   @Input() product: any;
@@ -23,6 +27,7 @@ export class ViewImagesComponent {
   viewColor: any;
   warningMsg: any;
   zoomStyle = {};
+  user = this.authCookieService.getUserData();
 
   ngOnInit() {
     this.scrollToTop();
@@ -45,6 +50,7 @@ export class ViewImagesComponent {
   }
   onViewSizeClick(size: any) {
     this.viewSize = size;
+    console.log(this.viewSize)
   }
   onViewColorClick(color: any) {
     this.viewColor = color;
@@ -99,64 +105,54 @@ export class ViewImagesComponent {
   }
 
   addToCart(product: any) {
-    const user = this.authCookieService.getUserData();
+    const cartProduct = {
+      id: crypto.randomUUID(),
+      productId: product.id,
+      ...(this.viewSize && { selectSize: this.viewSize }),
+      ...(this.viewColor && { selectColor: this.viewColor }),
+      quantity: this.count
+    };
 
-    if (!user) {
-      console.error('User not logged in');
-      return;
-    }
-
-    if ((!product?.sizes && !product?.colors) ||
-      (product?.sizes && this.viewSize && !product?.colors) ||
-      (product?.colors && this.viewColor && !product?.sizes) ||
-      (product?.sizes && this.viewSize && product?.colors && this.viewColor)) {
-
-      const cartProduct = {
-        id: crypto.randomUUID().toString(),
-        productId: product.id,
-        selectSize: this.viewSize,
-        selectColor: this.viewColor,
-        quantity: this.count
-      };
-
-      this.cartService.getCart(user.uid).subscribe({
+    if (this.user?.uid) {
+      this.cartService.getCart(this.user.uid).subscribe({
         next: (cart) => {
-          console.log(cart)
           if (cart.length > 0) {
-            const restCart = cart[0];
-            // If the cart exists, check if the product is already in the cart
-            const existingProduct = restCart.products.find((p: any) => p.productId === cartProduct.productId && p.selectSize === cartProduct.selectSize && p.selectColor === cartProduct.selectColor);
+            // Get the first cart (assuming one cart per user)
+            let userCart = { ...cart[0] };
 
-            if (existingProduct) {
-              // Update the quantity if the product already exists
-              existingProduct.quantity += cartProduct.quantity;
+            // Check if product exists in cart
+            const existingProductIndex = userCart.products.findIndex(
+              (p: any) => p.productId == cartProduct.productId
+            );
+
+            if (existingProductIndex !== -1) {
+              // Product exists - increment quantity
+              userCart.products[existingProductIndex].quantity += 1;
             } else {
-              // Add the new product to the cart
-              restCart.products.push(cartProduct);
+              // Product doesn't exist - add new product
+              userCart.products.push(cartProduct);
             }
 
             // Update the cart
-            this.cartService.updateCart(restCart.id, restCart).subscribe({
+            this.cartService.updateCart(userCart.id, userCart).subscribe({
               next: () => {
                 console.log('Cart updated successfully');
-                // this.router.navigateByUrl('user/shopping-cart');
+                // Optionally: this.router.navigateByUrl('user/shopping-cart');
               },
               error: (error) => {
                 console.error('Error updating cart:', error);
               }
             });
           } else {
-            // If no cart exists, create a new cart for the user
+            // No cart exists - create new cart
             const newCart = {
-              id: Date.now().toString(), // Generate a unique ID for the new cart
-              userId: user.uid,
+              userId: this.user.uid,
               products: [cartProduct]
             };
 
             this.cartService.addCart(newCart).subscribe({
               next: () => {
                 console.log('New cart created successfully');
-                // this.router.navigateByUrl('user/shopping-cart');
               },
               error: (error) => {
                 console.error('Error creating cart:', error);
@@ -165,15 +161,92 @@ export class ViewImagesComponent {
           }
         },
         error: (error) => {
-          console.error('Error fetching user cart:', error);
+          // Error fetching cart - create new one
+          const newCart = {
+            userId: this.user.uid,
+            products: [cartProduct]
+          };
+
+          this.cartService.addCart(newCart).subscribe({
+            next: () => {
+              console.log('New cart created successfully');
+            },
+            error: (error) => {
+              console.error('Error creating cart:', error);
+            }
+          });
         }
       });
-
     } else {
-      this.warningMsg = (product?.sizes && product?.colors)
-        ? ((this.viewSize && !this.viewColor) ? "Please select color" : (!this.viewSize && this.viewColor) ? "Please select size" : "Please select size and color")
-        : ((!product?.sizes && product?.colors) ? "Please select color" : "Please select size");
-      console.log(this.warningMsg);
+      console.error('User not logged in');
+      // Optionally redirect to login
+    }
+  }
+
+  addToWishlist(product: any) {
+    // const user = this.authCookieService.getUserData();
+
+    const favoriteProduct = {
+      id: crypto.randomUUID(),  // Generate a unique ID for the product
+      productId: product.id
+    };
+
+    if (this.user?.uid) {
+      this.wishListService.getWishlist(this.user.uid).subscribe({
+        next: (wishlist) => {
+          console.log(wishlist)
+          if (wishlist.length > 0) {
+            const restFavoriteProduct = wishlist[0];
+            console.log(restFavoriteProduct)
+            // If the wishlist exists, check if the product is already in the wishlist
+            const existingProduct = restFavoriteProduct?.products?.find((p: any) => p.productId == favoriteProduct.productId);
+
+            if (existingProduct) {
+              this.toastService.showMessage('warn', 'Warning', 'Product already in the wish list!');
+              console.log("Product already in the wish list");
+              return;
+            } else {
+              // Add the new product to the wishlist
+              restFavoriteProduct.products.push(favoriteProduct);
+            }
+
+            // Update the wishlist
+            this.wishListService.updateWishlist(restFavoriteProduct.id, restFavoriteProduct).subscribe({
+              next: () => {
+                console.log('wishlist updated successfully');
+                this.toastService.showMessage('success', 'Successful', 'Product successfully added to wishlist!');
+              },
+              error: (error) => {
+                console.error('Error updating wishlist:', error);
+                this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error creating wishlist'}`);
+              }
+            });
+          } else {
+            // If no wishlist exists, create a new wishlist for the user
+            const newFavoriteProduct = {
+              userId: this.user.uid,
+              products: [favoriteProduct]
+            };
+
+            this.wishListService.addWishlist(newFavoriteProduct).subscribe({
+              next: () => {
+                this.toastService.showMessage('success', 'Successful', 'Product successfully added to wishlist!');
+                // this.router.navigateByUrl('user/shopping-wishlist');
+              },
+              error: (error) => {
+                this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error creating wishlist'}`);
+              }
+            });
+          }
+        },
+        error: (error) => {
+          this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error fetching wishlist'}`)
+        }
+      });
+    } else {
+      this.toastService.showMessage('warn', 'Warning', 'User not logged in!');
+      console.error('User not logged in');
+      this.router.navigateByUrl('login');
     }
   }
 

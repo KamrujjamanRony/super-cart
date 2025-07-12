@@ -1,20 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private readonly http = inject(HttpClient);
-  baseApiUrl = 'http://supersoft:81/api/User';
+  private apiUrl = `${environment.apiUrl}/User`;
 
   addUser(model: any): Observable<void> {
-    return this.http.post<void>(this.baseApiUrl, model)
+    return this.http.post<void>(this.apiUrl, model)
   }
 
   getUser(query: string): Observable<any> {
-    return this.http.post<any>(`${this.baseApiUrl}/SearchUser?Search=${query}`, {});
+    return this.http.post<any>(`${this.apiUrl}/SearchUser?Search=${query}`, {});
   }
 
   updateUser(id: string | number, updateUserRequest: any): Observable<any> {
@@ -22,10 +23,10 @@ export class UserService {
       ...updateUserRequest,
       userId: id
     }
-    return this.http.put<any>(`${this.baseApiUrl}/EditUser/${id}?userId=${id}`, req);
+    return this.http.put<any>(`${this.apiUrl}/EditUser/${id}?userId=${id}`, req);
   }
 
   deleteUser(id: string | number): Observable<any> {
-    return this.http.delete<any>(`${this.baseApiUrl}/DeleteUser?id=${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/DeleteUser?id=${id}`);
   }
 }

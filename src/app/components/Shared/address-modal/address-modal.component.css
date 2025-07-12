@@ -1,24 +1,26 @@
-:host {
-  display: block;
+/* Custom dialog header style */
+.p-dialog .p-dialog-header {
+  padding: 0.1rem;
+  border-bottom: 1px solid #e5e7eb;
 }
 
+/* Close button style */
+.p-dialog-header-icon {
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.p-dialog-header-icon:hover {
+  color: #1f2937;
+}
+
+/* Form field spacing */
 .field {
   margin-bottom: 0.1rem;
 }
 
-label {
-  display: block;
-  margin-bottom: 0.2rem;
-  font-weight: 500;
-}
-
-input,
-p-dropdown {
+/* Input field styling */
+.p-inputtext {
   width: 100%;
-}
-
-.field-checkbox {
-  display: flex;
-  align-items: center;
-  margin: 0.2rem 0;
+  padding: 0.5rem;
 }

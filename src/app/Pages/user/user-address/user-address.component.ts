@@ -75,13 +75,21 @@ export class UserAddressComponent {
 
   addAddress(newAddress: any) {
     this.loading.set(true);
-    const newAddressWithId = {
+
+    // If new address is set as default, unset all others
+    let updatedAddresses = [...this.address(), {
       ...newAddress,
       id: crypto.randomUUID(),
       userId: this.userId
-    };
+    }];
 
-    const updatedAddresses = [...this.address(), newAddressWithId];
+    if (newAddress.isDefault) {
+      updatedAddresses = updatedAddresses.map(address => ({
+        ...address,
+        isDefault: address.id === newAddress.id
+      }));
+    }
+
     this.updateUserAddresses(updatedAddresses, 'Address added successfully');
   }
 
@@ -94,32 +102,58 @@ export class UserAddressComponent {
   }
 
   deleteAddress(addressId: string) {
-    this.loading.set(true);
-    const updatedAddresses = this.address().filter(address => address.id !== addressId);
+    const addressToDelete = this.address().find(a => a.id === addressId);
 
-    // Prevent deleting all addresses if one exists
-    if (updatedAddresses.length === 0) {
-      this.toastService.showMessage('error', 'Error', 'You must have at least one address');
-      this.loading.set(false);
+    // Prevent deleting default address
+    if (addressToDelete?.isDefault) {
+      this.toastService.showMessage('error', 'Error', 'Cannot delete default address');
       return;
     }
 
-    // If deleting default address, set the first remaining as default
-    const wasDefault = this.address().find(a => a.id === addressId)?.isDefault;
-    if (wasDefault && updatedAddresses.length > 0) {
-      updatedAddresses[0].isDefault = true;
-    }
+    this.loading.set(true);
+    const updatedAddresses = this.address().filter(address => address.id !== addressId);
 
-    this.updateUserAddresses(updatedAddresses, 'Address deleted successfully');
+    this.usersService.updateUser(this.selectedId()!, {
+      ...this.userData(),
+      address: updatedAddresses
+    }).subscribe({
+      next: () => {
+        this.address.set(updatedAddresses);
+        this.toastService.showMessage('success', 'Success', 'Address deleted');
+        this.loading.set(false);
+      },
+      error: (error) => {
+        this.toastService.showMessage('error', 'Error', 'Failed to delete address');
+        console.error('Error:', error);
+        this.loading.set(false);
+      }
+    });
   }
 
   setDefaultAddress(addressId: string) {
     this.loading.set(true);
+
+    // Update all addresses - set only the selected one as default
     const updatedAddresses = this.address().map(address => ({
       ...address,
       isDefault: address.id === addressId
     }));
-    this.updateUserAddresses(updatedAddresses, 'Default address updated');
+
+    this.usersService.updateUser(this.selectedId()!, {
+      ...this.userData(),
+      address: updatedAddresses
+    }).subscribe({
+      next: () => {
+        this.address.set(updatedAddresses);
+        this.toastService.showMessage('success', 'Success', 'Default address updated');
+        this.loading.set(false);
+      },
+      error: (error) => {
+        this.toastService.showMessage('error', 'Error', 'Failed to update default address');
+        console.error('Error:', error);
+        this.loading.set(false);
+      }
+    });
   }
 
   private updateUserAddresses(addresses: any[], successMessage: string) {

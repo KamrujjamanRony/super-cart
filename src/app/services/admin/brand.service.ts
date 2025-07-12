@@ -1,27 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrandService {
   private readonly http = inject(HttpClient);
-  baseApiUrl = 'http://supersoft:81/api/Brand';
+  private apiUrl = `${environment.apiUrl}/Brand`;
 
   addBrand(model: any): Observable<any> {
-    return this.http.post<void>(this.baseApiUrl, model)
+    return this.http.post<void>(this.apiUrl, model)
   }
 
   getBrand(): Observable<any> {
-    return this.http.get<any[]>(`${this.baseApiUrl}`)
+    return this.http.get<any[]>(`${this.apiUrl}`)
   }
 
   updateBrand(id: any, updateRequest: any): Observable<any> {
-    return this.http.put<any>(`${this.baseApiUrl}/${id}`, updateRequest);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, updateRequest);
   }
 
   deleteBrand(id: any): Observable<any> {
-    return this.http.delete<any>(`${this.baseApiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }

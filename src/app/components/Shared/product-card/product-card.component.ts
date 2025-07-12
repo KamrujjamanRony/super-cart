@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 import { WishListService } from '../../../services/user/wish-list.service';
 import { CartService } from '../../../services/user/cart.service';
+import { ToastService } from '../../primeng/toast/toast.service';
 
 @Component({
   selector: 'app-product-card',
@@ -15,6 +16,8 @@ export class ProductCardComponent {
   authCookieService = inject(AuthCookieService);
   wishListService = inject(WishListService);
   cartService = inject(CartService);
+  private toastService = inject(ToastService);
+  router = inject(Router);
   @Input() product: any;
   user = this.authCookieService.getUserData();
 
@@ -28,12 +31,13 @@ export class ProductCardComponent {
     return `/view/${id}`;
   }
 
+
   addToWishlist(product: any) {
     // const user = this.authCookieService.getUserData();
 
     const favoriteProduct = {
       id: crypto.randomUUID(),  // Generate a unique ID for the product
-      productId: product.id.toString()  //Todo: Ensure productId is a string
+      productId: product.id
     };
 
     if (this.user?.uid) {
@@ -47,7 +51,9 @@ export class ProductCardComponent {
             const existingProduct = restFavoriteProduct?.products?.find((p: any) => p.productId == favoriteProduct.productId);
 
             if (existingProduct) {
-              console.log("Product already in the wish list")
+              this.toastService.showMessage('warn', 'Warning', 'Product already in the wish list!');
+              console.log("Product already in the wish list");
+              return;
             } else {
               // Add the new product to the wishlist
               restFavoriteProduct.products.push(favoriteProduct);
@@ -57,56 +63,46 @@ export class ProductCardComponent {
             this.wishListService.updateWishlist(restFavoriteProduct.id, restFavoriteProduct).subscribe({
               next: () => {
                 console.log('wishlist updated successfully');
-                // this.router.navigateByUrl('user/shopping-wishlist');
+                this.toastService.showMessage('success', 'Successful', 'Product successfully added to wishlist!');
               },
               error: (error) => {
                 console.error('Error updating wishlist:', error);
+                this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error creating wishlist'}`);
               }
             });
           } else {
             // If no wishlist exists, create a new wishlist for the user
             const newFavoriteProduct = {
+              userId: this.user.uid,
               products: [favoriteProduct]
             };
 
             this.wishListService.addWishlist(newFavoriteProduct).subscribe({
               next: () => {
-                console.log('New wishlist created successfully');
+                this.toastService.showMessage('success', 'Successful', 'Product successfully added to wishlist!');
                 // this.router.navigateByUrl('user/shopping-wishlist');
               },
               error: (error) => {
-                console.error('Error creating wishlist:', error);
+                this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error creating wishlist'}`);
               }
             });
           }
         },
         error: (error) => {
-          const newFavoriteProduct = {
-            userId: this.user.uid,
-            products: [favoriteProduct]
-          };
-
-          this.wishListService.addWishlist(newFavoriteProduct).subscribe({
-            next: () => {
-              console.log('New wishlist created successfully');
-              // this.router.navigateByUrl('user/shopping-wishlist');
-            },
-            error: (error) => {
-              console.error('Error creating wishlist:', error);
-            }
-          });
-          console.error('Error fetching user wishlist:', error);
+          this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error fetching wishlist'}`)
         }
       });
     } else {
+      this.toastService.showMessage('warn', 'Warning', 'User not logged in!');
       console.error('User not logged in');
+      this.router.navigateByUrl('login');
     }
   }
 
   addToCart(product: any) {
     const cartProduct = {
       id: crypto.randomUUID(),
-      productId: product.id.toString(),
+      productId: product?.id,
       quantity: 1
     };
 
@@ -158,20 +154,7 @@ export class ProductCardComponent {
           }
         },
         error: (error) => {
-          // Error fetching cart - create new one
-          const newCart = {
-            userId: this.user.uid,
-            products: [cartProduct]
-          };
-
-          this.cartService.addCart(newCart).subscribe({
-            next: () => {
-              console.log('New cart created successfully');
-            },
-            error: (error) => {
-              console.error('Error creating cart:', error);
-            }
-          });
+          console.error('Error creating cart:', error);
         }
       });
     } else {

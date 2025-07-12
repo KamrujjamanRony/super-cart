@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-shop',
@@ -16,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ShopComponent {
   productService = inject(ProductService);
+  dataService = inject(DataService);
   route = inject(ActivatedRoute);
 
   products: any;
@@ -34,6 +36,7 @@ export class ShopComponent {
   paramsSubscription?: Subscription;
 
   ngOnInit() {
+    this.dataService.loadSections().subscribe();
     // Fetch products from the ProductService
     this.paramsSubscription = this.route.paramMap.subscribe({
       next: (params) => {

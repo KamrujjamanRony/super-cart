@@ -2,16 +2,17 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   http = inject(HttpClient);
-  baseApiUrl = 'http://supersoft:81/api/Product';
+  private apiUrl = `${environment.apiUrl}/Product`;
 
   addProduct(model: any | FormData): Observable<void> {
-    return this.http.post<void>(this.baseApiUrl, model);
+    return this.http.post<void>(this.apiUrl, model);
   }
 
   getProducts(query: string = '', category: string = '', brand: string = ''): Observable<any[]> {
@@ -20,19 +21,19 @@ export class ProductService {
       category: category,
       brand: brand
     }
-    return this.http.post<any[]>(`${this.baseApiUrl}/search`, queryParams);
+    return this.http.post<any[]>(`${this.apiUrl}/search`, queryParams);
   }
 
   getProduct(id: string): Observable<any> {
-    return this.http.get<any>(`${this.baseApiUrl}/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
   updateProduct(id: string, updateProductRequest: any | FormData): Observable<any> {
-    return this.http.put<any>(`${this.baseApiUrl}/${id}`, updateProductRequest);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, updateProductRequest);
   }
 
   deleteProduct(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseApiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 
   getRelatedProducts(productId: number): Observable<any[]> {
@@ -49,10 +50,10 @@ export class ProductService {
   }
 
   getCategories(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseApiUrl}/categories`);
+    return this.http.get<string[]>(`${this.apiUrl}/categories`);
   }
 
   getBrands(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseApiUrl}/brands`);
+    return this.http.get<string[]>(`${this.apiUrl}/brands`);
   }
 }

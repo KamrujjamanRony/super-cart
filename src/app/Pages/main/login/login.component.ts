@@ -6,6 +6,7 @@ import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 import { UsersService } from '../../../services/user/users.service';
 import { AuthService } from '../../../services/user/auth.service';
 import { Location } from '@angular/common';
+import { ToastService } from '../../../components/primeng/toast/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -28,11 +29,12 @@ export class LoginComponent {
   // End Form Init ----------------------------------------------------------------
 
   // Declare Services ------------------------------------------------------
-  usersService = inject(UsersService);
-  authService = inject(AuthService);
+  private usersService = inject(UsersService);
+  private authService = inject(AuthService);
   private location = inject(Location);
-  authCookieService = inject(AuthCookieService);
-  router = inject(Router);
+  private authCookieService = inject(AuthCookieService);
+  private toastService = inject(ToastService);
+  private router = inject(Router);
 
   error: any;
 
@@ -87,21 +89,6 @@ export class LoginComponent {
         this.error = err.toString();
         console.log('Facebook login failed', err)
       });
-  }
-
-  resetPassword(e: Event) {
-    e.preventDefault();
-    const emailControl = this.form.get('email');
-    if (emailControl && emailControl.value) {
-      this.authService.forgotPassword(emailControl.value)
-        .then(() => console.log('Password reset email sent'))
-        .catch((err) => {
-          this.error = err.toString();
-          console.log('Password reset email failed', err)
-        });
-    } else {
-      alert('Email is required for password reset');
-    }
   }
 
   entryUser(data: any) {

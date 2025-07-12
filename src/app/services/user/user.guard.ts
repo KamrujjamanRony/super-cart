@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { AuthCookieService } from './auth-cookie.service';
 import { Location } from '@angular/common';
 
@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 })
 export class userGuard implements CanActivate {
   constructor(
+    private router: Router,
     private location: Location,
     private authService: AuthCookieService
   ) { }
@@ -19,7 +20,8 @@ export class userGuard implements CanActivate {
       return true;
     }
 
-    this.location.back();
+    // this.location.back();
+    this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
     return false;
   }
 }

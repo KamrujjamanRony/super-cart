@@ -28193,6 +28193,10 @@
     {
       "id": 6,
       "name": "Limited Time Offers"
+    },
+    {
+      "id": 7,
+      "name": "Shop Sidebar"
     }
   ]
 }

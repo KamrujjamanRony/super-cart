@@ -1,24 +1,11 @@
-// address-modal.component.ts
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog';
-import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
-import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-address-modal',
-  imports: [
-    CommonModule,
-    FormsModule,
-    ButtonModule,
-    DialogModule,
-    InputTextModule,
-    DropdownModule,
-    CheckboxModule
-  ],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './address-modal.component.html',
   styleUrls: ['./address-modal.component.css']
 })
@@ -28,7 +15,7 @@ export class AddressModalComponent {
   @Output() submit = new EventEmitter<any>();
   @Output() close = new EventEmitter<void>();
 
-  showModal = true; // Control visibility internally
+  showModal = true;
 
   addressTypes = [
     { label: 'Home', value: 'Home' },

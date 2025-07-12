@@ -5,6 +5,7 @@ import { Auth } from '@angular/fire/auth';
 import { ProductService } from '../../../services/product.service';
 import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -17,6 +18,7 @@ export class ShoppingCartComponent {
   cartService = inject(CartService);
   productService = inject(ProductService);
   authCookieService = inject(AuthCookieService);
+  router = inject(Router);
   private auth = inject(Auth);
 
   carts: any[] = [];
@@ -25,6 +27,8 @@ export class ShoppingCartComponent {
   user: any;
   totalPrice: number = 0;
   totalQuantity: number = 0;
+  deliveryCharge: number = 120; // Set your delivery charge
+  totalPriceWithDelivery: number = 0;
 
   ngOnInit() {
     this.loadCart();
@@ -81,20 +85,66 @@ export class ShoppingCartComponent {
     });
   }
 
+  // calculateTotals() {
+  //   this.totalPrice = this.carts.reduce((total, item) => {
+  //     return total + item.price * item.quantity;
+  //   }, 0);
+
+  //   this.totalPrice = Math.round(this.totalPrice * 100) / 100; // Round to 2 decimal places
+
+  //   this.totalQuantity = this.carts.reduce((total, item) => {
+  //     return total + item.quantity;
+  //   }, 0);
+  // }
+
+  updateCartAfterChange(updatedCarts: any) {
+    this.carts = this.mergeCartAndProducts(updatedCarts);
+    this.calculateTotals();
+  }
   calculateTotals() {
     this.totalPrice = this.carts.reduce((total, item) => {
       return total + item.price * item.quantity;
     }, 0);
 
-    this.totalPrice = Math.round(this.totalPrice * 100) / 100; // Round to 2 decimal places
+    this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+    this.totalPriceWithDelivery = this.totalPrice + this.deliveryCharge;
+    this.totalPriceWithDelivery = Math.round(this.totalPriceWithDelivery * 100) / 100;
 
     this.totalQuantity = this.carts.reduce((total, item) => {
       return total + item.quantity;
     }, 0);
   }
 
-  updateCartAfterChange(updatedCarts: any) {
-    this.carts = this.mergeCartAndProducts(updatedCarts);
-    this.calculateTotals();
+  // proceedToCheckout() {
+  //   // Navigate to checkout page with cart data
+  //   const orderData = {
+  //     products: this.carts,
+  //     subtotal: this.totalPrice,
+  //     deliveryCharge: this.deliveryCharge,
+  //     total: this.totalPriceWithDelivery,
+  //     quantity: this.totalQuantity
+  //   };
+  //   // You can use a service or router to pass this data to the order page
+  //   this.router.navigate(['/checkout'], { state: { orderData } });
+  // }
+
+  proceedToCheckout() {
+    if (this.carts.length === 0) {
+      alert('Your cart is empty');
+      return;
+    }
+
+    const orderData = {
+      products: this.carts,
+      subtotal: this.totalPrice,
+      deliveryCharge: this.deliveryCharge,
+      total: this.totalPriceWithDelivery,
+      quantity: this.totalQuantity
+    };
+
+    // Navigate with state
+    this.router.navigate(['/checkout'], {
+      state: { orderData }
+    });
   }
 }

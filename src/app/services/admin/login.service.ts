@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +9,9 @@ import { Observable, switchMap } from 'rxjs';
 export class LoginService {
 
   private readonly http = inject(HttpClient);
-  baseApiUrl = 'http://supersoft:81/HWS/Authentication';
+  private apiUrl = environment.authUrl;
 
   login(model: any): Observable<any> {
-    return this.http.post<any>(`${this.baseApiUrl}/Login`, model)
+    return this.http.post<any>(`${this.apiUrl}/Authentication/Login`, model)
   }
 }

@@ -6,6 +6,7 @@
   <!-- shop wrapper -->
   <div class="container flex flex-col md:flex-row gap-6 pt-4 pb-16 items-start">
     <!-- sidebar -->
+    @if (dataService.isPermitted("Shop Sidebar")) {
     <div class="bg-white px-4 pb-6 shadow rounded overflow-hidden min-w-64">
       <div class="divide-y divide-gray-200 space-y-5">
         <!-- category filter -->
@@ -150,6 +151,7 @@
         </button>
       </div>
     </div>
+    }
     <!-- sidebar end -->
 
     <!-- product -->

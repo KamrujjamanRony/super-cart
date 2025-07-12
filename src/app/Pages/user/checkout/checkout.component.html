@@ -1,0 +1,103 @@
+<!-- checkout.component.html -->
+<div class="container mx-auto p-4 max-w-6xl">
+  <h1 class="text-2xl font-bold mb-6">Checkout</h1>
+
+  @if (error) {
+  <div
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
+  >
+    {{ error }}
+  </div>
+  }
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <!-- Delivery Address -->
+    <div class="md:col-span-2 space-y-6">
+      <div class="bg-white p-6 rounded shadow">
+        <h2 class="text-xl font-semibold mb-4">Delivery Address</h2>
+
+        <div class="space-y-4">
+          @for (address of userDetails?.address; track address.id) {
+          <div
+            class="border p-4 rounded cursor-pointer"
+            [class.border-rose-500]="deliveryAddress?.id === address.id"
+            (click)="deliveryAddress = address"
+          >
+            <div class="flex justify-between">
+              <h3 class="font-medium">{{ address.type }}</h3>
+              @if (address.isDefault) {
+              <span class="text-xs bg-gray-100 px-2 py-1 rounded">Default</span>
+              }
+            </div>
+            <p class="text-gray-600">{{ address.street }}</p>
+            <p class="text-gray-600">{{ address.city }}</p>
+            <p class="text-gray-600">Phone: {{ address.contact }}</p>
+          </div>
+          }
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="bg-white p-6 rounded shadow">
+        <h2 class="text-xl font-semibold mb-4">Payment Method</h2>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 p-3 border rounded">
+            <input
+              type="radio"
+              id="cod"
+              name="payment"
+              [(ngModel)]="paymentMethod"
+              value="Cash on Delivery"
+              checked
+            />
+            <label for="cod" class="w-full">
+              <div class="flex justify-between items-center">
+                <span>Cash on Delivery</span>
+                <span class="text-sm text-gray-500"
+                  >Pay when you receive the order</span
+                >
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div>
+      <div class="bg-white p-6 rounded shadow sticky top-4">
+        <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
+
+        <div class="space-y-2 mb-4">
+          <div class="flex justify-between">
+            <span>Subtotal ({{ orderData?.quantity }} items)</span>
+            <span>${{ orderData?.subtotal | number : "1.2-2" }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Delivery Charge</span>
+            <span>${{ orderData?.deliveryCharge | number : "1.2-2" }}</span>
+          </div>
+        </div>
+
+        <div class="border-t pt-4 mb-4">
+          <div class="flex justify-between font-bold text-lg">
+            <span>Total</span>
+            <span>${{ orderData?.total | number : "1.2-2" }}</span>
+          </div>
+        </div>
+
+        <button
+          (click)="placeOrder()"
+          [disabled]="loading"
+          class="w-full mt-6 bg-rose-500 text-white py-2 rounded hover:bg-rose-600 transition disabled:bg-rose-300"
+        >
+          @if (loading) {
+          <span>Processing...</span>
+          } @else {
+          <span>Place Order</span>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

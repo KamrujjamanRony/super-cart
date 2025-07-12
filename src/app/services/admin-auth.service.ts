@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminAuthService {
+  private apiUrl = `${environment.apiUrl}/users`;
 
-  private apiUrl = 'http://localhost:3000/users';
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(email: any, password: any): Observable<any> {
     return this.http.get<any[]>(`${this.apiUrl}`).pipe(
