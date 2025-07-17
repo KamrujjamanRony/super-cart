@@ -94,14 +94,12 @@
               class="line-through text-gray-500 text-xs"
               *ngIf="product.offerPrice"
             >
-              ${{ product.regularPrice | number : "1.2-2" }}
+              {{ product.regularPrice | bdt }}
             </span>
             <span
               [class]="product.offerPrice ? 'text-red-600 font-semibold' : ''"
             >
-              ${{
-                product.offerPrice || product.regularPrice | number : "1.2-2"
-              }}
+              {{ product.offerPrice || product.regularPrice | bdt }}
             </span>
           </div>
         </td>

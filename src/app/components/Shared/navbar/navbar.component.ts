@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { CartService } from '../../../services/user/cart.service';
 import { WishListService } from '../../../services/user/wish-list.service';
 import { AuthService } from '../../../services/user/auth.service';
+import { CategoryService } from '../../../services/admin/category.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +18,8 @@ export class NavbarComponent {
   wishListService = inject(WishListService);
   private auth = inject(Auth);
   private cdr = inject(ChangeDetectorRef);
+  private CategoryService = inject(CategoryService);
+  categories: any[] = [];
   menuList = [
     { name: 'Home', path: '/' },
     { name: 'Shop', path: '/shop' },
@@ -50,6 +53,11 @@ export class NavbarComponent {
     // Listen for wishlist updates
     this.wishListService.wishlistUpdated$.subscribe(() => {
       this.fetchWishList();
+    });
+
+    // Fetch categories
+    this.CategoryService.getCategory().subscribe(data => {
+      this.categories = data;
     });
   }
 

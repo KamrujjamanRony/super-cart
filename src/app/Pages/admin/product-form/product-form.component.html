@@ -149,9 +149,9 @@
         <label class="block text-sm font-medium text-gray-700 mb-2"
           >Additional Images</label
         >
-        <div class="space-y-2 flex flex-col lg:flex-row gap-2">
+        <div class="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-2">
           @for(imageCtrl of imagesArray.controls; track $index; let i = $index){
-          <div class="flex items-center gap-2 w-full lg:w-1/2">
+          <div class="flex items-center gap-2 w-full">
             <input
               type="text"
               [formControl]="imageCtrl"

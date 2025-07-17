@@ -10,6 +10,7 @@
     <div class="bg-white px-4 pb-6 shadow rounded overflow-hidden min-w-64">
       <div class="divide-y divide-gray-200 space-y-5">
         <!-- category filter -->
+        @if (categories?.length > 0) {
         <div>
           <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">
             Categories
@@ -38,8 +39,10 @@
             <!-- single category end -->
           </div>
         </div>
+        }
         <!-- category filter end -->
         <!-- brand filter -->
+        @if (brands?.length > 0) {
         <div class="pt-4">
           <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">
             Brands
@@ -68,6 +71,7 @@
             <!-- single brand end -->
           </div>
         </div>
+        }
         <!-- brand filter end -->
         <!-- price filter -->
         <div class="pt-4">
@@ -76,20 +80,25 @@
           </h3>
           <div class="mt-4 flex items-center">
             <input
-              type="text"
+              type="number"
+              [(ngModel)]="minPrice"
               class="w-full min-w-24 border-gray-300 focus:border-primary focus:ring-0 px-3 py-1 text-gray-800 text-sm shadow-sm rounded"
               placeholder="min"
+              min="0"
             />
             <span class="px-3 text-gray-800">-</span>
             <input
-              type="text"
+              type="number"
+              [(ngModel)]="maxPrice"
               class="w-full min-w-24 border-gray-300 focus:border-primary focus:ring-0 px-3 py-1 text-gray-800 text-sm shadow-sm rounded"
               placeholder="max"
+              min="0"
             />
           </div>
         </div>
         <!-- price filter end -->
         <!-- size filter -->
+        @if (sizes?.length > 0) {
         <div class="pt-4">
           <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Size</h3>
           <div class="flex items-center gap-2">
@@ -114,8 +123,10 @@
             <!-- single size end -->
           </div>
         </div>
+        }
         <!-- size filter end -->
         <!-- color filter -->
+        @if (colors?.length > 0) {
         <div class="pt-4">
           <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">
             Color
@@ -142,6 +153,7 @@
             <!-- single color end -->
           </div>
         </div>
+        }
         <!-- color filter end -->
         <button
           (click)="onClearFilter()"
@@ -167,58 +179,20 @@
           <option value="high-low">Price high-low</option>
           <option value="latest">Latest product</option>
         </select>
-
-        <div class="hidden lg:flex gap-2 ml-auto">
-          <div
-            class="border w-10 h-9 flex items-center justify-center rounded cursor-pointer"
-            [ngClass]="{
-              'border-primary bg-primary text-gray-50': viewCart,
-              'border-gray-300 text-gray-800': !viewCart
-            }"
-            (click)="cardVertically()"
-          >
-            <i class="fas fa-th"></i>
-          </div>
-          <div
-            class="border w-10 h-9 flex items-center justify-center rounded cursor-pointer"
-            [ngClass]="{
-              'border-primary bg-primary text-gray-50': !viewCart,
-              'border-gray-300 text-gray-800': viewCart
-            }"
-            (click)="cardHorizontally()"
-          >
-            <i class="fas fa-list"></i>
-          </div>
-        </div>
       </div>
       <!-- sorting end -->
       <!-- product grid -->
-      @if (viewCart) {
       <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <!-- single product -->
         @for(product of
-        byCategory(byBrand(bySize(byColor(bySorting(products))))); track
-        product.id){
+        byPrice(byCategory(byBrand(bySize(byColor(bySorting(products))))));
+        track product.id){
         <app-product-card [product]="product"></app-product-card>
         } @empty {
         <div class="text-center text-gray-800 text-xl">No products found.</div>
         }
         <!-- single product end -->
       </div>
-      } @else {
-      <div class="grid grid-cols-1 gap-6">
-        <!-- single product -->
-        @for(product of
-        byCategory(byBrand(bySize(byColor(bySorting(products))))); track
-        product.id){
-        <app-product-card-2 [product]="product"></app-product-card-2>
-        } @empty {
-        <div class="text-center text-gray-800 text-xl">No products found.</div>
-        }
-        <!-- single product end -->
-      </div>
-      }
-
       <!-- product grid end -->
     </div>
     <!-- product end -->

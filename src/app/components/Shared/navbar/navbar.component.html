@@ -13,82 +13,15 @@
           class="absolute w-[80vw] left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible z-50"
         >
           <!-- single sub category -->
+          @for (item of categories; track item?.id) {
           <a
-            href="#"
+            [routerLink]="['/shop']"
+            [queryParams]="{ category: item.name }"
             class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
           >
-            <img
-              src="../../../../assets/images/icons/bed.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Bedroom</span>
+            <span class="ml-6 text-gray-800 text-sm">{{ item?.name }}</span>
           </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/sofa.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Sofa</span>
-          </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/office.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Office</span>
-          </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/terrace.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Outdoor</span>
-          </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/bed-2.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Mattress</span>
-          </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/restaurant.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Dining</span>
-          </a>
+          }
           <!-- single sub category end -->
         </div>
         <!-- sub category end -->
@@ -278,82 +211,15 @@
           class="absolute w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible z-50"
         >
           <!-- single sub category -->
+          @for (item of categories; track item?.id) {
           <a
-            href="#"
+            [routerLink]="['/shop']"
+            [queryParams]="{ category: item.name }"
             class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
           >
-            <img
-              src="../../../../assets/images/icons/bed.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Bedroom</span>
+            <span class="ml-6 text-gray-800 text-sm">{{ item?.name }}</span>
           </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/sofa.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Sofa</span>
-          </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/office.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Office</span>
-          </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/terrace.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Outdoor</span>
-          </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/bed-2.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Mattress</span>
-          </a>
-          <!-- single sub category end -->
-          <!-- single sub category -->
-          <a
-            href="#"
-            class="flex items-center px-6 py-3 hover:bg-gray-100 transition"
-          >
-            <img
-              src="../../../../assets/images/icons/restaurant.svg"
-              alt="icon"
-              class="w-5 h-5 object-contain"
-            />
-            <span class="ml-6 text-gray-800 text-sm">Dining</span>
-          </a>
+          }
           <!-- single sub category end -->
         </div>
         <!-- sub category end -->

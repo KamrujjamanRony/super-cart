@@ -2,10 +2,11 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CartService } from '../../../services/user/cart.service';
 import { RouterLink } from '@angular/router';
 import { AuthCookieService } from '../../../services/user/auth-cookie.service';
+import { BdtPipe } from "../../../pipes/bdt.pipe";
 
 @Component({
   selector: 'app-single-cart',
-  imports: [RouterLink],
+  imports: [RouterLink, BdtPipe],
   templateUrl: './single-cart.component.html',
   styleUrl: './single-cart.component.css'
 })

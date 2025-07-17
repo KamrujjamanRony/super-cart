@@ -4,10 +4,11 @@ import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 import { WishListService } from '../../../services/user/wish-list.service';
 import { CartService } from '../../../services/user/cart.service';
 import { ToastService } from '../../primeng/toast/toast.service';
+import { BdtPipe } from "../../../pipes/bdt.pipe";
 
 @Component({
   selector: 'app-product-card-2',
-  imports: [RouterLink],
+  imports: [RouterLink, BdtPipe],
   templateUrl: './product-card-2.component.html',
   styleUrl: './product-card-2.component.css'
 })

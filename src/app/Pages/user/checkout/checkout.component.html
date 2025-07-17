@@ -71,18 +71,18 @@
         <div class="space-y-2 mb-4">
           <div class="flex justify-between">
             <span>Subtotal ({{ orderData?.quantity }} items)</span>
-            <span>${{ orderData?.subtotal | number : "1.2-2" }}</span>
+            <span>{{ orderData?.subtotal | bdt }}</span>
           </div>
           <div class="flex justify-between">
             <span>Delivery Charge</span>
-            <span>${{ orderData?.deliveryCharge | number : "1.2-2" }}</span>
+            <span>{{ deliveryCharge | bdt }}</span>
           </div>
         </div>
 
         <div class="border-t pt-4 mb-4">
           <div class="flex justify-between font-bold text-lg">
             <span>Total</span>
-            <span>${{ orderData?.total | number : "1.2-2" }}</span>
+            <span>{{ orderData?.subtotal + deliveryCharge | bdt }}</span>
           </div>
         </div>
 

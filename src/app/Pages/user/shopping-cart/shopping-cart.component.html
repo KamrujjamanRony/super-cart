@@ -14,17 +14,17 @@
     <div class="w-full h-1 bg-white rounded"></div>
     <div class="flex flex-col items-end gap-2">
       <h3 class="text-lg">
-        Subtotal ({{ totalQuantity }} items):
-        <span class="font-bold">${{ totalPrice }}</span>
+        Total ({{ totalQuantity }} items):
+        <span class="font-bold">{{ totalPrice | bdt }}</span>
       </h3>
-      <h3 class="text-lg">
+      <!-- <h3 class="text-lg">
         Delivery Charge:
-        <span class="font-bold">${{ deliveryCharge }}</span>
-      </h3>
-      <h3 class="text-xl">
+        <span class="font-bold">${{ deliveryCharge | bdt }}</span>
+      </h3> -->
+      <!-- <h3 class="text-xl">
         Total:
-        <span class="font-bold">${{ totalPriceWithDelivery }}</span>
-      </h3>
+        <span class="font-bold">${{ totalPriceWithDelivery | bdt }}</span>
+      </h3> -->
     </div>
     <!-- single cart end -->
   </div>
@@ -32,17 +32,17 @@
   <div class="border rounded bg-white w-full md:w-96 p-5 h-fit">
     <div class="flex flex-col gap-2 mb-4">
       <h3 class="text-lg">
-        Subtotal ({{ totalQuantity }} items):
-        <span class="font-bold">${{ totalPrice }}</span>
+        Total ({{ totalQuantity }} items):
+        <span class="font-bold">{{ totalPrice | bdt }}</span>
       </h3>
-      <h3 class="text-lg">
+      <!-- <h3 class="text-lg">
         Delivery Charge:
-        <span class="font-bold">${{ deliveryCharge }}</span>
-      </h3>
-      <h3 class="text-xl">
+        <span class="font-bold">${{ deliveryCharge | bdt }}</span>
+      </h3> -->
+      <!-- <h3 class="text-xl">
         Total:
-        <span class="font-bold">${{ totalPriceWithDelivery }}</span>
-      </h3>
+        <span class="font-bold">${{ totalPriceWithDelivery | bdt }}</span>
+      </h3> -->
     </div>
     <button
       (click)="proceedToCheckout()"

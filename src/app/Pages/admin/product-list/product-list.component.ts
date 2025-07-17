@@ -9,10 +9,13 @@ import { ToastService } from '../../../components/primeng/toast/toast.service';
 import { AuthService } from '../../../services/admin/auth.service';
 import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map, Observable, switchMap } from 'rxjs';
 import { DataService } from '../../../services/data.service';
+import { CategoryService } from '../../../services/admin/category.service';
+import { BrandService } from '../../../services/admin/brand.service';
+import { BdtPipe } from "../../../pipes/bdt.pipe";
 
 @Component({
   selector: 'app-product-list',
-  imports: [CommonModule, FontAwesomeModule, ProductFormComponent],
+  imports: [CommonModule, FontAwesomeModule, ProductFormComponent, BdtPipe],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
@@ -24,6 +27,8 @@ export class ProductListComponent {
   private dataFetchService = inject(DataFetchService);
   private toastService = inject(ToastService);
   private authService = inject(AuthService);
+  private CategoryService = inject(CategoryService);
+  private BrandService = inject(BrandService);
   private DataService = inject(DataService);
 
   isView = signal<boolean>(false);
@@ -71,10 +76,10 @@ export class ProductListComponent {
 
   loadCategoriesAndBrands() {
     // For demonstration purposes, using hardcoded categories and brands
-    this.DataService.getCategories().subscribe(data => {
+    this.CategoryService.getCategory().subscribe(data => {
       this.categories.set(Array.isArray(data) ? data.map((cat: any) => cat.name) : []);
     });
-    this.DataService.getBrands().subscribe(data => {
+    this.BrandService.getBrand().subscribe(data => {
       this.brands.set(Array.isArray(data) ? data.map((brand: any) => brand.name) : []);
     });
     // this.productService.getCategories().subscribe(categories => {

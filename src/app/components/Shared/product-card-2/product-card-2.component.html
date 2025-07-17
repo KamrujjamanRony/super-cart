@@ -21,9 +21,11 @@
   </div>
   <!-- wishlist content end -->
   <div class="flex items-baseline mb-1 space-x-2 font-roboto">
-    <p class="text-xl text-primary font-semibold">${{ product?.offerPrice }}</p>
+    <p class="text-xl text-primary font-semibold">
+      {{ product?.offerPrice | bdt }}
+    </p>
     <p class="text-sm text-secondary line-through">
-      ${{ product?.regularPrice }}
+      {{ product?.regularPrice | bdt }}
     </p>
   </div>
   <a

@@ -7,12 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { CartService } from '../../../services/user/cart.service';
 import { OrderService } from '../../../services/user/order.service';
 import { UsersService } from '../../../services/user/users.service'; // Add this import
-import { ToastService } from '../../../components/primeng/toast/toast.service'; // Add this import
+import { ToastService } from '../../../components/primeng/toast/toast.service';
+import { BdtPipe } from "../../../pipes/bdt.pipe"; // Add this import
 
 @Component({
     selector: 'app-checkout',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, BdtPipe],
     templateUrl: './checkout.component.html',
     styleUrls: ['./checkout.component.css']
 })
@@ -23,6 +24,7 @@ export class CheckoutComponent implements OnInit {
     loading = false;
     error: string | null = null;
     paymentMethod: string = 'Cash on Delivery';
+    deliveryCharge: number = 120; // Set your delivery charge
     deliveryAddress: any = null; // Changed from {} to null
     userAddresses: any[] = []; // To store user addresses
     selectedAddressId: string | null = null;
@@ -120,8 +122,8 @@ export class CheckoutComponent implements OnInit {
             userPhone: this.deliveryAddress.contact,
             orderItems,
             subtotal: this.orderData.subtotal,
-            deliveryCharge: this.orderData.deliveryCharge,
-            totalAmount: this.orderData.total,
+            deliveryCharge: this.deliveryCharge,
+            totalAmount: this.orderData.subtotal + this.deliveryCharge,
             paymentMethod: this.paymentMethod,
             orderStatus: 'Pending',
             shippingAddress: {

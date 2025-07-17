@@ -18,7 +18,9 @@
     </p>
   </div>
   <!-- wishlist content end -->
-  <div class="text-primary text-lg font-semibold">${{ product?.price }}</div>
+  <div class="text-primary text-lg font-semibold">
+    {{ product?.price | bdt }}
+  </div>
   <div class="flex items-center gap-1">
     <a
       [routerLink]="getViewLink(product.productId)"

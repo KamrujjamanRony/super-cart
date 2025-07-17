@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { BreadcrumbsComponent } from '../../../components/Shared/breadcrumbs/breadcrumbs.component';
 import { ProductCardComponent } from '../../../components/Shared/product-card/product-card.component';
 import { CommonModule } from '@angular/common';
-import { ProductCard2Component } from '../../../components/Shared/product-card-2/product-card-2.component';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 import { Subscription } from 'rxjs';
@@ -11,7 +10,7 @@ import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-shop',
-  imports: [BreadcrumbsComponent, ProductCardComponent, CommonModule, ProductCard2Component, FormsModule],
+  imports: [BreadcrumbsComponent, ProductCardComponent, CommonModule, FormsModule],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })
@@ -31,42 +30,43 @@ export class ShopComponent {
   prices: any;
   sizes: any;
   colors: any;
-  viewCart = true;
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
   sortValue: string = "";
   paramsSubscription?: Subscription;
+  queryParamsSubscription?: Subscription;
 
   ngOnInit() {
     this.dataService.loadSections().subscribe();
-    // Fetch products from the ProductService
-    this.paramsSubscription = this.route.paramMap.subscribe({
-      next: (params) => {
-        this.paramName = params.get('category');
-        this.productService.getProducts('', this.paramName ? this.paramName : '').subscribe(data => {
-          this.products = data;
-          this.categories = this.groupProductsByProperty(this.products, 'category');
-          this.brands = this.groupProductsByProperty(this.products, 'brand');
-          this.prices = this.groupProductsByProperty(this.products, 'offerPrice');
-          this.sizes = this.groupProductsByArrayProperty(this.products, 'sizes');
-          this.colors = this.groupProductsByArrayProperty(this.products, 'colors');
-        });
-      }
+
+    // Handle both route params and query params
+    this.paramsSubscription = this.route.paramMap.subscribe(params => {
+      this.loadProducts();
     });
-    // this.productService.getProducts().subscribe(data => {
-    //   this.products = data;
-    //   this.categories = this.groupProductsByProperty(this.products, 'category');
-    //   this.brands = this.groupProductsByProperty(this.products, 'brand');
-    //   this.prices = this.groupProductsByProperty(this.products, 'offerPrice');
-    //   this.sizes = this.groupProductsByArrayProperty(this.products, 'sizes');
-    //   this.colors = this.groupProductsByArrayProperty(this.products, 'colors');
-    // });
+
+    this.queryParamsSubscription = this.route.queryParamMap.subscribe(queryParams => {
+      const category = queryParams.get('category');
+      if (category) {
+        this.categoryNames = [category];
+      } else {
+        this.categoryNames = [];
+      }
+      this.loadProducts();
+    });
   }
 
-  cardVertically() {
-    this.viewCart = true;
-  }
+  loadProducts() {
+    const queryParams = this.route.snapshot.queryParams;
+    const category = queryParams['category'] || '';
 
-  cardHorizontally() {
-    this.viewCart = false;
+    this.productService.getProducts('', category).subscribe(data => {
+      this.products = data;
+      this.categories = this.groupProductsByProperty(this.products, 'category');
+      this.brands = this.groupProductsByProperty(this.products, 'brand');
+      this.prices = this.groupProductsByProperty(this.products, 'offerPrice');
+      this.sizes = this.groupProductsByArrayProperty(this.products, 'sizes');
+      this.colors = this.groupProductsByArrayProperty(this.products, 'colors');
+    });
   }
 
   groupProductsByProperty(products: any[], property: string): any[] {
@@ -78,7 +78,6 @@ export class ShopComponent {
       acc[prop]++;
       return acc;
     }, {});
-
     return Object.keys(propertyMap).map(prop => ({
       title: prop,
       quantity: propertyMap[prop]
@@ -98,7 +97,6 @@ export class ShopComponent {
       }
       return acc;
     }, {});
-
     return Object.keys(propertyMap).map(prop => ({
       title: prop,
       quantity: propertyMap[prop]
@@ -147,17 +145,14 @@ export class ShopComponent {
     if (!this.categoryNames || this.categoryNames.length === 0) {
       return data; // If the categoryNames array is empty, return all data
     }
-
     const selectedData = data.filter((product: any) => product && this.categoryNames.includes(product.category.toString()));
     return selectedData;
   }
-
 
   byBrand(data: any): any {
     if (!this.brandNames || this.brandNames.length === 0) {
       return data; // If the brandNames array is empty, return all data
     }
-
     const selectedData = data.filter((product: any) => product && this.brandNames.includes(product.brand.toString()));
     return selectedData;
   }
@@ -166,9 +161,7 @@ export class ShopComponent {
     if (this.sizeName == "") {
       return data; // If the sizeNames array is empty, return all data
     }
-
     const selectedData = data.filter((product: any) => product?.sizes.includes(this.sizeName));
-
     return selectedData;
   }
 
@@ -176,10 +169,21 @@ export class ShopComponent {
     if (this.colorName == "") {
       return data; // If the colorNames array is empty, return all data
     }
-
     const selectedData = data.filter((product: any) => product?.colors.includes(this.colorName));
-
     return selectedData;
+  }
+
+  byPrice(data: any[]): any[] {
+    if (this.minPrice === null && this.maxPrice === null) {
+      return data; // If no price range is set, return all data
+    }
+
+    return data.filter((product: any) => {
+      const price = product.offerPrice || product.price; // Use whichever property holds the price
+      const meetsMin = this.minPrice === null || price >= this.minPrice;
+      const meetsMax = this.maxPrice === null || price <= this.maxPrice;
+      return meetsMin && meetsMax;
+    });
   }
 
   bySorting(data: any): any {
@@ -199,7 +203,12 @@ export class ShopComponent {
     this.brandNames = [];
     this.sizeName = "";
     this.colorName = "";
+    this.minPrice = null;
+    this.maxPrice = null;
   }
 
-
+  ngOnDestroy() {
+    this.paramsSubscription?.unsubscribe();
+    this.queryParamsSubscription?.unsubscribe();
+  }
 }

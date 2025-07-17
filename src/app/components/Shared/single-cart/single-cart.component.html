@@ -10,7 +10,7 @@
     <!-- cart image end -->
     <!-- price -->
     <div class="text-primary text-lg font-semibold">
-      ${{ (product?.price * count).toFixed(2) }}
+      {{ product?.price * count | bdt }}
     </div>
     <!-- price end -->
     <div class="flex gap-2 items-center">
@@ -145,7 +145,7 @@
   </div>
   <!-- cart content end -->
   <div class="text-primary text-lg font-semibold">
-    ${{ (product?.price * count).toFixed(2) }}
+    {{ product?.price * count | bdt }}
   </div>
   <!-- quantity -->
   <div class="">

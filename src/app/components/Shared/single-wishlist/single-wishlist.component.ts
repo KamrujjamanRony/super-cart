@@ -2,10 +2,11 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { WishListService } from '../../../services/user/wish-list.service';
 import { RouterLink } from '@angular/router';
 import { ToastService } from '../../primeng/toast/toast.service';
+import { BdtPipe } from "../../../pipes/bdt.pipe";
 
 @Component({
   selector: 'app-single-wishlist',
-  imports: [RouterLink],
+  imports: [RouterLink, BdtPipe],
   templateUrl: './single-wishlist.component.html',
   styleUrl: './single-wishlist.component.css'
 })

@@ -6,11 +6,12 @@ import { ProductService } from '../../../services/product.service';
 import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { BdtPipe } from "../../../pipes/bdt.pipe";
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [SingleCartComponent, CommonModule],
+  imports: [SingleCartComponent, CommonModule, BdtPipe],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.css'
 })
@@ -27,8 +28,7 @@ export class ShoppingCartComponent {
   user: any;
   totalPrice: number = 0;
   totalQuantity: number = 0;
-  deliveryCharge: number = 120; // Set your delivery charge
-  totalPriceWithDelivery: number = 0;
+  // totalPriceWithDelivery: number = 0;
 
   ngOnInit() {
     this.loadCart();
@@ -107,8 +107,8 @@ export class ShoppingCartComponent {
     }, 0);
 
     this.totalPrice = Math.round(this.totalPrice * 100) / 100;
-    this.totalPriceWithDelivery = this.totalPrice + this.deliveryCharge;
-    this.totalPriceWithDelivery = Math.round(this.totalPriceWithDelivery * 100) / 100;
+    // this.totalPriceWithDelivery = this.totalPrice + this.deliveryCharge;
+    // this.totalPriceWithDelivery = Math.round(this.totalPriceWithDelivery * 100) / 100;
 
     this.totalQuantity = this.carts.reduce((total, item) => {
       return total + item.quantity;
@@ -137,8 +137,8 @@ export class ShoppingCartComponent {
     const orderData = {
       products: this.carts,
       subtotal: this.totalPrice,
-      deliveryCharge: this.deliveryCharge,
-      total: this.totalPriceWithDelivery,
+      // deliveryCharge: this.deliveryCharge,
+      // total: this.totalPriceWithDelivery,
       quantity: this.totalQuantity
     };
 
