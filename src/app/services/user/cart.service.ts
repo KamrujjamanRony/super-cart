@@ -30,16 +30,25 @@ export class CartService {
       );
   }
 
-  deleteCart(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
-      tap(() => this.cartUpdated.next()) // Notify subscribers of cart update
+  deleteCart(id: string): Observable<string> {
+    return this.http.delete(`${this.apiUrl}/${id}`, {
+      responseType: 'text' as const  // Use 'as const' to properly type the response
+    }).pipe(
+      tap(() => this.cartUpdated.next())
     );
   }
 
   // Add this method to your CartService
-  clearCart(userId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/user/${userId}`).pipe(
-      tap(() => this.cartUpdated.next())
-    );
+  clearCart(userId: string): any {
+    console.log(`Clearing cart for user: ${userId}`);
+    this.getCart(userId).subscribe(cart => {
+      if (cart[0]) {
+        console.log('Current cart:', cart[0]);
+        this.deleteCart(cart[0].id).subscribe(data => {
+          console.log('Cart cleared successfully:', data);
+          this.cartUpdated.next(); // Notify subscribers that the cart has been cleared
+        });
+      }
+    });
   }
 }

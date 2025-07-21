@@ -130,6 +130,7 @@ export class ProductCardComponent {
             this.cartService.updateCart(userCart.id, userCart).subscribe({
               next: () => {
                 console.log('Cart updated successfully');
+                this.toastService.showMessage('success', 'Successful', 'Product successfully added to cart!');
                 // Optionally: this.router.navigateByUrl('user/shopping-cart');
               },
               error: (error) => {
@@ -159,6 +160,7 @@ export class ProductCardComponent {
       });
     } else {
       console.error('User not logged in');
+      this.toastService.showMessage('warn', 'Warning', 'User not logged in!');
       // Optionally redirect to login
     }
   }

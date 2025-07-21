@@ -25,6 +25,7 @@ import { WishListComponent } from './Pages/admin/wish-list/wish-list.component';
 import { BrandListComponent } from './Pages/admin/brand-list/brand-list.component';
 import { UserAddressComponent } from './Pages/user/user-address/user-address.component';
 import { PasswordResetComponent } from './Pages/user/password-reset/password-reset.component';
+import { OrderConfirmationComponent } from './Pages/user/order-confirmation/order-confirmation.component';
 
 export const routes: Routes = [
   {
@@ -62,6 +63,11 @@ export const routes: Routes = [
       {
         path: 'user-checkout',
         component: UserCheckoutComponent
+      },
+      {
+        path: 'order-confirmation',
+        component: OrderConfirmationComponent,
+        title: 'Order Confirmation'
       },
     ]
   },

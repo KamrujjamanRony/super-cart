@@ -4,6 +4,7 @@ import { FormControl, NonNullableFormBuilder, ReactiveFormsModule, Validators } 
 import { Router, RouterLink } from '@angular/router';
 import { AuthCookieService } from '../../../services/user/auth-cookie.service';
 import { AuthService } from '../../../services/user/auth.service';
+import { UsersService } from '../../../services/user/users.service';
 
 @Component({
   selector: 'app-register',
@@ -28,6 +29,7 @@ export class RegisterComponent {
   // Declare Services ------------------------------------------------------
   authService = inject(AuthService);
   authCookieService = inject(AuthCookieService);
+  private usersService = inject(UsersService);
   router = inject(Router);
 
   error: any;
@@ -40,7 +42,9 @@ export class RegisterComponent {
       const { email, password } = this.form.value;
       this.authService.registerWithEmail(email, password)
         .then((data) => {
+          // console.log(data)
           this.authCookieService.login(data.user);
+          this.entryUser(data.user);
           console.log('User registered successfully');
           this.router.navigate(['/']);
         })
@@ -58,6 +62,7 @@ export class RegisterComponent {
       .signInWithGoogle()
       .then((data) => {
         this.authCookieService.login(data.user);
+        this.entryUser(data.user);
         console.log('Logged in with Google')
       })
       .catch((err) => {
@@ -71,12 +76,41 @@ export class RegisterComponent {
       .signInWithFacebook()
       .then((data) => {
         this.authCookieService.login(data.user);
+        this.entryUser(data.user);
         console.log('Logged in with Facebook')
       })
       .catch((err) => {
         this.error = err.toString();
         console.error('Facebook login failed', err)
       });
+  }
+
+  entryUser(data: any) {
+    console.log(data)
+    this.usersService.getUser(data?.uid).subscribe(data => {
+      if (data) {
+        console.log(data)
+      } else {
+        const userInfo = {
+          userId: data?.uid,
+          email: data?.providerData[0]?.email || '',
+          username: data?.providerData[0]?.email || '',
+          role: "user",
+          fullname: data?.providerData[0]?.displayName || data?.providerData[0]?.email?.split('@')[0] || '',
+          photoURL: data?.providerData[0]?.photoURL || '',
+          address: [],
+          gender: "",
+          dob: "1997-12-08",
+          phoneNumber: data?.providerData[0]?.phoneNumber || ''
+        }
+        // console.log(data.providerData[0])
+        setTimeout(() => {
+          this.usersService.addUser(userInfo).subscribe(data => {
+            // console.log(data)
+          });
+        }, 500)
+      }
+    });
   }
 
 

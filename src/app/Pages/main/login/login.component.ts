@@ -93,24 +93,30 @@ export class LoginComponent {
 
   entryUser(data: any) {
     console.log(data)
-    const userInfo = {
-      userId: data?.uid,
-      email: data?.providerData[0]?.email,
-      username: data?.providerData[0]?.email,
-      role: "user",
-      fullname: data?.providerData[0]?.displayName,
-      photoURL: data?.providerData[0]?.photoURL,
-      address: [],
-      gender: "",
-      dob: "1997-12-08",
-      phoneNumber: data?.providerData[0]?.phoneNumber
-    }
-    console.log(data.providerData[0])
-    setTimeout(() => {
-      this.usersService.addUser(userInfo).subscribe(data => {
+    this.usersService.getUser(data?.uid).subscribe(data => {
+      if (data) {
         console.log(data)
-      });
-    }, 500)
+      } else {
+        const userInfo = {
+          userId: data?.uid,
+          email: data?.providerData[0]?.email || '',
+          username: data?.providerData[0]?.email || '',
+          role: "user",
+          fullname: data?.providerData[0]?.displayName || data?.providerData[0]?.email?.split('@')[0] || '',
+          photoURL: data?.providerData[0]?.photoURL || '',
+          address: [],
+          gender: "",
+          dob: "1997-12-08",
+          phoneNumber: data?.providerData[0]?.phoneNumber || ''
+        }
+        // console.log(data.providerData[0])
+        setTimeout(() => {
+          this.usersService.addUser(userInfo).subscribe(data => {
+            // console.log(data)
+          });
+        }, 500)
+      }
+    });
   }
 
 

@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
     providedIn: 'root'
 })
 export class OrderService {
-    private apiUrl = `${environment.apiUrl}/Order`;
+    private apiUrl = `${environment.apiUrl}/Orders`;
 
     constructor(private http: HttpClient) { }
 
@@ -17,10 +17,18 @@ export class OrderService {
     }
 
     getOrders(userId: string): Observable<any> {
-        return this.http.get(`${this.apiUrl}/user/${userId}`);
+        return this.http.get(`${this.apiUrl}/${userId}`);
     }
 
     getOrderById(orderId: string): Observable<any> {
-        return this.http.get(`${this.apiUrl}/${orderId}`);
+        return this.http.get(`${this.apiUrl}/order/${orderId}`);
+    }
+
+    updateOrder(id: any, updateRequest: any): Observable<any> {
+        return this.http.put<any>(`${this.apiUrl}/${id}`, updateRequest);
+    }
+
+    deleteOrder(id: any): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrl}/${id}`);
     }
 }

@@ -32,8 +32,23 @@ export class WishListService {
   }
 
   deleteWishlist(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe(
-      tap(() => this.wishlistUpdated.next()) // Notify subscribers of Wishlist update
+    return this.http.delete(`${this.apiUrl}/${id}`, {
+      responseType: 'text' as const  // Use 'as const' to properly type the response
+    }).pipe(
+      tap(() => this.wishlistUpdated.next())
     );
+  }
+
+  clearWishlist(userId: string): any {
+    console.log(`Clearing Wishlist for user: ${userId}`);
+    this.getWishlist(userId).subscribe(Wishlist => {
+      if (Wishlist[0]) {
+        console.log('Current Wishlist:', Wishlist[0]);
+        this.deleteWishlist(Wishlist[0].id).subscribe(data => {
+          console.log('Wishlist cleared successfully:', data);
+          this.wishlistUpdated.next(); // Notify subscribers that the cart has been cleared
+        });
+      }
+    });
   }
 }

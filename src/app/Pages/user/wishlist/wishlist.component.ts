@@ -17,7 +17,6 @@ export class WishlistComponent {
   productService = inject(ProductService);
   authCookieService = inject(AuthCookieService);
   private auth = inject(Auth);
-
   wishlist: any[] = [];
   userWishlist: any[] = [];
   products: any[] = [];
@@ -33,9 +32,6 @@ export class WishlistComponent {
       this.loadWishlist(); // Refresh Wishlist whenever it updates
     });
   }
-
-
-
   loadWishlist() {
     this.auth.onAuthStateChanged((user) => {
       this.user = user;
@@ -54,7 +50,6 @@ export class WishlistComponent {
       });
     });
   }
-
   // Merge cart items with product data
   mergeWishlistAndProducts(items: any[]) {
     return items.map((item) => {
@@ -70,7 +65,6 @@ export class WishlistComponent {
       };
     });
   }
-
   calculateTotals() {
     this.totalPrice = this.wishlist.reduce((total, item) => {
       return total + item.price * item.quantity;
@@ -82,10 +76,8 @@ export class WishlistComponent {
       return total + item.quantity;
     }, 0);
   }
-
   updateCartAfterChange(data: any) {
     this.wishlist = this.mergeWishlistAndProducts(data);
     this.calculateTotals();
   }
-
 }

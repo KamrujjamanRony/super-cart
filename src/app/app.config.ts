@@ -10,15 +10,16 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { MessageService } from 'primeng/api';
 import { authInterceptor } from './services/admin/auth.interceptor';
+import { environment } from '../environments/environment';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAFJCGAbWU3TJmmo1BJBSnnlwUin68wYvo",
-  authDomain: "super-cart-80b68.firebaseapp.com",
-  projectId: "super-cart-80b68",
-  storageBucket: "super-cart-80b68.firebasestorage.app",
-  messagingSenderId: "193969857306",
-  appId: "1:193969857306:web:931f5f4d45f918140002a3"
+  apiKey: environment.apiKey,
+  authDomain: environment.authDomain,
+  projectId: environment.projectId,
+  storageBucket: environment.storageBucket,
+  messagingSenderId: environment.messagingSenderId,
+  appId: environment.appId
 };
 
 export const appConfig: ApplicationConfig = {

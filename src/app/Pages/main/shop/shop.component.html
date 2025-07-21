@@ -182,7 +182,9 @@
       </div>
       <!-- sorting end -->
       <!-- product grid -->
-      <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div
+        class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch"
+      >
         <!-- single product -->
         @for(product of
         byPrice(byCategory(byBrand(bySize(byColor(bySorting(products))))));
