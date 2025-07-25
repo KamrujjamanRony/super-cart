@@ -26,6 +26,7 @@ import { BrandListComponent } from './Pages/admin/brand-list/brand-list.componen
 import { UserAddressComponent } from './Pages/user/user-address/user-address.component';
 import { PasswordResetComponent } from './Pages/user/password-reset/password-reset.component';
 import { OrderConfirmationComponent } from './Pages/user/order-confirmation/order-confirmation.component';
+import { OrderListComponent } from './Pages/admin/order-list/order-list.component';
 
 export const routes: Routes = [
   {
@@ -84,6 +85,10 @@ export const routes: Routes = [
       {
         path: 'product-list',
         component: ProductListComponent, canActivate: [authGuard]
+      },
+      {
+        path: 'order-list',
+        component: OrderListComponent, canActivate: [authGuard]
       },
       {
         path: 'menu-list',

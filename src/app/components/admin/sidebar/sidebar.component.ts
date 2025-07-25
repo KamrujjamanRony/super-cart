@@ -43,7 +43,7 @@ export class SidebarComponent {
     {
       title: 'Orders',
       icon: faFolder,
-      link: '/admin/orders'
+      link: '/admin/order-list'
     },
     {
       title: 'Admins',

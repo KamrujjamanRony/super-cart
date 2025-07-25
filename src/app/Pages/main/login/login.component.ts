@@ -91,30 +91,49 @@ export class LoginComponent {
       });
   }
 
-  entryUser(data: any) {
-    console.log(data)
-    this.usersService.getUser(data?.uid).subscribe(data => {
-      if (data) {
-        console.log(data)
-      } else {
-        const userInfo = {
-          userId: data?.uid,
-          email: data?.providerData[0]?.email || '',
-          username: data?.providerData[0]?.email || '',
-          role: "user",
-          fullname: data?.providerData[0]?.displayName || data?.providerData[0]?.email?.split('@')[0] || '',
-          photoURL: data?.providerData[0]?.photoURL || '',
-          address: [],
-          gender: "",
-          dob: "1997-12-08",
-          phoneNumber: data?.providerData[0]?.phoneNumber || ''
-        }
-        // console.log(data.providerData[0])
-        setTimeout(() => {
-          this.usersService.addUser(userInfo).subscribe(data => {
-            // console.log(data)
+  entryUser(userData: any) {
+    console.log('Initial user data:', userData);
+
+    if (!userData?.uid) {
+      console.error('No UID provided in user data');
+      return;
+    }
+
+    this.usersService.getUser(userData.uid).subscribe({
+      next: (existingUser) => {
+        if (existingUser?.userId) {
+          console.log('User already exists:', existingUser);
+        } else {
+          const providerData = userData.providerData?.[0] || {};
+          const email = providerData.email || '';
+          const username = email.split('@')[0] || 'user';
+
+          const userInfo = {
+            userId: userData.uid,
+            email: email,
+            username: username,
+            role: "user",
+            fullname: providerData.displayName || username,
+            photoURL: providerData.photoURL || '',
+            address: [],
+            gender: "",
+            dob: "1997-12-08",
+            phoneNumber: providerData.phoneNumber || ''
+          };
+
+          console.log('Creating new user:', userInfo);
+          this.usersService.addUser(userInfo).subscribe({
+            next: (createdUser) => {
+              console.log('User created successfully:', createdUser);
+            },
+            error: (err) => {
+              console.error('Error creating user:', err);
+            }
           });
-        }, 500)
+        }
+      },
+      error: (err) => {
+        console.error('Error checking for existing user:', err);
       }
     });
   }
