@@ -40,12 +40,9 @@ export class CartService {
 
   // Add this method to your CartService
   clearCart(userId: string): any {
-    console.log(`Clearing cart for user: ${userId}`);
     this.getCart(userId).subscribe(cart => {
       if (cart[0]) {
-        console.log('Current cart:', cart[0]);
         this.deleteCart(cart[0].id).subscribe(data => {
-          console.log('Cart cleared successfully:', data);
           this.cartUpdated.next(); // Notify subscribers that the cart has been cleared
         });
       }

@@ -93,13 +93,13 @@
             <span
               class="line-through text-gray-500 text-xs"
               *ngIf="product.offerPrice"
+              [innerHTML]="product.regularPrice | bdt"
             >
-              {{ product.regularPrice | bdt }}
             </span>
             <span
               [class]="product.offerPrice ? 'text-red-600 font-semibold' : ''"
+              [innerHTML]="product.offerPrice || product.regularPrice | bdt"
             >
-              {{ product.offerPrice || product.regularPrice | bdt }}
             </span>
           </div>
         </td>

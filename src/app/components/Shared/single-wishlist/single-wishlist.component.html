@@ -22,9 +22,10 @@
     </p>
   </div>
 
-  <div class="text-primary text-lg font-semibold">
-    {{ product?.price | bdt }}
-  </div>
+  <div
+    class="text-primary text-lg font-semibold"
+    [innerHTML]="product?.price | bdt"
+  ></div>
 
   <div class="flex items-center gap-1">
     <button
@@ -90,8 +91,7 @@
       <span class="text-green-600">{{ product?.availability }}</span>
     </p>
   </div>
-  <div class="text-primary text-lg font-semibold">
-    {{ product?.price | bdt }}
+  <div class="text-primary text-lg font-semibold" [innerHTML]="product?.price | bdt">
   </div>
   <div class="flex items-center gap-1">
     <a

@@ -1,14 +1,19 @@
 import { Auth } from '@angular/fire/auth';
 import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CartService } from '../../../services/user/cart.service';
 import { WishListService } from '../../../services/user/wish-list.service';
 import { AuthService } from '../../../services/user/auth.service';
 import { CategoryService } from '../../../services/admin/category.service';
+import { ProductService } from '../../../services/product.service';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink],
+  standalone: true,
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -19,17 +24,14 @@ export class NavbarComponent {
   private auth = inject(Auth);
   private cdr = inject(ChangeDetectorRef);
   private CategoryService = inject(CategoryService);
+  private productService = inject(ProductService);
+  private router = inject(Router);
+
   categories: any[] = [];
-  menuList = [
-    { name: 'Home', path: '/' },
-    { name: 'Shop', path: '/shop' },
-    { name: 'About Us', path: '/about-us' },
-    { name: 'Contact Us', path: '/contact-us' },
-    { name: 'Login', path: '/login' },
-    { name: 'Register', path: '/register' },
-    { name: 'Cart', path: '/cart' },
-    { name: 'Wishlist', path: '/wish-list' }
-  ]
+  productList = signal<any[]>([]);
+  searchControl = new FormControl();
+  searchResults = signal<any[]>([]);
+  showSearchResults = signal(false);
 
   totalCarts = signal<number>(0);
   totalWishlists = signal<number>(0);
@@ -59,6 +61,70 @@ export class NavbarComponent {
     this.CategoryService.getCategory().subscribe(data => {
       this.categories = data;
     });
+
+    // Fetch product list
+    this.productService.getProducts().subscribe(data => {
+      this.productList.set(data);
+      this.cdr.detectChanges();
+    });
+
+    // Setup search functionality
+    this.setupSearch();
+  }
+
+  setupSearch() {
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap(term => {
+          if (!term || term.length < 2) {
+            this.showSearchResults.set(false);
+            return of([]);
+          }
+          return of(this.filterProducts(term));
+        })
+      )
+      .subscribe(results => {
+        this.searchResults.set(results);
+        this.showSearchResults.set(results.length > 0);
+      });
+  }
+
+  filterProducts(term: string): any[] {
+    const lowerTerm = term.toLowerCase();
+    return this.productList().filter(product =>
+      product.name.toLowerCase().includes(lowerTerm) ||
+      product.category.toLowerCase().includes(lowerTerm) ||
+      product.brand.toLowerCase().includes(lowerTerm)
+    );
+  }
+
+  onSearchFocus() {
+    if (this.searchControl.value && this.searchControl.value.length >= 2) {
+      this.showSearchResults.set(true);
+    }
+  }
+
+  onSearchBlur() {
+    setTimeout(() => {
+      this.showSearchResults.set(false);
+    }, 200);
+  }
+
+  navigateToProduct(productId: number) {
+    this.router.navigate(['/view', productId]);
+    this.searchControl.reset();
+    this.showSearchResults.set(false);
+  }
+
+  performSearch() {
+    const term = this.searchControl.value;
+    if (term && term.length >= 2) {
+      this.router.navigate(['/shop'], { queryParams: { search: term } });
+      this.searchControl.reset();
+      this.showSearchResults.set(false);
+    }
   }
 
   fetchUserCart() {
@@ -86,5 +152,4 @@ export class NavbarComponent {
   logout() {
     this.authService.logout();
   }
-
 }

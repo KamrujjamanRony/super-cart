@@ -64,7 +64,10 @@
               }
             </div>
           </div>
-          <div class="font-medium">{{ item.Price * item.Quantity | bdt }}</div>
+          <div
+            class="font-medium"
+            [innerHTML]="item.Price * item.Quantity | bdt"
+          ></div>
         </div>
         }
       </div>
@@ -73,15 +76,15 @@
       <div class="space-y-2 border-t pt-4">
         <div class="flex justify-between">
           <span>Subtotal</span>
-          <span>{{ orderDetails.Subtotal | bdt }}</span>
+          <span [innerHTML]="orderDetails.Subtotal | bdt"></span>
         </div>
         <div class="flex justify-between">
           <span>Delivery Charge</span>
-          <span>{{ orderDetails.DeliveryCharge | bdt }}</span>
+          <span [innerHTML]="orderDetails.DeliveryCharge | bdt"></span>
         </div>
         <div class="flex justify-between font-bold text-lg mt-2">
           <span>Total</span>
-          <span>{{ orderDetails.TotalAmount | bdt }}</span>
+          <span [innerHTML]="orderDetails.TotalAmount | bdt"></span>
         </div>
       </div>
 

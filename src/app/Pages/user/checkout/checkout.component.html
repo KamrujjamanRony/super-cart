@@ -38,7 +38,9 @@
               }
             </div>
             <p class="text-gray-600">{{ address.street }}</p>
-            <p class="text-gray-600">{{ address.city }}</p>
+            <p class="text-gray-600">
+              {{ address.city }}, {{ address.district }}
+            </p>
             <p class="text-gray-600">Phone: {{ address.contact }}</p>
 
             <!-- Edit button -->
@@ -105,18 +107,20 @@
         <div class="space-y-2 mb-4">
           <div class="flex justify-between">
             <span>Subtotal ({{ orderData?.quantity }} items)</span>
-            <span>{{ orderData?.subtotal | bdt }}</span>
+            <span [innerHTML]="orderData?.subtotal | bdt"></span>
           </div>
           <div class="flex justify-between">
             <span>Delivery Charge</span>
-            <span>{{ deliveryCharge | bdt }}</span>
+            <span [innerHTML]="deliveryCharge | bdt"></span>
           </div>
         </div>
 
         <div class="border-t pt-4 mb-4">
           <div class="flex justify-between font-bold text-lg">
             <span>Total</span>
-            <span>{{ orderData?.subtotal + deliveryCharge | bdt }}</span>
+            <span
+              [innerHTML]="orderData?.subtotal + deliveryCharge | bdt"
+            ></span>
           </div>
         </div>
 

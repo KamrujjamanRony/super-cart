@@ -118,3 +118,14 @@
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(233 30 99 / var(--tw-ring-opacity));
 }
+
+.bdt-symbol {
+  font-weight: 900;
+  font-size: 1.1em;
+  color: inherit;
+}
+
+.bdt-amount {
+  font-weight: normal;
+  font-size: 1em;
+}

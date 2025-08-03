@@ -62,7 +62,7 @@ export class ProductCard2Component {
             // Update the cart
             this.cartService.updateCart(userCart.id, userCart).subscribe({
               next: () => {
-                console.log('Cart updated successfully');
+                // console.log('Cart updated successfully');
                 // Optionally: this.router.navigateByUrl('user/shopping-cart');
               },
               error: (error) => {
@@ -78,7 +78,7 @@ export class ProductCard2Component {
 
             this.cartService.addCart(newCart).subscribe({
               next: () => {
-                console.log('New cart created successfully');
+                // console.log('New cart created successfully');
               },
               error: (error) => {
                 console.error('Error creating cart:', error);

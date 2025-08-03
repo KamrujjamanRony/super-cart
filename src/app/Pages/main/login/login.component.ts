@@ -49,12 +49,12 @@ export class LoginComponent {
         .then((data) => {
           this.authCookieService.login(data.user);
           this.entryUser(data.user);
-          console.log('Logged in successfully');
+          // console.log('Logged in successfully');
           this.location.back();
         })
         .catch((err) => {
           this.error = err.toString();
-          console.log('Login failed', err.toString());
+          // console.log('Login failed', err.toString());
         });
     } else {
       alert('Form is invalid! Please Fill Email and Password.');
@@ -67,12 +67,12 @@ export class LoginComponent {
       .then((data) => {
         this.authCookieService.login(data.user);
         this.entryUser(data.user);
-        console.log('Logged in with Google');
+        // console.log('Logged in with Google');
         this.location.back();
       })
       .catch((err) => {
         this.error = err.toString();
-        console.log('Google login failed', err)
+        // console.log('Google login failed', err)
       });
   }
 
@@ -82,17 +82,17 @@ export class LoginComponent {
       .then((data) => {
         this.authCookieService.login(data.user);
         this.entryUser(data.user);
-        console.log('Logged in with Facebook');
+        // console.log('Logged in with Facebook');
         this.location.back();
       })
       .catch((err) => {
         this.error = err.toString();
-        console.log('Facebook login failed', err)
+        // console.log('Facebook login failed', err)
       });
   }
 
   entryUser(userData: any) {
-    console.log('Initial user data:', userData);
+    // console.log('Initial user data:', userData);
 
     if (!userData?.uid) {
       console.error('No UID provided in user data');
@@ -102,7 +102,7 @@ export class LoginComponent {
     this.usersService.getUser(userData.uid).subscribe({
       next: (existingUser) => {
         if (existingUser?.userId) {
-          console.log('User already exists:', existingUser);
+          // console.log('User already exists:', existingUser);
         } else {
           const providerData = userData.providerData?.[0] || {};
           const email = providerData.email || '';
@@ -121,10 +121,10 @@ export class LoginComponent {
             phoneNumber: providerData.phoneNumber || ''
           };
 
-          console.log('Creating new user:', userInfo);
+          // console.log('Creating new user:', userInfo);
           this.usersService.addUser(userInfo).subscribe({
             next: (createdUser) => {
-              console.log('User created successfully:', createdUser);
+              // console.log('User created successfully:', createdUser);
             },
             error: (err) => {
               console.error('Error creating user:', err);

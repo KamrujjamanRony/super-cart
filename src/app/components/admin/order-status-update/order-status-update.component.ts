@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-order-status-update',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './order-status-update.component.html'
 })
 export class OrderStatusUpdateComponent {
@@ -12,7 +12,7 @@ export class OrderStatusUpdateComponent {
   @Input() order!: any;
   @Output() statusUpdated = new EventEmitter<any>();
 
-  newStatus: number = this.currentStatus;
+  newStatus: any = signal(this.currentStatus);
   showModal = false;
 
   statusOptions = [
@@ -24,16 +24,17 @@ export class OrderStatusUpdateComponent {
   ];
 
   openModal() {
-    this.newStatus = this.currentStatus;
+    this.newStatus.set(this.currentStatus);
     this.showModal = true;
   }
 
   updateStatus() {
-    this.statusUpdated.emit({ body: this.order, status: +this.newStatus });
+    this.statusUpdated.emit({ id: this.order.id, status: this.newStatus() });
     this.showModal = false;
   }
 
-  getStatusLabel(status: any): string {
-    return this.statusOptions.find(opt => opt.value === status)?.label || '';
-  }
+  // getStatusLabel(status: any): string {
+  //   console.log(status, this.statusOptions);
+  //   return this.statusOptions.find(opt => opt.value === status)?.label || '';
+  // }
 }

@@ -45,12 +45,12 @@ export class RegisterComponent {
           // console.log(data)
           this.authCookieService.login(data.user);
           this.entryUser(data.user);
-          console.log('User registered successfully');
+          // console.log('User registered successfully');
           this.router.navigate(['/']);
         })
         .catch((err) => {
           this.error = err.toString();
-          console.log('Register failed', err.toString());
+          // console.log('Register failed', err.toString());
         });
     } else {
       alert('Form is invalid! Please Fill Email and Password.');
@@ -63,7 +63,7 @@ export class RegisterComponent {
       .then((data) => {
         this.authCookieService.login(data.user);
         this.entryUser(data.user);
-        console.log('Logged in with Google')
+        // console.log('Logged in with Google')
       })
       .catch((err) => {
         this.error = err.toString();
@@ -77,7 +77,7 @@ export class RegisterComponent {
       .then((data) => {
         this.authCookieService.login(data.user);
         this.entryUser(data.user);
-        console.log('Logged in with Facebook')
+        // console.log('Logged in with Facebook')
       })
       .catch((err) => {
         this.error = err.toString();
@@ -86,10 +86,9 @@ export class RegisterComponent {
   }
 
   entryUser(data: any) {
-    console.log(data)
     this.usersService.getUser(data?.uid).subscribe(data => {
       if (data) {
-        console.log(data)
+        // console.log(data)
       } else {
         const userInfo = {
           userId: data?.uid,

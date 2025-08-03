@@ -8,9 +8,10 @@
       <img [src]="product?.image" alt="{{ product?.productName }}" />
     </div>
     <!-- price -->
-    <div class="text-primary text-lg font-semibold">
-      {{ product?.price * count | bdt }}
-    </div>
+    <div
+      class="text-primary text-lg font-semibold"
+      [innerHTML]="product?.price * count | bdt"
+    ></div>
     <div class="flex gap-2 items-center">
       <!-- quantity -->
       <div class="">
@@ -146,9 +147,10 @@
     }
   </div>
 
-  <div class="text-primary text-lg font-semibold">
-    {{ product?.price * count | bdt }}
-  </div>
+  <div
+    class="text-primary text-lg font-semibold"
+    [innerHTML]="product?.price * count | bdt"
+  ></div>
 
   <div
     class="flex border border-gray-300 text-gray-800 divide-x divide-gray-300 w-max"

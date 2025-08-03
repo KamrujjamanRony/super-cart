@@ -14,7 +14,6 @@ export class WishListService {
   private apiUrl = `${environment.apiUrl}/Wishlist`;
 
   addWishlist(model: any | FormData): Observable<void> {
-    console.log(model)
     return this.http.post<void>(this.apiUrl, model).pipe(
       tap(() => this.wishlistUpdated.next()) // Notify subscribers of Wishlist update
     );
@@ -40,12 +39,12 @@ export class WishListService {
   }
 
   clearWishlist(userId: string): any {
-    console.log(`Clearing Wishlist for user: ${userId}`);
+    // console.log(`Clearing Wishlist for user: ${userId}`);
     this.getWishlist(userId).subscribe(Wishlist => {
       if (Wishlist[0]) {
-        console.log('Current Wishlist:', Wishlist[0]);
+        // console.log('Current Wishlist:', Wishlist[0]);
         this.deleteWishlist(Wishlist[0].id).subscribe(data => {
-          console.log('Wishlist cleared successfully:', data);
+          // console.log('Wishlist cleared successfully:', data);
           this.wishlistUpdated.next(); // Notify subscribers that the cart has been cleared
         });
       }

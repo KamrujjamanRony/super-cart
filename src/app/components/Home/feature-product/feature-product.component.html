@@ -16,7 +16,9 @@
         <h4 class="font-medium capitalize text-lg text-gray-950">
           Free shipping
         </h4>
-        <p class="text-gray-800 text-sm">order over {{ 200 | bdt }}</p>
+        <p class="text-gray-800 text-sm">
+          order over <span [innerHTML]="200 | bdt"></span>
+        </p>
       </div>
     </div>
     <!-- single feature end -->

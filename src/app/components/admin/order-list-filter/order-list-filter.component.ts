@@ -9,10 +9,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class OrderListFilterComponent {
   @Output() filterChanged = new EventEmitter<any>();
+  today = new Date();
 
   statusFilter: any = null;
-  fromDate: string = '';
-  toDate: string = '';
+  fromDate: string = this.today.toISOString().split('T')[0]; // Default to today
+  toDate: string = this.today.toISOString().split('T')[0]; // Default to
 
   statusOptions = [
     { value: null, label: 'All Statuses' },

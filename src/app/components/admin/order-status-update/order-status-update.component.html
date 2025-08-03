@@ -7,7 +7,8 @@
   </button>
 
   <!-- Status Update Modal -->
-  <div *ngIf="showModal" class="fixed z-10 inset-0 overflow-y-auto">
+  @if (showModal) {
+  <div class="fixed z-10 inset-0 overflow-y-auto">
     <div
       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
     >
@@ -30,7 +31,7 @@
               >Current Status</label
             >
             <div class="mt-1 px-3 py-2 bg-gray-100 rounded-md">
-              {{ getStatusLabel(currentStatus) }}
+              {{ currentStatus }}
             </div>
           </div>
 
@@ -42,16 +43,15 @@
               [(ngModel)]="newStatus"
               class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
             >
-              <option
-                *ngFor="let option of statusOptions"
-                [value]="option.value"
-              >
+              @for (option of statusOptions; track $index) {
+              <option [value]="option.label">
                 {{ option.label }}
               </option>
+              }
             </select>
           </div>
-
-          <div class="mb-4" *ngIf="newStatus === 3">
+          @if (newStatus === 3) {
+          <div class="mb-4">
             <div class="text-sm text-green-600">
               <svg
                 class="inline h-5 w-5 mr-1"
@@ -69,6 +69,7 @@
               Delivered date will be set to current time automatically
             </div>
           </div>
+          }
         </div>
 
         <div
@@ -92,4 +93,5 @@
       </div>
     </div>
   </div>
+  }
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
@@ -9,22 +9,32 @@ import { UsersService } from '../../../services/user/users.service';
 import { ToastService } from '../../../components/primeng/toast/toast.service';
 import { BdtPipe } from "../../../pipes/bdt.pipe";
 import { AddressModalComponent } from '../../../components/Shared/address-modal/address-modal.component';
+import { DataService } from '../../../services/data.service';
+import { SiteSettingService } from '../../../services/admin/site-settings.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-checkout',
-    standalone: true,
     imports: [CommonModule, FormsModule, BdtPipe, AddressModalComponent],
     templateUrl: './checkout.component.html',
     styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+    private router = inject(Router);
+    private cartService = inject(CartService);
+    private orderService = inject(OrderService);
+    private usersService = inject(UsersService);
+    private toastService = inject(ToastService);
+    private siteSettingService = inject(SiteSettingService);
+    private auth = inject(Auth);
+    siteId = environment.siteId;
     orderData: any;
     user: any;
     userDetails: any;
     loading = false;
     error: string | null = null;
     paymentMethod: string = 'Cash on Delivery';
-    deliveryCharge: number = 120;
+    deliveryCharge: number = 0;
     deliveryAddress: any = null;
     userAddresses: any[] = [];
     selectedAddressId: string | null = null;
@@ -34,14 +44,7 @@ export class CheckoutComponent implements OnInit {
     addressModalEditMode = false;
     selectedAddressForEdit: any = null;
 
-    constructor(
-        private router: Router,
-        private cartService: CartService,
-        private orderService: OrderService,
-        private usersService: UsersService,
-        private toastService: ToastService,
-        private auth: Auth
-    ) {
+    constructor() {
         const navigation = this.router.getCurrentNavigation();
         this.orderData = navigation?.extras.state?.['orderData'] ||
             history.state?.orderData;
@@ -64,6 +67,22 @@ export class CheckoutComponent implements OnInit {
                 this.userAddresses = data?.address || [];
                 this.setDefaultAddress();
                 this.loading = false;
+
+                this.siteSettingService.getSettingsById(this.siteId).subscribe({
+                    next: (charges) => {
+                        if (charges && charges.deliveryCharges.length > 0) {
+                            if (this.deliveryAddress && this.deliveryAddress.district.includes('Dhaka')) {
+                                this.deliveryCharge = charges.deliveryCharges[0]?.amount || 0;
+                            } else {
+                                this.deliveryCharge = charges.deliveryCharges[1]?.amount || 0;
+                            }
+                        }
+                    },
+                    error: (err) => {
+                        console.error('Failed to load delivery charges:', err);
+                        this.deliveryCharge = 0; // Fallback to 0 if there's an error
+                    }
+                });
             },
             error: (err) => {
                 console.error('Failed to load user details:', err);

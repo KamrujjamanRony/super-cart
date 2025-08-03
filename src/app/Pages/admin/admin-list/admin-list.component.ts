@@ -150,7 +150,7 @@ export class AdminListComponent {
   }
 
   onLoadUsers() {
-    const { data$, isLoading$, hasError$ } = this.dataFetchService.fetchData(this.userService.getUser(""));     // ToDo: user data request due
+    const { data$, isLoading$, hasError$ } = this.dataFetchService.fetchData(this.userService.getUser(""));
 
     this.isLoading$ = isLoading$;
     this.hasError$ = hasError$;
@@ -164,7 +164,7 @@ export class AdminListComponent {
           UserData.userName?.toLowerCase().includes(query)
         )
       )
-    ).subscribe(filteredData => {
+    ).subscribe(filteredData => {     // ToDo: user data request due
       if (!this.searchQuery$.getValue() || this.searchQuery$.getValue()?.toLowerCase() === 's' || this.searchQuery$.getValue()?.toLowerCase() === 'su' || this.searchQuery$.getValue()?.toLowerCase() === 'sup' || this.searchQuery$.getValue()?.toLowerCase() === 'supe' || this.searchQuery$.getValue()?.toLowerCase() === 'super' || this.searchQuery$.getValue()?.toLowerCase() === 'supers' || this.searchQuery$.getValue()?.toLowerCase() === 'superso' || this.searchQuery$.getValue()?.toLowerCase() === 'supersof' || this.searchQuery$.getValue()?.toLowerCase() === 'supersoft') {
         filteredData.shift();
       }

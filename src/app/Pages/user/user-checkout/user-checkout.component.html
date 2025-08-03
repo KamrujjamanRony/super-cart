@@ -40,30 +40,47 @@
                 label="region"
                 [isRequired]="true"
                 [(value)]="model.region"
-                [options]="region"
+                [options]="regions"
+                optionValue="name"
+                optionLabel="name"
                 defaultPlaceholder="Please choose your region"
                 (valueChange)="onRegionChanged()"
+                [isDisabled]="isLoading"
               ></app-inputs>
+
+              @if (isLoading && model.region && !model.city) {
+              <div class="text-sm text-gray-500">Loading cities...</div>
+              }
+
               <app-inputs
                 type="select"
                 inputId="city"
                 label="city"
                 [isRequired]="true"
                 [(value)]="model.city"
-                [options]="city"
-                [isDisabled]="model.region === ''"
+                [options]="cities"
+                optionValue="name"
+                optionLabel="name"
+                [isDisabled]="!model.region || isLoading"
                 defaultPlaceholder="Please choose your city"
                 (valueChange)="onCityChanged()"
               ></app-inputs>
+
+              @if (isLoading && model.city && !model.area) {
+              <div class="text-sm text-gray-500">Loading areas...</div>
+              }
+
               <app-inputs
                 type="select"
                 inputId="area"
                 label="area"
-                [isRequired]="true"
+                [isRequired]="false"
                 [(value)]="model.area"
-                [options]="area"
-                [isDisabled]="model.city === ''"
-                defaultPlaceholder="Please choose your area"
+                [options]="areas"
+                optionValue="name"
+                optionLabel="name"
+                [isDisabled]="!model.city || isLoading"
+                defaultPlaceholder="Please choose your area (optional)"
               ></app-inputs>
             </div>
           </div>
@@ -109,6 +126,7 @@
               type="checkbox"
               id="agreement"
               class="text-primary focus:ring-0 rounded-md cursor-pointer w-3 h-3"
+              required
             />
             <label
               for="agreement"
@@ -119,11 +137,17 @@
           </div>
         </div>
         <div class="mt-4">
-          <input
+          <button
             type="submit"
-            value="Place Order"
             class="block w-full py-2 text-center text-gray-50 bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
-          />
+            [disabled]="isLoading"
+          >
+            @if (isLoading) {
+            <span>Processing...</span>
+            } @else {
+            <span>Place Order</span>
+            }
+          </button>
         </div>
       </div>
       <!-- sidebar end -->

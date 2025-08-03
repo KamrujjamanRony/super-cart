@@ -43,16 +43,14 @@ export class ProductCardComponent {
     if (this.user?.uid) {
       this.wishListService.getWishlist(this.user.uid).subscribe({
         next: (wishlist) => {
-          console.log(wishlist)
           if (wishlist.length > 0) {
             const restFavoriteProduct = wishlist[0];
-            console.log(restFavoriteProduct)
             // If the wishlist exists, check if the product is already in the wishlist
             const existingProduct = restFavoriteProduct?.products?.find((p: any) => p.productId == favoriteProduct.productId);
 
             if (existingProduct) {
               this.toastService.showMessage('warn', 'Warning', 'Product already in the wish list!');
-              console.log("Product already in the wish list");
+              // console.log("Product already in the wish list");
               return;
             } else {
               // Add the new product to the wishlist
@@ -62,7 +60,7 @@ export class ProductCardComponent {
             // Update the wishlist
             this.wishListService.updateWishlist(restFavoriteProduct.id, restFavoriteProduct).subscribe({
               next: () => {
-                console.log('wishlist updated successfully');
+                // console.log('wishlist updated successfully');
                 this.toastService.showMessage('success', 'Successful', 'Product successfully added to wishlist!');
               },
               error: (error) => {
@@ -129,7 +127,7 @@ export class ProductCardComponent {
             // Update the cart
             this.cartService.updateCart(userCart.id, userCart).subscribe({
               next: () => {
-                console.log('Cart updated successfully');
+                // console.log('Cart updated successfully');
                 this.toastService.showMessage('success', 'Successful', 'Product successfully added to cart!');
                 // Optionally: this.router.navigateByUrl('user/shopping-cart');
               },
@@ -146,7 +144,7 @@ export class ProductCardComponent {
 
             this.cartService.addCart(newCart).subscribe({
               next: () => {
-                console.log('New cart created successfully');
+                // console.log('New cart created successfully');
               },
               error: (error) => {
                 console.error('Error creating cart:', error);

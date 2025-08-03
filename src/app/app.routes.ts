@@ -27,6 +27,8 @@ import { UserAddressComponent } from './Pages/user/user-address/user-address.com
 import { PasswordResetComponent } from './Pages/user/password-reset/password-reset.component';
 import { OrderConfirmationComponent } from './Pages/user/order-confirmation/order-confirmation.component';
 import { OrderListComponent } from './Pages/admin/order-list/order-list.component';
+import { SettingsComponent } from './Pages/admin/settings/settings.component';
+import { UserOrderHistoryComponent } from './Pages/user/user-order-history/user-order-history.component';
 
 export const routes: Routes = [
   {
@@ -106,6 +108,10 @@ export const routes: Routes = [
         path: 'wish-list',
         component: WishListComponent, canActivate: [authGuard]
       },
+      {
+        path: 'settings',
+        component: SettingsComponent, canActivate: [authGuard]
+      },
     ]
   },
   {
@@ -115,12 +121,16 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'profile-info', pathMatch: 'full' },
       {
+        path: 'profile-info',
+        component: ProfileInfoComponent, canActivate: [userGuard]
+      },
+      {
         path: 'user-address',
         component: UserAddressComponent, canActivate: [userGuard]
       },
       {
-        path: 'profile-info',
-        component: ProfileInfoComponent, canActivate: [userGuard]
+        path: 'my-orders',
+        component: UserOrderHistoryComponent, canActivate: [userGuard]
       },
       {
         path: 'wishlist',

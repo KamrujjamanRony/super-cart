@@ -41,7 +41,6 @@ export class ProfileInfoComponent {
         this.usersService.getUser(this.userId).subscribe(data => {
             this.model = data;
             this.id = data?.id;
-            console.log(this.model)
         });
     }
 
@@ -49,9 +48,8 @@ export class ProfileInfoComponent {
         const { fullname, username } = this.model;
         this.loading.set(true);
         if (fullname && username) {
-            this.usersService.updateUser(this.id, this.model).subscribe({
+            this.usersService.updateUser(this.model.id || this.id, this.model).subscribe({
                 next: (response) => {
-                    console.log(response);
                     this.toastService.showMessage('success', 'Success', 'Profile Update successfully');
                     this.id = null;
                     setTimeout(() => {

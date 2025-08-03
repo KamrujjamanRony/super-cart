@@ -46,9 +46,11 @@
         class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
         [(ngModel)]="statusFilter"
       >
-        <option *ngFor="let option of statusOptions" [value]="option.value">
+        @for (option of statusOptions; track $index) {
+        <option [value]="option.value">
           {{ option.label }}
         </option>
+        }
       </select>
     </div>
 

@@ -67,7 +67,6 @@ export class RattingReviewsComponent {
 
     // Fetch user data
     this.usersService.getUser(id).subscribe((data: any) => {
-      console.log('Fetched user:', data);
       this.userNames.update((users) => ({
         ...users, // Keep existing users
         [id]: data?.fullname || "Unknown", // Add new user

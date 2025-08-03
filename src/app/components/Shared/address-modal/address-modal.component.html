@@ -1,4 +1,4 @@
-<!-- Backdrop -->
+<!-- address modal start -->
 <div *ngIf="isLoading" class="loading-overlay">
   <span class="loading-spinner"></span>
 </div>
@@ -52,35 +52,35 @@
         </select>
       </div>
 
-      <!-- Division (Region) Selection -->
+      <!-- Region (Division) Selection -->
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">Division*</label>
         <select
-          [(ngModel)]="formData.division"
-          (change)="onDivisionChange(formData.division)"
+          [(ngModel)]="formData.region"
+          (change)="onRegionChange(formData.region)"
           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-rose-500 focus:border-rose-500"
           required
         >
           <option value="">Select Division</option>
-          <option *ngFor="let division of divisions" [value]="division._id">
-            {{ division.name }}
+          <option *ngFor="let region of regions" [value]="region.name">
+            {{ region.name }}
           </option>
         </select>
       </div>
 
-      <!-- District (City) Selection -->
+      <!-- City (District) Selection -->
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700">District*</label>
         <select
-          [(ngModel)]="formData.district"
-          (change)="onDistrictChange(formData.district)"
+          [(ngModel)]="formData.city"
+          (change)="onCityChange(formData.city)"
           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-rose-500 focus:border-rose-500"
-          [disabled]="!formData.division"
+          [disabled]="!formData.region"
           required
         >
           <option value="">Select District</option>
-          <option *ngFor="let district of districts" [value]="district._id">
-            {{ district.name }}
+          <option *ngFor="let city of cities" [value]="city.name">
+            {{ city.name }}
           </option>
         </select>
       </div>
@@ -91,10 +91,10 @@
         <select
           [(ngModel)]="formData.area"
           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-rose-500 focus:border-rose-500"
-          [disabled]="!formData.district"
+          [disabled]="!formData.city"
         >
           <option value="">Select Area (Optional)</option>
-          <option *ngFor="let area of areas" [value]="area._id">
+          <option *ngFor="let area of areas" [value]="area.name">
             {{ area.name }}
           </option>
         </select>
@@ -158,3 +158,4 @@
     </div>
   </div>
 </div>
+<!-- address modal end -->

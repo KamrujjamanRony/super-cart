@@ -14,24 +14,27 @@ export class DataService {
     return this.http.get<any>(this.jsonUrl);
   }
 
-  // Method to fetch and filter JSON data by parentId
-  getCityByParentId(parentId: string): Observable<any[]> {
+  // In data.service.ts
+  getRegions(): Observable<any[]> {
+    return this.http.get<any>(this.jsonUrl).pipe(
+      map(data => data.region || [])
+    );
+  }
+
+  getCitiesByRegion(regionName: string): Observable<any[]> {
     return this.http.get<any>(this.jsonUrl).pipe(
       map(data => {
-        // Access the city array and filter it based on parentId
         const cities = data.city || [];
-        return cities.filter((item: any) => item.parentId == parentId);
+        return cities.filter((city: any) => city.parent === regionName);
       })
     );
   }
 
-  // Method to fetch and filter JSON data by parentId
-  getAreaByParentId(parentId: string): Observable<any[]> {
+  getAreasByCity(cityName: string): Observable<any[]> {
     return this.http.get<any>(this.jsonUrl).pipe(
       map(data => {
-        // Access the area array and filter it based on parentId
         const areas = data.area || [];
-        return areas.filter((item: any) => item.parentId == parentId);
+        return areas.filter((area: any) => area.parent === cityName);
       })
     );
   }
@@ -90,6 +93,21 @@ export class DataService {
   isPermitted(sectionName: string): boolean {
     return this.publishSections.some(
       section => section.name.toLowerCase() === sectionName.toLowerCase()
+    );
+  }
+
+  getDeliveryCharges(): Observable<any[]> {
+    return this.http.get<any>(this.jsonUrl, {
+      headers: new HttpHeaders({
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      })
+    }).pipe(
+      map(data => {
+        const deliveryCharges = data.DeliveryCharges || [];
+        return deliveryCharges;
+      })
     );
   }
 }
