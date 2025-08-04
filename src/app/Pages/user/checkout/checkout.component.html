@@ -24,11 +24,11 @@
         </div>
 
         <div class="space-y-4">
-          @if (userAddresses && userAddresses.length > 0) { @for (address of
-          userAddresses; track address.id) {
+          @if (userAddresses() && userAddresses().length > 0) { @for (address of
+          userAddresses(); track address.id) {
           <div
             class="border p-4 rounded cursor-pointer group relative"
-            [class.border-rose-500]="deliveryAddress?.id === address.id"
+            [class.border-rose-500]="deliveryAddress()?.id === address.id"
             (click)="selectAddress(address.id)"
           >
             <div class="flex justify-between">
@@ -111,7 +111,7 @@
           </div>
           <div class="flex justify-between">
             <span>Delivery Charge</span>
-            <span [innerHTML]="deliveryCharge | bdt"></span>
+            <span [innerHTML]="deliveryCharge() | bdt"></span>
           </div>
         </div>
 
@@ -119,14 +119,14 @@
           <div class="flex justify-between font-bold text-lg">
             <span>Total</span>
             <span
-              [innerHTML]="orderData?.subtotal + deliveryCharge | bdt"
+              [innerHTML]="orderData?.subtotal + deliveryCharge() | bdt"
             ></span>
           </div>
         </div>
 
         <button
           (click)="placeOrder()"
-          [disabled]="loading || !deliveryAddress"
+          [disabled]="loading || !deliveryAddress()"
           class="w-full mt-6 bg-rose-500 text-white py-2 rounded hover:bg-rose-600 transition disabled:bg-rose-300"
         >
           @if (loading) {

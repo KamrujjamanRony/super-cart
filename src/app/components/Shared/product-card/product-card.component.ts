@@ -133,6 +133,7 @@ export class ProductCardComponent {
               },
               error: (error) => {
                 console.error('Error updating cart:', error);
+                this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error added to cart'}`);
               }
             });
           } else {
@@ -144,10 +145,12 @@ export class ProductCardComponent {
 
             this.cartService.addCart(newCart).subscribe({
               next: () => {
+                this.toastService.showMessage('success', 'Successful', 'Product successfully added to cart!');
                 // console.log('New cart created successfully');
               },
               error: (error) => {
                 console.error('Error creating cart:', error);
+                this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error added to cart'}`);
               }
             });
           }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
@@ -34,10 +34,10 @@ export class CheckoutComponent implements OnInit {
     loading = false;
     error: string | null = null;
     paymentMethod: string = 'Cash on Delivery';
-    deliveryCharge: number = 0;
-    deliveryAddress: any = null;
-    userAddresses: any[] = [];
-    selectedAddressId: string | null = null;
+    deliveryCharge = signal<number>(0);
+    deliveryAddress = signal<any>(null);
+    userAddresses = signal<any[]>([]);
+    selectedAddressId = signal<string | null>(null);
 
     // For address modal
     showAddressModal = false;
@@ -59,28 +59,46 @@ export class CheckoutComponent implements OnInit {
         });
     }
 
+    private calculateDeliveryCharge() {
+        this.siteSettingService.getSettingsById(this.siteId).subscribe({
+            next: (charges) => {
+                if (charges && charges.deliveryCharges.length > 0) {
+                    if (this.deliveryAddress() && this.deliveryAddress().district.includes('Dhaka')) {
+                        this.deliveryCharge.set(charges.deliveryCharges[0]?.amount || 0);
+                    } else {
+                        this.deliveryCharge.set(charges.deliveryCharges[1]?.amount || 0);
+                    }
+                }
+            },
+            error: (err) => {
+                console.error('Failed to load delivery charges:', err);
+                this.deliveryCharge.set(0);
+            }
+        });
+    }
+
     loadUserDetails(userId: string) {
         this.loading = true;
         this.usersService.getUser(userId).subscribe({
             next: (data) => {
                 this.userDetails = data;
-                this.userAddresses = data?.address || [];
+                this.userAddresses.set(data.address || []);
                 this.setDefaultAddress();
                 this.loading = false;
 
                 this.siteSettingService.getSettingsById(this.siteId).subscribe({
                     next: (charges) => {
                         if (charges && charges.deliveryCharges.length > 0) {
-                            if (this.deliveryAddress && this.deliveryAddress.district.includes('Dhaka')) {
-                                this.deliveryCharge = charges.deliveryCharges[0]?.amount || 0;
+                            if (this.deliveryAddress() && this.deliveryAddress().district.includes('Dhaka')) {
+                                this.deliveryCharge.set(charges.deliveryCharges[0]?.amount || 0);
                             } else {
-                                this.deliveryCharge = charges.deliveryCharges[1]?.amount || 0;
+                                this.deliveryCharge.set(charges.deliveryCharges[1]?.amount || 0);
                             }
                         }
                     },
                     error: (err) => {
                         console.error('Failed to load delivery charges:', err);
-                        this.deliveryCharge = 0; // Fallback to 0 if there's an error
+                        this.deliveryCharge.set(0); // Fallback to 0 if there's an error
                     }
                 });
             },
@@ -93,13 +111,13 @@ export class CheckoutComponent implements OnInit {
     }
 
     private setDefaultAddress() {
-        const defaultAddress = this.userAddresses.find(addr => addr.isDefault);
+        const defaultAddress = this.userAddresses().find(addr => addr.isDefault);
         if (defaultAddress) {
-            this.deliveryAddress = defaultAddress;
-            this.selectedAddressId = defaultAddress.id;
-        } else if (this.userAddresses.length > 0) {
-            this.deliveryAddress = this.userAddresses[0];
-            this.selectedAddressId = this.userAddresses[0].id;
+            this.deliveryAddress.set(defaultAddress);
+            this.selectedAddressId.set(defaultAddress.id);
+        } else if (this.userAddresses().length > 0) {
+            this.deliveryAddress.set(this.userAddresses()[0]);
+            this.selectedAddressId?.set(this.userAddresses()[0].id);
         }
     }
 
@@ -115,7 +133,7 @@ export class CheckoutComponent implements OnInit {
 
         if (this.addressModalEditMode) {
             // Update existing address
-            const updatedAddresses = this.userAddresses.map(addr =>
+            const updatedAddresses = this.userAddresses().map(addr =>
                 addr.id === result.id ? result : addr
             );
             this.updateUserAddresses(updatedAddresses, 'Address updated successfully');
@@ -127,7 +145,7 @@ export class CheckoutComponent implements OnInit {
                 userId: this.user?.uid
             };
 
-            const updatedAddresses = [...this.userAddresses, newAddress];
+            const updatedAddresses = [...this.userAddresses(), newAddress];
 
             // If new address is default, unset others
             if (newAddress.isDefault) {
@@ -140,8 +158,9 @@ export class CheckoutComponent implements OnInit {
 
             // Select the new address if it's the only one or is default
             if (updatedAddresses.length === 1 || newAddress.isDefault) {
-                this.deliveryAddress = newAddress;
-                this.selectedAddressId = newAddress.id;
+                this.deliveryAddress.set(newAddress);
+                this.selectedAddressId.set(newAddress.id);
+                this.calculateDeliveryCharge(); // Add this line
             }
         }
     }
@@ -152,7 +171,7 @@ export class CheckoutComponent implements OnInit {
             address: addresses
         }).subscribe({
             next: () => {
-                this.userAddresses = addresses;
+                this.userAddresses.set(addresses);
                 this.toastService.showMessage('success', 'Success', successMessage);
                 this.loading = false;
             },
@@ -165,10 +184,11 @@ export class CheckoutComponent implements OnInit {
     }
 
     selectAddress(addressId: string) {
-        const selected = this.userAddresses.find(addr => addr.id === addressId);
+        const selected = this.userAddresses().find(addr => addr.id === addressId);
         if (selected) {
-            this.deliveryAddress = selected;
-            this.selectedAddressId = addressId;
+            this.deliveryAddress.set(selected);
+            this.selectedAddressId.set(addressId);
+            this.calculateDeliveryCharge(); // Add this line
         }
     }
 
@@ -178,7 +198,7 @@ export class CheckoutComponent implements OnInit {
             return;
         }
 
-        if (!this.deliveryAddress) {
+        if (!this.deliveryAddress()) {
             this.error = 'Please select a delivery address';
             return;
         }
@@ -205,21 +225,21 @@ export class CheckoutComponent implements OnInit {
             userId: this.user.uid || '',
             userEmail: this.user.email || '',
             userName: this.userDetails?.fullname || '',
-            userPhone: this.deliveryAddress.contact || '',
+            userPhone: this.deliveryAddress().contact || '',
             orderItems,
             subtotal: this.orderData.subtotal || 0,
-            deliveryCharge: this.deliveryCharge || 0,
-            totalAmount: this.orderData.subtotal + this.deliveryCharge || 0,
+            deliveryCharge: this.deliveryCharge() || 0,
+            totalAmount: this.orderData.subtotal + this.deliveryCharge() || 0,
             paymentMethod: this.paymentMethod || 'Cash on Delivery',
             orderStatus: 'Pending',
             shippingAddress: {
-                // id: this.deliveryAddress.id,
-                district: this.deliveryAddress.district || '',
-                city: this.deliveryAddress.city || '',
-                street: this.deliveryAddress.street || '',
-                contact: this.deliveryAddress.contact || '',
-                type: this.deliveryAddress.type || '',
-                // isDefault: this.deliveryAddress.isDefault
+                // id: this.deliveryAddress().id,
+                district: this.deliveryAddress().district || '',
+                city: this.deliveryAddress().city || '',
+                street: this.deliveryAddress().street || '',
+                contact: this.deliveryAddress().contact || '',
+                type: this.deliveryAddress().type || '',
+                // isDefault: this.deliveryAddress().isDefault
             },
             orderDate: new Date().toISOString()
         };

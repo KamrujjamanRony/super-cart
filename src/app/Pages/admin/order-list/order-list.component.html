@@ -45,6 +45,12 @@
               scope="col"
               class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
+              Order Id
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
               Customer
             </th>
             <th
@@ -96,19 +102,29 @@
           <tr>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm font-medium text-gray-900">
-                {{ order.userName }}
+                {{ order.id }}
               </div>
-              <div class="text-sm text-gray-500">{{ order.userEmail }}</div>
-              <div class="text-sm text-gray-500">{{ order.userPhone }}</div>
+            </td>
+
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm font-medium text-gray-900">
+                Name: {{ order.userName }}
+              </div>
+              <div class="text-sm text-gray-500">
+                Email: {{ order.userEmail }}
+              </div>
+              <div class="text-sm text-gray-500">
+                Phone: {{ order.userPhone }}
+              </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              @if (order?.ShippingAddress?.district) {
-              <div class="text-sm text-gray-900">
-                District: {{ order?.ShippingAddress?.district }}
-              </div>
-              } @if (order?.shippingAddress?.city) {
-              <div class="text-sm text-gray-500">
+              @if (order?.shippingAddress?.city) {
+              <div class="text-sm font-medium text-gray-900">
                 City: {{ order?.shippingAddress?.city }}
+              </div>
+              } @if (order?.shippingAddress?.district) {
+              <div class="text-sm text-gray-500">
+                District: {{ order?.shippingAddress?.district }}
               </div>
               } @if (order?.shippingAddress?.street) {
               <div class="text-sm text-gray-500">
@@ -129,7 +145,7 @@
                 {{ order.orderDate | date : "shortTime" }}
               </div>
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 min-w-40 whitespace-nowrap">
               @for (item of order.orderItems; track $index) {
               <div class="flex items-center mb-2 last:mb-0">
                 <img

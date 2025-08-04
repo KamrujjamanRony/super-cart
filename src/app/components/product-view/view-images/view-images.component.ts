@@ -136,11 +136,13 @@ export class ViewImagesComponent {
             // Update the cart
             this.cartService.updateCart(userCart.id, userCart).subscribe({
               next: () => {
+                this.toastService.showMessage('success', 'Successful', 'Product successfully added to cart!');
                 // console.log('Cart updated successfully');
                 // Optionally: this.router.navigateByUrl('user/shopping-cart');
               },
               error: (error) => {
                 console.error('Error updating cart:', error);
+                this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error added to cart'}`);
               }
             });
           } else {
@@ -152,10 +154,12 @@ export class ViewImagesComponent {
 
             this.cartService.addCart(newCart).subscribe({
               next: () => {
+                this.toastService.showMessage('success', 'Successful', 'Product successfully added to cart!');
                 // console.log('New cart created successfully');
               },
               error: (error) => {
                 console.error('Error creating cart:', error);
+                this.toastService.showMessage('error', 'Error', `${error.error.status || 'Error'} : ${error.error.message || error.error.title || 'Error added to cart'}`);
               }
             });
           }
