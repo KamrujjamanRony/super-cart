@@ -16062,25 +16062,5 @@
       "id": 7,
       "name": "Shop Sidebar"
     }
-  ],
-  "DeliveryCharges": [
-    {
-      "id": 1,
-      "name": "Inside Dhaka",
-      "amount": 50,
-      "isActive": 1
-    },
-    {
-      "id": 2,
-      "name": "Outside Dhaka",
-      "amount": 100,
-      "isActive": 1
-    },
-    {
-      "id": 3,
-      "name": "Free Delivery",
-      "amount": 0,
-      "isActive": 0
-    }
   ]
 }

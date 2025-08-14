@@ -39,17 +39,17 @@
         <p class="flex items-center gap-2">
           <i class="pi pi-map-marker"></i> {{ siteInfo()?.address1 }}
         </p>
-        <p *ngIf="siteInfo()?.address2" class="flex items-center gap-2">
+        @if (siteInfo()?.address2) {
+        <p class="flex items-center gap-2">
           <i class="pi pi-map-marker"></i> {{ siteInfo()?.address2 }}
         </p>
+        }
       </div>
     </div>
 
     <!-- Delivery Section -->
-    <div
-      *ngIf="siteInfo()?.deliveryCharges?.length"
-      class="bg-white p-6 rounded-lg shadow-md"
-    >
+    @if (siteInfo()?.deliveryCharges?.length) {
+    <div class="bg-white p-6 rounded-lg shadow-md">
       <h2 class="text-2xl font-semibold text-blue-600 mb-4">
         Delivery Information
       </h2>
@@ -61,12 +61,12 @@
           <h3 class="font-medium text-lg text-gray-800 mb-2">
             {{ option.name }}
           </h3>
-          <p *ngIf="option.amount > 0" class="text-gray-700">
-            Delivery Charge: {{ option.amount }} BDT
-          </p>
-          <p *ngIf="option.amount === 0" class="text-green-600 font-medium">
-            Free Delivery
-          </p>
+          @if (option.amount > 0) {
+          <p class="text-gray-700">Delivery Charge: {{ option.amount }} BDT</p>
+          } @if (option.amount === 0) {
+          <p class="text-green-600 font-medium">Free Delivery</p>
+          }
+
           <p
             class="text-sm mt-2"
             [ngClass]="{
@@ -80,44 +80,46 @@
         </div>
       </div>
     </div>
+    }
 
     <!-- Social Section -->
     @if (siteInfo()?.socialLinks) {
     <div class="bg-white p-6 rounded-lg shadow-md">
       <h2 class="text-2xl font-semibold text-blue-600 mb-4">Connect With Us</h2>
       <div class="flex gap-4">
+        @if (siteInfo()?.socialLinks?.facebook) {
         <a
-          *ngIf="siteInfo()?.socialLinks?.facebook"
           [href]="siteInfo()?.socialLinks?.facebook"
           target="_blank"
           class="text-blue-600 hover:text-blue-800 text-2xl"
         >
           <i class="fab fa-facebook-f"></i>
         </a>
+        } @if (siteInfo()?.socialLinks?.twitter) {
         <a
-          *ngIf="siteInfo()?.socialLinks?.twitter"
           [href]="siteInfo()?.socialLinks?.twitter"
           target="_blank"
           class="text-blue-400 hover:text-blue-600 text-2xl"
         >
           <i class="fab fa-twitter"></i>
         </a>
+        } @if (siteInfo()?.socialLinks?.instagram) {
         <a
-          *ngIf="siteInfo()?.socialLinks?.instagram"
           [href]="siteInfo()?.socialLinks?.instagram"
           target="_blank"
           class="text-pink-600 hover:text-pink-800 text-2xl"
         >
           <i class="fab fa-instagram"></i>
         </a>
+        } @if (siteInfo()?.socialLinks?.linkedin) {
         <a
-          *ngIf="siteInfo()?.socialLinks?.linkedin"
           [href]="siteInfo()?.socialLinks?.linkedin"
           target="_blank"
           class="text-blue-700 hover:text-blue-900 text-2xl"
         >
           <i class="fab fa-linkedin-in"></i>
         </a>
+        }
       </div>
     </div>
     }

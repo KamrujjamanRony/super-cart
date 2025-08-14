@@ -90,12 +90,14 @@
         </td>
         <td class="p-1">
           <div class="flex flex-col">
+            @if (product.offerPrice) {
             <span
               class="line-through text-gray-500 text-xs"
-              *ngIf="product.offerPrice"
               [innerHTML]="product.regularPrice | bdt"
             >
             </span>
+            }
+
             <span
               [class]="product.offerPrice ? 'text-red-600 font-semibold' : ''"
               [innerHTML]="product.offerPrice || product.regularPrice | bdt"
@@ -113,12 +115,13 @@
           >
             {{ product.isActive ? "Active" : "Inactive" }}
           </span>
+          @if (product.isFeatured) {
           <span
-            *ngIf="product.isFeatured"
             class="ml-1 bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded"
           >
             Featured
           </span>
+          }
         </td>
         <td class="flex gap-1">
           @if (isEdit()) {

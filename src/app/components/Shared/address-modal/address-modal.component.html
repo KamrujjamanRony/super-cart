@@ -1,9 +1,10 @@
 <!-- address modal start -->
-<div *ngIf="isLoading" class="loading-overlay">
+@if (isLoading) {
+<div class="loading-overlay">
   <span class="loading-spinner"></span>
 </div>
+} @if (showModal) {
 <div
-  *ngIf="showModal"
   class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
 >
   <!-- Modal Container -->
@@ -158,4 +159,6 @@
     </div>
   </div>
 </div>
+}
+
 <!-- address modal end -->

@@ -19,38 +19,39 @@
         >
       </p>
       <div class="flex space-x-6">
+        @if (siteInfo()?.socialLinks?.facebook) {
         <a
-          *ngIf="siteInfo()?.socialLinks?.facebook"
           [href]="siteInfo()?.socialLinks?.facebook"
           target="_blank"
           class="text-blue-600 hover:text-blue-800"
         >
           <i class="fab fa-facebook-f"></i>
         </a>
+        } @if (siteInfo()?.socialLinks?.twitter) {
         <a
-          *ngIf="siteInfo()?.socialLinks?.twitter"
           [href]="siteInfo()?.socialLinks?.twitter"
           target="_blank"
           class="text-blue-400 hover:text-blue-600"
         >
           <i class="fab fa-twitter"></i>
         </a>
+        } @if (siteInfo()?.socialLinks?.instagram) {
         <a
-          *ngIf="siteInfo()?.socialLinks?.instagram"
           [href]="siteInfo()?.socialLinks?.instagram"
           target="_blank"
           class="text-pink-600 hover:text-pink-800"
         >
           <i class="fab fa-instagram"></i>
         </a>
+        } @if (siteInfo()?.socialLinks?.linkedin) {
         <a
-          *ngIf="siteInfo()?.socialLinks?.linkedin"
           [href]="siteInfo()?.socialLinks?.linkedin"
           target="_blank"
           class="text-blue-700 hover:text-blue-900"
         >
           <i class="fab fa-linkedin-in"></i>
         </a>
+        }
       </div>
     </div>
     <!-- footer text end -->
